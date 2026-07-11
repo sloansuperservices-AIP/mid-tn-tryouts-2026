@@ -746,7 +746,7 @@ function WalkupRegister({ athletes, onAddWalkup }) {
           </button>
           
           <div style=${{ textAlign: 'center', fontSize: '12px' }}>
-            <a href=${faqUrl} target="_blank" style=${{ color: '#4fc3f7', textDecoration: 'none' }}>
+            <a href=${MIDTN_URL} target="_blank" style=${{ color: '#4fc3f7', textDecoration: 'none' }}>
               Need Help? Read Tryout FAQ / Instructions
             </a>
           </div>
@@ -772,7 +772,7 @@ function Login({onLogin}){
   const faqUrl = getFaqUrl();
   const MIDTN_URL = 'https://www.midtnvbc.com';
   const walkupQr = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(MIDTN_URL)}`;
-  const faqQr = `https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${encodeURIComponent(faqUrl)}`;
+  const faqQr = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(MIDTN_URL)}`;
 
   const printSigns = () => {
     const printWin = window.open('', '_blank');
