@@ -805,3 +805,1959 @@ function Login({onLogin}){
           <script>window.onload = function() { window.print(); }<\/script>
         </body>
       </html>
+    `);
+    printWin.document.close();
+  };
+
+  return html`
+    <div style=${{minHeight:'100vh',display:'flex',alignItems:'center',justifyContent:'center',background:'#0d1017',padding:'20px'}}>
+      <div style=${{display:'flex',gap:'24px',flexWrap:'wrap',justifyContent:'center',alignItems:'stretch',maxWidth:'840px',width:'100%'}}>
+        
+        <!-- Login Card -->
+        <div class="card" style=${{padding:40,width:380,textAlign:'center',display:'flex',flexDirection:'column',justifyContent:'center'}}>
+          <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAABACAYAAABMbHjfAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAHWlUWHRTb2Z0d2FyZQAAAAAAQWRvYmUgSW1hZ2VSZWFkeQatApcAAAOJaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA5LjEtYzAwMiA3OS5hNmE2Mzk2OGEsIDIwMjQvMDMvMDYtMTE6NTI6MDUgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6NWE0YjQwOTYtMmM3NS00ZDBmLThjZjItMTA1ZWFkNWRiMTg2IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkIxNzdGM0JGOEVDNDExRUY4OTQxOTJEMEYyOTFGOUY4IiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkIxNzdGM0JFOEVDNDExRUY4OTQxOTJEMEYyOTFGOUY4IiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NzcxZWM4ODQtN2Y0Ni00Y2EwLWI3ZTItYzViZGQ4NTE5Yjg0IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90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' alt='Mid TN VBC' style='width:200px;display:block;margin:0 auto 20px;'/>
+          <h1 style=${{fontSize:26,fontWeight:800,margin:'0 0 4px'}}><span style=${{color:'#f0a500'}}>MID TN</span> VBC</h1>
+          <p style=${{color:'#78909c',fontSize:13,margin:'0 0 6px'}}>Tryout Manager · 2026–2027</p>
+          
+          <input type="password" placeholder="Enter PIN" maxLength="6" value=${pin}
+            onInput=${e=>{setPin(e.target.value);setErr('');}}
+            onKeyDown=${e=>e.key==='Enter'&&go()}
+            style=${{width:'100%',padding:12,background:'#12151c',border:'1px solid #2a2e38',borderRadius:8,color:'#e8eaed',fontSize:22,textAlign:'center',letterSpacing:12,marginBottom:10}}/>
+          ${err&&html`<p style=${{color:'#ef5350',fontSize:13,marginBottom:10}}>${err}</p>`}
+          <button onClick=${go} style=${{width:'100%',padding:12,background:'#f0a500',border:'none',borderRadius:8,color:'#000',fontSize:15,fontWeight:800,cursor:'pointer',marginBottom:20}}>Log In →</button>
+          <div style=${{borderTop:'1px solid #2a2e38',paddingTop:14,fontSize:11,color:'#546e7a'}}>
+            <div style=${{fontWeight:700,marginBottom:8,textTransform:'uppercase',letterSpacing:1}}>PINs</div>
+            <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginBottom:4}}>
+              <div>Staff: <span style=${{color:'#f0a500',fontFamily:'monospace',fontWeight:700}}>1111</span></div>
+              <div>Coach: <span style=${{color:'#ef5350',fontFamily:'monospace',fontWeight:700}}>0000</span></div>
+              <div>CheckIn: <span style=${{color:'#26c6da',fontFamily:'monospace',fontWeight:700}}>9999</span></div>
+              <div>Station2: <span style=${{color:'#ffa726',fontFamily:'monospace',fontWeight:700}}>2222</span></div>
+            </div>
+          </div>
+
+          <!-- GitHub Sync Token -->
+          <div style=${{borderTop:'1px solid #2a2e38',paddingTop:14,marginTop:4}}>
+            <div style=${{fontSize:10,fontWeight:700,color:'#546e7a',textTransform:'uppercase',letterSpacing:1,marginBottom:6}}>GitHub Sync Token</div>
+            ${GH_ENABLED()
+              ? html`<div style=${{fontSize:11,color:'#66bb6a',display:'flex',alignItems:'center',gap:4}}><span style=${{width:6,height:6,borderRadius:'50%',background:'#66bb6a',display:'inline-block'}}></span>Sync active</div>`
+              : html`<div>
+                  <input id="gh-token-input" type="password" placeholder="Paste GitHub token to enable sync"
+                    style=${{width:'100%',padding:'6px 8px',background:'#12151c',border:'1px solid #2a2e38',borderRadius:6,color:'#e8eaed',fontSize:11,marginBottom:6,boxSizing:'border-box'}}/>
+                  <button onClick=${()=>{
+                    const t=document.getElementById('gh-token-input').value.trim();
+                    if(t){saveGHToken(t);window.location.reload();}
+                  }} style=${{width:'100%',padding:'5px',background:'#1a2a1a',border:'1px solid #26c6da',borderRadius:6,color:'#26c6da',fontSize:11,cursor:'pointer'}}>Enable Sync</button>
+                </div>`
+            }
+          </div>
+        </div>
+
+        <!-- QR Code Card -->
+        <div class="card" style=${{padding:30,width:380,display:'flex',flexDirection:'column',justifyContent:'space-between',border:'1px solid #f0a50033'}}>
+          <div>
+            <h3 style=${{color:'#f0a500',fontSize:15,fontWeight:800,marginBottom:16,textAlign:'center',textTransform:'uppercase',letterSpacing:'0.5px'}}>Tryout QR Check-Ins</h3>
+            
+            <div style=${{display:'flex',gap:12,flexDirection:'column'}}>
+              
+              <div style=${{display:'flex',alignItems:'center',gap:12,background:'#12151c',padding:10,borderRadius:8,border:'1px solid #2a2e38'}}>
+                <img src=${walkupQr} alt="Walk-up QR" style=${{border:'3px solid white',borderRadius:4,width:76,height:76,flexShrink:0}}/>
+                <div style=${{textAlign:'left'}}>
+                  <div style=${{fontSize:12,fontWeight:700,color:'#66bb6a'}}>Scan to Register</div>
+                  <div style=${{fontSize:10,color:'#78909c',marginTop:2,lineHeight:1.3}}>For walk-up players to register and check in on their own phones.</div>
+                  <a href=${walkupUrl} target="_blank" style=${{display:'inline-block',fontSize:10,color:'#4fc3f7',marginTop:4,textDecoration:'underline'}}>Open Form</a>
+                </div>
+              </div>
+
+              <div style=${{display:'flex',alignItems:'center',gap:12,background:'#12151c',padding:10,borderRadius:8,border:'1px solid #2a2e38'}}>
+                <img src=${faqQr} alt="FAQ QR" style=${{border:'3px solid white',borderRadius:4,width:76,height:76,flexShrink:0}}/>
+                <div style=${{textAlign:'left'}}>
+                  <div style=${{fontSize:12,fontWeight:700,color:'#ffa726'}}>FAQ & Info</div>
+                  <div style=${{fontSize:10,color:'#78909c',marginTop:2,lineHeight:1.3}}>Scan to read rule interpretations, times, and requirements.</div>
+                  <a href=${faqUrl} target="_blank" style=${{display:'inline-block',fontSize:10,color:'#4fc3f7',marginTop:4,textDecoration:'underline'}}>View FAQ</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <button onClick=${printSigns} class="btn" style=${{background:'rgba(240,165,0,0.1)',color:'#f0a500',border:'1px solid #f0a500',fontWeight:700,marginTop:16,width:'100%',padding:10}}>
+            🖨️ Print Desk Signs
+          </button>
+        </div>
+
+      </div>
+    </div>`;
+}
+
+// â”€â”€ CHECK-IN CONFIRMATION MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function CheckInConfirmModal({ athlete, onClose, onConfirm }) {
+  if (!athlete) return null;
+  const [phone, setPhone] = useState(athlete.phone || '');
+  const [email, setEmail] = useState(athlete.email || '');
+
+  const handleConfirm = () => {
+    if (!phone.trim() || !email.trim()) return;
+    onConfirm(athlete.id, { phone: phone.trim(), email: email.trim() });
+  };
+
+  const isValid = phone.trim().length >= 7 && email.trim().includes('@');
+
+  return html`
+    <div class="modal-overlay">
+      <div class="modal-box" style=${{maxWidth:400,width:'95%'}}>
+        <h3 style=${{margin:'0 0 12px',color:'#f0a500',fontSize:18,fontWeight:800}}>Confirm Contact Info</h3>
+        <p style=${{fontSize:12,color:'#78909c',marginBottom:16,lineHeight:1.4}}>
+          Please confirm or update contact details for <strong>${athlete.first} ${athlete.last}</strong> (#${athlete.to}) before check-in:
+        </p>
+        
+        <div style=${{marginBottom:12}}>
+          <label class="label">Phone Number *</label>
+          <input class="input" value=${phone} onInput=${e=>setPhone(e.target.value)} placeholder="e.g. 615-555-0199"/>
+        </div>
+        
+        <div style=${{marginBottom:20}}>
+          <label class="label">Email Address *</label>
+          <input class="input" type="email" value=${email} onInput=${e=>setEmail(e.target.value)} placeholder="e.g. parent@email.com"/>
+        </div>
+        
+        <div style=${{display:'flex',gap:10,justifyContent:'flex-end'}}>
+          <${Btn} onClick=${onClose} color="#2a2e38">Cancel<//>
+          <${Btn} onClick=${handleConfirm} disabled=${!isValid} color="#26c6da">Confirm & Check In ✓<//>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// -- STAFF HUB (DASHBOARD & STATIONS) -
+// -- SYNC STATUS INDICATOR ──────────────────────────────────────
+function SyncStatus() {
+  const [status, setStatus] = useState(GH_ENABLED() ? 'syncing' : 'off');
+  // 'off' | 'syncing' | 'ok' | 'error'
+  useEffect(() => {
+    if (!GH_ENABLED()) return;
+    // Override ghRead/ghWrite to update status
+    const origRead = window._ghReadOrig || ghRead;
+    window._ghReadOrig = origRead;
+    setStatus('ok');
+  }, []);
+  if (!GH_ENABLED()) return html`<span style=${{fontSize:10,color:'#546e7a',fontFamily:'monospace',padding:'2px 6px',background:'#1a1e24',borderRadius:4}}>LOCAL ONLY</span>`;
+  return html`<span style=${{fontSize:10,fontFamily:'monospace',padding:'2px 6px',background:'#1a1e24',borderRadius:4,color:'#66bb6a',display:'flex',alignItems:'center',gap:4}}>
+    <span style=${{width:6,height:6,borderRadius:'50%',background:'#66bb6a',display:'inline-block'}}></span>
+    GITHUB SYNC
+  </span>`;
+}
+
+function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric, onLogout, initialTab}) {
+  const [activeTab, setActiveTab] = useState(initialTab || 'checkin'); // 'checkin', 's1', 's2'
+  const [globalSearch, setGlobalSearch] = useState('');
+  const [selAth, setSelAth] = useState(null);
+
+  // Active athlete selected in inputs (s1, s2, drills)
+  const [activeAthlete, setActiveAthlete] = useState(null);
+  const [s1Vals, setS1Vals] = useState(['', '', '']);
+  const [s2Val, setS2Val] = useState('');
+  const [drillVal, setDrillVal] = useState('');
+
+  // Sign In Pane States
+  const [checkinQ, setCheckinQ] = useState('');
+  const [showWalkup, setShowWalkup] = useState(false);
+  const [walkupForm, setWalkupForm] = useState({first:'', last:'', dob:'', division:'12 & Under', primaryPos:'Outside Hitter', altPos:'N/A', phone:'', email:''});
+  const [recentCheckins, setRecentCheckins] = useState([]);
+  const [confirmCheckInAth, setConfirmCheckInAth] = useState(null);
+  const [emailAth, setEmailAth] = useState(null);
+  const [emailTeam, setEmailTeam] = useState('');
+  const [hideAth, setHideAth] = useState(null);
+
+  // Helper: update a single athlete by id
+  const upd = (id, updates) => setAthletes(p => p.map(a => a.id === id ? {...a, ...updates} : a));
+  const doHide = (id, reason, note) => upd(id, {hidden:true, hideReason:reason, hideNote:note, teamAssignment:null, teamLocked:false});
+  const doUnhide = id => upd(id, {hidden:false, hideReason:'', hideNote:''});
+
+  const handleConfirmCheckIn = (id, contactInfo) => {
+    onArrive(id, contactInfo);
+    const matched = athletes.find(a=>a.id===id);
+    setRecentCheckins(p=>[matched,...p].filter(Boolean).map(a=>a.id===id?{...a,...contactInfo}:a).slice(0,6));
+    setConfirmCheckInAth(null);
+    setCheckinQ('');
+    setGlobalSearch('');
+  };
+
+  // Station lists: all registered athletes, sorted by arrived desc, then first name
+  const allAthletesSorted = useMemo(() => {
+    return [...athletes].filter(a => !a.hidden).sort((a, b) => {
+      if (a.arrived !== b.arrived) return a.arrived ? 1 : -1;
+      return a.first.localeCompare(b.first);
+    });
+  }, [athletes]);
+
+  // Global search filtering
+  const lookupResults = useMemo(() => {
+    const q = globalSearch.trim().toLowerCase();
+    if (!q) return [];
+    return athletes.filter(a => !a.hidden && (
+      a.first.toLowerCase().includes(q) ||
+      a.last.toLowerCase().includes(q) ||
+      (a.first+' '+a.last).toLowerCase().includes(q) ||
+      (a.first.trim()+' '+a.last.trim()).toLowerCase().includes(q) ||
+      a.to.includes(q)
+    ));
+  }, [globalSearch, athletes]);
+
+  // Handle loading athlete in station
+  const loadAthleteForTab = (ath, tab = activeTab) => {
+    setActiveAthlete(ath);
+    setGlobalSearch('');
+    if (tab === 's1') {
+      const v = ath.metrics?.s1 || ['', '', ''];
+      setS1Vals([v[0] || '', v[1] || '', v[2] || '']);
+    } else if (tab === 's2') {
+      const v = ath.metrics?.s2 || [''];
+      setS2Val(v[0] || '');
+    } else if (tab === 'drills') {
+      setDrillVal(ath.drillScore || '');
+    }
+  };
+
+  const getCompletion = (ath) => {
+    const s1 = ath.metrics?.s1 || [];
+    const s1Done = s1.filter(x => x !== '' && x !== null && !isNaN(Number(x))).length === 3;
+    const s2 = ath.metrics?.s2 || [];
+    const s2Done = s2.length > 0 && s2[0] !== '' && s2[0] !== null;
+    const drillDone = ath.drillScore !== '' && ath.drillScore !== null && !isNaN(Number(ath.drillScore));
+    return {
+      checkin: ath.arrived,
+      s1: s1Done,
+      s2: s2Done,
+      drills: drillDone
+    };
+  };
+
+  const handleSaveS1 = () => {
+    if (!activeAthlete) return;
+    onMetric(activeAthlete.id, 's1', s1Vals);
+    setActiveAthlete(null);
+    setS1Vals(['', '', '']);
+    alert('Physical metrics saved successfully!');
+  };
+
+  const handleSaveS2 = () => {
+    if (!activeAthlete) return;
+    onMetric(activeAthlete.id, 's2', [s2Val]);
+    setActiveAthlete(null);
+    setS2Val('');
+    alert('Agility metric saved successfully!');
+  };
+
+  const handleSaveDrill = () => {
+    if (!activeAthlete) return;
+    setAthletes(prev => prev.map(a => a.id === activeAthlete.id ? { ...a, drillScore: drillVal } : a));
+    setActiveAthlete(null);
+    setDrillVal('');
+    alert('Drill score saved successfully!');
+  };
+
+  const handleGlobalAction = (ath, targetTab) => {
+    setActiveTab(targetTab);
+    loadAthleteForTab(ath, targetTab);
+  };
+
+  useEffect(() => {
+    if (activeAthlete) {
+      const updated = athletes.find(a => a.id === activeAthlete.id);
+      if (updated) {
+        setActiveAthlete(updated);
+      }
+    }
+  }, [athletes]);
+
+  return html`
+    <div style=${{minHeight:'100vh',background:'#0d1017',paddingBottom:40}}>
+      <div class="sticky-header" style=${{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+        <div>
+          <h1 style=${{fontSize:18,fontWeight:800,color:'#f0a500',margin:0}}>MID TN VBC</h1>
+          <p style=${{fontSize:12,color:'#78909c',margin:0}}>Staff Operations Hub</p>
+        </div>
+        <div style=${{fontSize:11,color:'#546e7a',textAlign:'right'}}>
+          <div>Arrived: <strong style=${{color:'#26c6da'}}>${athletes.filter(a=>a.arrived&&!a.hidden).length}</strong></div>
+          <div>Total Registered: <strong>${athletes.filter(a=>!a.hidden).length}</strong></div>
+        </div>
+        <${Btn} sm onClick=${onLogout} color="#ef5350" outline>Log Out<//>
+          <${SyncStatus}/>
+      </div>
+
+      <div style=${{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(130px, 1fr))',gap:12,padding:'20px 20px 10px',maxWidth:800,margin:'0 auto'}}>
+        ${[
+          {key:'checkin',label:'Sign In',desc:'Arrived / Walkups',icon:'📝',c:'#26c6da'},
+          {key:'s1',label:'Stations',desc:'Physical · Agility · Drills',icon:'📏',c:'#42a5f5'}
+        ].map(tile => {
+          const active = activeTab === tile.key;
+          return html`
+            <div key=${tile.key} onClick=${()=>setActiveTab(tile.key)} class="card" style=${{
+              padding:14,
+              cursor:'pointer',
+              border:active?`2px solid ${tile.c}`:'2px solid #1e222b',
+              boxShadow:active?`0 0 12px ${tile.c}33`:'none',
+              background:active?'#12151c':'#161a22',
+              transition:'all 0.2s',
+              textAlign:'center',
+              display:'flex',
+              flexDirection:'column',
+              justifyContent:'center',
+              alignItems:'center',
+              gap:4
+            }}>
+              <div style=${{fontSize:24}}>${tile.icon}</div>
+              <div style=${{fontWeight:800,fontSize:13,color:active?tile.c:'#e8eaed'}}>${tile.label}</div>
+              <div style=${{fontSize:10,color:'#546e7a'}}>${tile.desc}</div>
+            </div>`;
+        })}
+      </div>
+
+      <div style=${{padding:'10px 20px 20px',maxWidth:800,margin:'0 auto'}}>
+        <div class="card" style=${{padding:16,marginBottom:20,border:'1px solid #2a2e38',background:'#12151c'}}>
+          <label class="label" style=${{fontWeight:700,fontSize:12,color:'#78909c',marginBottom:6}}>📍 Quick Player Completion Lookup</label>
+          <input class="input" placeholder="Search registered player by name or TO#..."
+            value=${globalSearch} onInput=${e=>setGlobalSearch(e.target.value)}
+            style=${{padding:10,fontSize:14}}/>
+          
+          ${globalSearch && html`
+            <div style=${{marginTop:10,maxHeight:300,overflowY:'auto',background:'#0d1017',borderRadius:8,border:'1px solid #1e222b',padding:8}}>
+              ${lookupResults.map(a => {
+                const comp = getCompletion(a);
+                return html`
+                  <div key=${a.id} style=${{display:'flex',flexDirection:'column',gap:8,padding:10,borderBottom:'1px solid #1a1d24'}}>
+                    <div style=${{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
+                      <div>
+                        <span style=${{fontWeight:700,fontSize:14}}>${a.first} ${a.last}</span>
+                        <span style=${{fontFamily:'monospace',color:'#4fc3f7',fontSize:12,marginLeft:8}}>#${a.to}</span>
+                        <span style=${{fontSize:11,color:'#546e7a',marginLeft:8}}>${a.division} · ${posAbbr(a.primaryPos)}</span>
+                      </div>
+                      <div style=${{display:'flex',gap:6}}>
+                        <${Btn} sm onClick=${()=>setSelAth(a)} color="#4fc3f7" outline>Profile 📋<//>
+                         ${!a.arrived && html`<${Btn} sm onClick=${()=>setConfirmCheckInAth(a)} color="#26c6da">Check In ✓<//>`}
+                      </div>
+                    </div>
+                    
+                    <!-- Progress Grid -->
+                    <div style=${{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(110px, 1fr))',gap:6,background:'#12151c',padding:8,borderRadius:6,border:'1px solid #1e222b',fontSize:11}}>
+                      <div style=${{display:'flex',alignItems:'center',gap:4,color:comp.checkin?'#66bb6a':'#ffa726'}}>
+                        <span>${comp.checkin?'✓':'⏳'}</span> Sign In
+                      </div>
+                      <div style=${{display:'flex',alignItems:'center',gap:4,color:comp.s1?'#66bb6a':'#ef5350'}} title=${a.metrics?.s1 ? `Height: ${a.metrics.s1[0]}", Reach: ${a.metrics.s1[1]}", Vert: ${a.metrics.s1[2]}"` : ''}>
+                        <span>${comp.s1?'✓':'⏳'}</span> Physical ${a.metrics?.s1 ? `(${a.metrics.s1.filter(Boolean).length}/3)` : ''}
+                      </div>
+                      <div style=${{display:'flex',alignItems:'center',gap:4,color:comp.s2?'#66bb6a':'#ef5350'}} title=${a.metrics?.s2 ? `Shuttle: ${a.metrics.s2[0]}s` : ''}>
+                        <span>${comp.s2?'✓':'⏳'}</span> Agility
+                      </div>
+                      <div style=${{display:'flex',alignItems:'center',gap:4,color:a.drillScore?'#66bb6a':'#ef5350'}} title=${a.drillScore ? `Drill: ${a.drillScore}` : ''}>
+                        <span>${a.drillScore?'✓':'⏳'}</span> Drill Score
+                      </div>
+                    </div>
+                    
+                    <!-- Jump Actions -->
+                    <div style=${{display:'flex',gap:8,justifyContent:'flex-end',fontSize:11,marginTop:4}}>
+                      <button onClick=${()=>handleGlobalAction(a, 's1')} style=${{background:'none',border:'none',color:'#42a5f5',cursor:'pointer',textDecoration:'underline',fontSize:11,padding:0}}>→ Input Physical</button>
+                      <button onClick=${()=>handleGlobalAction(a, 's2')} style=${{background:'none',border:'none',color:'#ffa726',cursor:'pointer',textDecoration:'underline',fontSize:11,padding:0}}>→ Agility Timer</button>
+                    </div>
+                  </div>`;
+              })}
+              ${lookupResults.length === 0 && html`<div style=${{textAlign:'center',padding:12,color:'#ef5350'}}>No registered player matching "${globalSearch}"</div>`}
+            </div>
+          `}
+        </div>
+
+        <!-- Tab Station Pane -->
+        <div style=${{minHeight:400}}>
+          ${activeTab === 'checkin' && html`
+            <div>
+              <div style=${{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
+                <h2 style=${{fontSize:16,fontWeight:800,margin:0,color:'#26c6da'}}>Sign In Station</h2>
+                <${Btn} sm onClick=${()=>setShowWalkup(true)} color="#f0a500">+ Add Walkup<//>
+              </div>
+              
+              ${showWalkup ? html`
+                <div class="card" style=${{padding:20,marginBottom:16,border:'1px solid #f0a50033'}}>
+                  <div style=${{display:'flex',justifyContent:'space-between',marginBottom:16}}>
+                    <h3 style=${{color:'#f0a500',fontSize:14,margin:0}}>Add Walkup Athlete</h3>
+                    <${Btn} sm onClick=${()=>setShowWalkup(false)} color="#2a2e38">Cancel<//>
+                  </div>
+                  <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10,marginBottom:12}}>
+                    ${[['First *','first'],['Last *','last'],['DOB','dob'],['Phone *','phone']].map(([l,k])=>html`
+                      <div key=${k}><label class="label">${l}</label>
+                        <input class="input" value=${walkupForm[k]} onInput=${e=>setWalkupForm(p=>({...p,[k]:e.target.value}))} style=${{padding:'6px 8px',fontSize:12}}/></div>`)}
+                    <div style=${{gridColumn:'span 2'}}><label class="label">Email *</label>
+                      <input class="input" type="email" placeholder="e.g. parent@email.com" value=${walkupForm.email} onInput=${e=>setWalkupForm(p=>({...p,email:e.target.value}))} style=${{padding:'6px 8px',fontSize:12}}/></div>
+                    <div><label class="label">Division *</label>
+                      <select class="select" value=${walkupForm.division} onChange=${e=>setWalkupForm(p=>({...p,division:e.target.value}))} style=${{padding:'6px 8px',fontSize:12}}>
+                        ${AGES.map(a=>html`<option value=${a+' & Under'}>${a}s</option>`)}</select></div>
+                    <div><label class="label">Primary Position *</label>
+                      <select class="select" value=${walkupForm.primaryPos} onChange=${e=>setWalkupForm(p=>({...p,primaryPos:e.target.value}))} style=${{padding:'6px 8px',fontSize:12}}>
+                        ${['Outside Hitter','Middle Hitter','Setter','Right Side Hitter','Defensive Specialist','Libero','I am unsure'].map(p=>html`<option>${p}</option>`)}</select></div>
+                  </div>
+                  <${Btn} onClick=${()=>{
+                    const isWuValid = walkupForm.first.trim() && walkupForm.last.trim() && walkupForm.phone.trim().length >= 7 && walkupForm.email.trim().includes('@');
+                    if(!isWuValid) return;
+                    const id=`wu-${Date.now()}`;
+                    const toN = String(200+athletes.filter(a=>a.isWalkup).length);
+                    onAddWalkup({...walkupForm,id,to:toN,isWalkup:true,arrived:true,status:'arrived'});
+                    setRecentCheckins(p=>[{...walkupForm,to:toN,isWalkup:true},...p].slice(0,6));
+                    setWalkupForm({first:'',last:'',dob:'',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:''});
+                    setShowWalkup(false);
+                  }} disabled=${!(walkupForm.first.trim() && walkupForm.last.trim() && walkupForm.phone.trim().length >= 7 && walkupForm.email.trim().includes('@'))} style=${{width:'100%',padding:10}}>Register & Check In ✓<//>
+                </div>
+              ` : html`
+                <div class="card" style=${{padding:16,marginBottom:16}}>
+                  <label class="label">Search Registered Athlete</label>
+                  <input class="input" placeholder="Type name or TO# to sign in..." value=${checkinQ}
+                    onInput=${e=>setCheckinQ(e.target.value)}/>
+                </div>
+                
+                ${checkinQ && html`
+                  <div style=${{marginBottom:16}}>
+                    ${athletes.filter(a=>!a.hidden && (a.first.toLowerCase().includes(checkinQ.toLowerCase()) || a.last.toLowerCase().includes(checkinQ.toLowerCase()) || a.to.includes(checkinQ))).map(a=>html`
+                      <div key=${a.id} style=${{display:'flex',alignItems:'center',gap:10,padding:'10px 14px',background:a.arrived?'#0a2010':'#1a1d24',border:`1px solid ${a.arrived?'#66bb6a44':'#2a2e38'}`,borderRadius:8,marginBottom:6}}>
+                        <span style=${{fontFamily:'monospace',color:'#4fc3f7',fontSize:12}}>#${a.to}</span>
+                        <div style=${{flex:1}}>
+                          <div style=${{fontWeight:700,fontSize:14}}>${a.first} ${a.last}</div>
+                          <div style=${{fontSize:10,color:'#78909c'}}>${a.division} · ${posAbbr(a.primaryPos)}</div>
+                        </div>
+                        ${a.isWalkup&&html`<${Badge} c="#ffa726" sm>Walkup<//>`}
+                        <div style=${{display:'flex',alignItems:'center',gap:8,marginRight:8}}>
+                          <label style=${{fontSize:10,color:'#78909c',fontWeight:700}}>DRILL</label>
+                          <input type="number" min="1" max="10" step="0.5" value=${a.drillScore||''} onClick=${e=>e.stopPropagation()}
+                            onInput=${e=>setAthletes(prev=>prev.map(ath=>ath.id===a.id?{...ath,drillScore:e.target.value}:ath))}
+                            style=${{width:40,padding:'2px 4px',background:'#12151c',border:'1px solid #f0a50088',borderRadius:4,color:'#e8eaed',fontSize:12,textAlign:'center',fontWeight:700}}/>
+                        </div>
+                        ${a.arrived
+                          ? html`<div style=${{display:'flex',gap:6}}><${Badge} c="#66bb6a" sm>✓ Arrived<//><${Btn} sm onClick=${()=>setSelAth(a)} color="#f0a500" outline>Edit Profile 📋<//></div>`
+                          : html`<div style=${{display:'flex',gap:6}}><${Btn} sm onClick=${()=>setConfirmCheckInAth(a)} color="#26c6da">Check In ✓<//><${Btn} sm onClick=${()=>setSelAth(a)} color="#f0a500" outline>Edit Profile 📋<//></div>`}
+                      </div>`)}
+                  </div>
+                `}
+                
+                ${recentCheckins.length > 0 && html`
+                  <div class="card" style=${{padding:14}}>
+                    <div style=${{fontSize:10,color:'#546e7a',textTransform:'uppercase',letterSpacing:1,marginBottom:8}}>Recent Check-Ins</div>
+                    ${recentCheckins.map((a,i)=>html`
+                      <div key=${i} style=${{display:'flex',alignItems:'center',gap:8,padding:'4px 0',borderBottom:'1px solid #1e222b'}}>
+                        <span style=${{fontFamily:'monospace',color:'#4fc3f7',fontSize:11}}>#${a.to}</span>
+                        <span style=${{flex:1,fontSize:12}}>${a.first} ${a.last}</span>
+                        <span style=${{color:'#66bb6a',fontSize:12}}>✓ Checked In</span>
+                        ${a.isWalkup&&html`<${Badge} c="#ffa726" sm>WU<//>`}
+                      </div>`)}
+                  </div>
+                `}
+              `}
+            </div>
+          `}
+
+          ${activeTab === 's1' && html`
+            <div>
+              <h2 style=${{fontSize:16,fontWeight:800,marginBottom:12,color:'#42a5f5'}}>Reach & Vertical Station</h2>
+              
+              ${activeAthlete ? html`
+                <div class="card" style=${{padding:16,marginBottom:16}}>
+                  <div style=${{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:12}}>
+                    <div>
+                      <h3 style=${{margin:0,fontSize:16,fontWeight:800,display:'flex',alignItems:'center',gap:6}}>
+                        ${activeAthlete.first} ${activeAthlete.last}
+                        ${!activeAthlete.arrived && html`<span style=${{color:'#ffa726',fontSize:11,background:'rgba(240,165,0,0.1)',padding:'2px 6px',borderRadius:4}}>âš ️ Not Checked In</span>`}
+                      </h3>
+                      <div style=${{fontSize:11,color:'#78909c',marginTop:2}}>TO# ${activeAthlete.to} · ${activeAthlete.division} · ${posAbbr(activeAthlete.primaryPos)}</div>
+                    </div>
+                    <${Btn} sm onClick=${()=>setSelAth(activeAthlete)} color="#4fc3f7" outline>Profile 📋<//>
+                  </div>
+                  
+                  <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:10,marginBottom:14}}>
+                    ${['Height (in)', 'Reach (in)', 'Vertical (in)'].map((l,idx)=>html`
+                      <div key=${idx}>
+                        <label class="label" style=${{fontSize:11}}>${l}</label>
+                        <input type="number" step="0.5" value=${s1Vals[idx] || ''}
+                          onInput=${e=>{const nv=[...s1Vals];nv[idx]=e.target.value;setS1Vals(nv);}}
+                          style=${{width:'100%',padding:8,background:'#12151c',border:'1px solid #2a2e38',borderRadius:6,color:'#e8eaed',fontSize:20,textAlign:'center',fontFamily:'monospace'}}/>
+                      </div>
+                    `)}
+                  </div>
+                  
+                  <div style=${{display:'flex',gap:8}}>
+                    <${Btn} onClick=${()=>setActiveAthlete(null)} color="#2a2e38" style=${{flex:1}}>Cancel<//>
+                    <${Btn} onClick=${handleSaveS1} color="#66bb6a" style=${{flex:2}}>Save & Load Next ✓<//>
+                  </div>
+                </div>
+              ` : html`
+                <div class="card" style=${{padding:16,marginBottom:16,textAlign:'center'}}>
+                  <div style=${{color:'#78909c',fontSize:12,marginBottom:12}}>Select any registered player below to input metrics:</div>
+                  <div style=${{maxHeight:360,overflowY:'auto',textAlign:'left'}}>
+                    ${allAthletesSorted.map(a => {
+                      const comp = getCompletion(a).s1;
+                      return html`
+                        <div key=${a.id} onClick=${()=>loadAthleteForTab(a)} style=${{display:'flex',alignItems:'center',gap:8,padding:'8px 10px',background:'#1a1d24',borderRadius:8,marginBottom:4,cursor:'pointer',border:comp?'1px solid #66bb6a22':'1px solid #2a2e38'}}>
+                          <span style=${{fontFamily:'monospace',color:'#4fc3f7',fontSize:11}}>#${a.to}</span>
+                          <div style=${{flex:1}}>
+                            <span style=${{fontSize:13,fontWeight:600}}>${a.first} ${a.last}</span>
+                            ${!a.arrived && html`<span style=${{color:'#ffa726',fontSize:9,marginLeft:6}}>âš ️ Not Checked In</span>`}
+                          </div>
+                          ${comp ? html`<${Badge} c="#66bb6a" sm>Completed<//>` : html`<${Badge} c="#ef5350" sm>Pending<//>`}
+                        </div>`;
+                    })}
+                  </div>
+                </div>
+              `}
+            </div>
+          `}
+
+          ${(activeTab === 's2' || activeTab === 's1') && html`
+            <div>
+              <h2 style=${{fontSize:16,fontWeight:800,marginBottom:12,color:'#ffa726'}}>Agility Station</h2>
+              
+              ${activeAthlete ? html`
+                <div class="card" style=${{padding:16,marginBottom:16}}>
+                  <div style=${{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:12}}>
+                    <div>
+                      <h3 style=${{margin:0,fontSize:16,fontWeight:800,display:'flex',alignItems:'center',gap:6}}>
+                        ${activeAthlete.first} ${activeAthlete.last}
+                        ${!activeAthlete.arrived && html`<span style=${{color:'#ffa726',fontSize:11,background:'rgba(240,165,0,0.1)',padding:'2px 6px',borderRadius:4}}>âš ️ Not Checked In</span>`}
+                      </h3>
+                      <div style=${{fontSize:11,color:'#78909c',marginTop:2}}>TO# ${activeAthlete.to} · ${activeAthlete.division} · ${posAbbr(activeAthlete.primaryPos)}</div>
+                    </div>
+                    <${Btn} sm onClick=${()=>setSelAth(activeAthlete)} color="#4fc3f7" outline>Profile 📋<//>
+                  </div>
+                  
+                  <div style=${{marginBottom:12}}>
+                    <${Stopwatch} label="Timing Shuttle Run" onApply=${(sec)=>setS2Val(sec)}/>
+                  </div>
+                  
+                  <div style=${{marginBottom:14}}>
+                    <label class="label">Shuttle Run Time (sec)</label>
+                    <input type="number" step="0.01" value=${s2Val} onInput=${e=>setS2Val(e.target.value)}
+                      style=${{width:'100%',padding:10,background:'#12151c',border:'1px solid #2a2e38',borderRadius:8,color:'#e8eaed',fontSize:24,textAlign:'center',fontFamily:'monospace'}}/>
+                  </div>
+                  
+                  <div style=${{display:'flex',gap:8}}>
+                    <${Btn} onClick=${()=>setActiveAthlete(null)} color="#2a2e38" style=${{flex:1}}>Cancel<//>
+                    <${Btn} onClick=${handleSaveS2} color="#66bb6a" style=${{flex:2}}>Save & Load Next ✓<//>
+                  </div>
+                </div>
+              ` : html`
+                <div class="card" style=${{padding:16,marginBottom:16,textAlign:'center'}}>
+                  <div style=${{color:'#78909c',fontSize:12,marginBottom:12}}>Select any registered player below to run timing:</div>
+                  <div style=${{maxHeight:360,overflowY:'auto',textAlign:'left'}}>
+                    ${allAthletesSorted.map(a => {
+                      const comp = getCompletion(a).s2;
+                      return html`
+                        <div key=${a.id} onClick=${()=>loadAthleteForTab(a)} style=${{display:'flex',alignItems:'center',gap:8,padding:'8px 10px',background:'#1a1d24',borderRadius:8,marginBottom:4,cursor:'pointer',border:comp?'1px solid #66bb6a22':'1px solid #2a2e38'}}>
+                          <span style=${{fontFamily:'monospace',color:'#4fc3f7',fontSize:11}}>#${a.to}</span>
+                          <div style=${{flex:1}}>
+                            <span style=${{fontSize:13,fontWeight:600}}>${a.first} ${a.last}</span>
+                            ${!a.arrived && html`<span style=${{color:'#ffa726',fontSize:9,marginLeft:6}}>âš ️ Not Checked In</span>`}
+                          </div>
+                          ${comp ? html`<${Badge} c="#66bb6a" sm>Completed<//>` : html`<${Badge} c="#ef5350" sm>Pending<//>`}
+                        </div>`;
+                    })}
+                  </div>
+                </div>
+              `}
+            </div>
+          `}
+
+          ${(activeTab === 'drills' || activeTab === 's1') && html`
+            <div>
+              <h2 style=${{fontSize:16,fontWeight:800,marginBottom:12,color:'#66bb6a'}}>Drills Station</h2>
+              
+              ${activeAthlete ? html`
+                <div class="card" style=${{padding:16,marginBottom:16}}>
+                  <div style=${{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:12}}>
+                    <div>
+                      <h3 style=${{margin:0,fontSize:16,fontWeight:800,display:'flex',alignItems:'center',gap:6}}>
+                        ${activeAthlete.first} ${activeAthlete.last}
+                        ${!activeAthlete.arrived && html`<span style=${{color:'#ffa726',fontSize:11,background:'rgba(240,165,0,0.1)',padding:'2px 6px',borderRadius:4}}>âš ️ Not Checked In</span>`}
+                      </h3>
+                      <div style=${{fontSize:11,color:'#78909c',marginTop:2}}>TO# ${activeAthlete.to} · ${activeAthlete.division} · ${posAbbr(activeAthlete.primaryPos)}</div>
+                    </div>
+                    <${Btn} sm onClick=${()=>setSelAth(activeAthlete)} color="#4fc3f7" outline>Profile 📋<//>
+                  </div>
+                  
+                  <div style=${{marginBottom:14}}>
+                    <label class="label">Drill Score (1-10)</label>
+                    <input type="number" min="0" max="10" step="0.5" value=${drillVal} onInput=${e=>setDrillVal(e.target.value)}
+                      style=${{width:'100%',padding:10,background:'#12151c',border:'1px solid #2a2e38',borderRadius:8,color:'#e8eaed',fontSize:24,textAlign:'center',fontFamily:'monospace',fontWeight:700}}/>
+                  </div>
+                  
+                  <div style=${{display:'flex',gap:8}}>
+                    <${Btn} onClick=${()=>setActiveAthlete(null)} color="#2a2e38" style=${{flex:1}}>Cancel<//>
+                    <${Btn} onClick=${handleSaveDrill} color="#66bb6a" style=${{flex:2}}>Save & Load Next ✓<//>
+                  </div>
+                </div>
+              ` : html`
+                <div class="card" style=${{padding:16,marginBottom:16,textAlign:'center'}}>
+                  <div style=${{color:'#78909c',fontSize:12,marginBottom:12}}>Select any registered player below to input drill scores:</div>
+                  <div style=${{maxHeight:360,overflowY:'auto',textAlign:'left'}}>
+                    ${allAthletesSorted.map(a => {
+                      const comp = getCompletion(a).drills;
+                      return html`
+                        <div key=${a.id} onClick=${()=>loadAthleteForTab(a)} style=${{display:'flex',alignItems:'center',gap:8,padding:'8px 10px',background:'#1a1d24',borderRadius:8,marginBottom:4,cursor:'pointer',border:comp?'1px solid #66bb6a22':'1px solid #2a2e38'}}>
+                          <span style=${{fontFamily:'monospace',color:'#4fc3f7',fontSize:11}}>#${a.to}</span>
+                          <div style=${{flex:1}}>
+                            <span style=${{fontSize:13,fontWeight:600}}>${a.first} ${a.last}</span>
+                            ${!a.arrived && html`<span style=${{color:'#ffa726',fontSize:9,marginLeft:6}}>âš ️ Not Checked In</span>`}
+                          </div>
+                          ${comp ? html`<${Badge} c="#66bb6a" sm>Completed<//>` : html`<${Badge} c="#ef5350" sm>Pending<//>`}
+                        </div>`;
+                    })}
+                  </div>
+                </div>
+              `}
+            </div>
+          `}
+        </div>
+      </div>
+
+      <${CheckInConfirmModal} athlete=${confirmCheckInAth} onClose=${()=>setConfirmCheckInAth(null)} onConfirm=${handleConfirmCheckIn}/>
+      <${AthleteModal} athlete=${selAth} onClose=${()=>setSelAth(null)} onChange=${(id, updates)=>{
+        setAthletes(prev => prev.map(a => a.id === id ? { ...a, ...updates } : a));
+        if (selAth && selAth.id === id) setSelAth(p => ({ ...p, ...updates }));
+        if (activeAthlete && activeAthlete.id === id) setActiveAthlete(p => ({ ...p, ...updates }));
+      }} onHide=${a=>{setSelAth(null);setHideAth(a);}} onUnhide=${doUnhide} onEmail=${a=>{setSelAth(null);setEmailAth(a);setEmailTeam(a.teamAssignment||'');}}/>
+    </div>`;
+}
+
+// -- ATHLETE MODAL -
+function AthleteModal({athlete,onClose,onChange,onHide,onUnhide,onEmail}){
+  if(!athlete) return null;
+  const locked = athlete.teamLocked || athlete.status === 'accepted';
+  const sc = totalScore(athlete.metrics, athlete.drillScore);
+  const [ef,setEf]=useState(null);
+  const [ev,setEv]=useState('');
+  const [showStopwatch, setShowStopwatch] = useState(false);
+
+  const startEdit=(k,v)=>{if(locked)return;setEf(k);setEv(v||'');};
+  const saveEdit=()=>{if(ef){onChange(athlete.id,{[ef]:ev});setEf(null);}};
+  const F=(label,key,opts)=>html`
+    <div>
+      <div class="label">${label}</div>
+      ${ef===key?(opts
+        ?html`<select class="select" value=${ev} onChange=${e=>setEv(e.target.value)} onBlur=${saveEdit} autoFocus>${opts.map(o=>html`<option>${o}</option>`)}</select>`
+        :html`<input class="input" value=${ev} onInput=${e=>setEv(e.target.value)} onBlur=${saveEdit} onKeyDown=${e=>e.key==='Enter'&&saveEdit()} autoFocus style=${{fontSize:13,padding:'6px 8px'}}/>`)
+      :html`<div onClick=${()=>startEdit(key,athlete[key])} style=${{fontSize:13,color:athlete[key]?'#e8eaed':'#444',cursor:locked?'default':'pointer',padding:'2px 0',borderBottom:'1px dashed #2a2e38',wordBreak:'break-all',minHeight:20}}>
+        ${athlete[key]||'"”'}${!locked&&html`<span style=${{color:'#4fc3f7',marginLeft:4,fontSize:10}}>âœ</span>`}
+      </div>`}
+    </div>`;
+  return html`
+    <div class="modal-overlay" onClick=${onClose}>
+      <div class="modal-box" style=${{width:640}} onClick=${e=>e.stopPropagation()}>
+        <div style=${{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:16}}>
+          <div>
+            <h3 style=${{fontSize:20,color:'#e8eaed',margin:0,display:'flex',alignItems:'center',gap:8}}>
+              ${locked&&'🔒 '}${athlete.first} ${athlete.last}
+              ${athlete.isWalkup&&html`<${Badge} c="#ffa726" sm>Walkup<//>`}
+              ${athlete.arrived&&html`<${Badge} c="#26c6da" sm>✓ Arrived<//>`}
+            </h3>
+            <div style=${{display:'flex',gap:8,marginTop:6,flexWrap:'wrap',alignItems:'center'}}>
+              <span style=${{color:'#4fc3f7',fontFamily:'monospace',fontSize:13}}>TO# ${athlete.to}</span>
+              ${sc&&html`<${Badge} c=${scoreColor(sc)}>Score: ${sc}<//>`}
+              <${SBadge} status=${athlete.status}/>
+              ${athlete.wontAccept&&html`<span title=${athlete.wontAccept}>âš ️</span>`}
+            </div>
+          </div>
+          <button onClick=${onClose} style=${{background:'none',border:'none',color:'#666',fontSize:24,cursor:'pointer'}}>×</button>
+        </div>
+        <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'12px 20px',marginBottom:16}}>
+          ${F('First Name','first')}${F('Last Name','last')}
+          ${F('Date of Birth','dob')}${F('Division','division',AGES.map(a=>a+' & Under'))}
+          ${F('Primary Position','primaryPos',['Outside Hitter','Middle Hitter','Setter','Right Side Hitter','Defensive Specialist','Libero','I am unsure'])}
+          ${F('Alt Position','altPos',['Outside Hitter','Middle Hitter','Setter','Right Side Hitter','Defensive Specialist','Libero','N/A'])}
+          ${F('Phone','phone')}${F('Email','email')}
+        </div>
+        <div style=${{marginBottom:14}}>
+          <label class="label" style=${{fontWeight:800,color:'#f0a500'}}>Tryout Notes & Call Log</label>
+          <textarea class="input" rows="5" placeholder="Add call log, tryout notes, parent concerns..."
+            value=${athlete.notes||''} onInput=${e=>onChange(athlete.id,{notes:e.target.value})}
+            style=${{lineHeight:1.6,resize:'vertical',height:'auto',border:'1px solid #f0a50044'}}></textarea>
+        </div>
+        <div style=${{marginBottom:16}}>
+          <label class="label" style=${{color:'#ffa726',fontWeight:800}}>âš ️ Won't Accept / Team Restrictions</label>
+          <input class="input" placeholder="e.g. Will not accept 14 Silver or lower"
+            value=${athlete.wontAccept||''} onInput=${e=>onChange(athlete.id,{wontAccept:e.target.value})} disabled=${locked}
+            style=${{borderColor:'#ffa72688'}}/>
+        </div>
+        <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:12,marginBottom:14}}>
+          <div><label class="label">Status</label>
+            <select class="select" value=${athlete.status} onChange=${e=>onChange(athlete.id,{status:e.target.value})} disabled=${locked}>
+              ${STATUSES.map(s=>html`<option value=${s}>${s.charAt(0).toUpperCase()+s.slice(1).replace('_',' ')}</option>`)}</select></div>
+          <div><label class="label">Coach POS</label>
+            <select class="select" value=${athlete.coachPos||''} onChange=${e=>onChange(athlete.id,{coachPos:e.target.value})} disabled=${locked}>
+              <option value="">---</option>${['S','M','OH','RS','DS','L'].map(p=>html`<option>${p}</option>`)}</select></div>
+          <div><label class="label">Arrived</label>
+            <select class="select" value=${athlete.arrived?'yes':'no'}
+              disabled=${locked}
+              onChange=${e=>onChange(athlete.id,{arrived:e.target.value==='yes',status:e.target.value==='yes'&&athlete.status==='pending'?'arrived':athlete.status})}>
+              <option value="no">Not Arrived</option><option value="yes">Arrived ✓</option></select></div>
+        </div>
+        <div style=${{borderTop:'1px solid #2a2e38',paddingTop:14,marginBottom:14}}>
+          <div style=${{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:10}}>
+            <div style=${{fontSize:13,fontWeight:700,color:'#4fc3f7'}}>Tryout Scores</div>
+            <button onClick=${()=>setShowStopwatch(!showStopwatch)} class="btn btn-sm btn-outline" style=${{borderColor:'#ffa726',color:'#ffa726',padding:'2px 8px',fontSize:'11px'}}>
+              ${showStopwatch ? 'âœ• Close Timer' : '⏱️ Open Timer'}
+            </button>
+          </div>
+          ${showStopwatch && html`
+            <div style=${{marginBottom:12}}>
+              <${Stopwatch} label="Athlete Timing" onApply=${(sec)=>{
+                const currentMetrics = athlete.metrics || {};
+                const s2Metrics = [...(currentMetrics.s2 || [''])];
+                s2Metrics[0] = sec; // Save to Shuttle Run (Station 2)
+                onChange(athlete.id, { metrics: { ...currentMetrics, s2: s2Metrics } });
+              }}/>
+              <div style=${{fontSize:10,color:'#78909c',textAlign:'center',marginTop:4}}>
+                * Applies elapsed time directly to Station 2: Shuttle Run.
+              </div>
+            </div>
+          `}
+          ${STATIONS.filter(s=>!s.isCheckin).map(st=>{
+            const vs=(athlete.metrics&&athlete.metrics[st.key])||st.metrics.map(()=>'');
+            const av=sAvg(athlete.metrics,st.key);
+            return html`
+              <div style=${{marginBottom:12}}>
+                <div style=${{fontSize:11,color:'#78909c',fontWeight:600,marginBottom:6,display:'flex',justifyContent:'space-between'}}>
+                  <span>${st.label}</span>${av!==null&&html`<span style=${{color:'#66bb6a'}}>Avg: ${av.toFixed(1)}</span>`}
+                </div>
+                <div style=${{display:'grid',gridTemplateColumns:`repeat(${st.metrics.length},1fr)`,gap:8}}>
+                  ${st.metrics.map((lbl,idx)=>html`
+                    <div key=${idx}><div style=${{fontSize:10,color:'#546e7a',marginBottom:2}}>${lbl}</div>
+                      <input type="number" step="0.01" value=${vs[idx]||''} disabled=${locked}
+                        onInput=${e=>{const nv=[...vs];nv[idx]=e.target.value;onChange(athlete.id,{metrics:{...athlete.metrics,[st.key]:nv}});}}
+                        style=${{width:'100%',padding:'5px',background:'#12151c',border:'1px solid #2a2e38',borderRadius:4,color:'#e8eaed',fontSize:13,textAlign:'center'}}/></div>`)}
+                </div>
+              </div>`;})}
+          <div style=${{display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
+            <div style=${{display:'flex',alignItems:'center',gap:10}}>
+              <label class="label" style=${{margin:0}}>Drill Score (1-10)</label>
+              <input type="number" min="0" max="10" step="0.5" value=${athlete.drillScore||''}
+                onInput=${e=>onChange(athlete.id,{drillScore:e.target.value})}
+                style=${{width:60,padding:'5px',background:'#12151c',border:'1px solid #f0a50088',borderRadius:4,color:'#e8eaed',fontSize:15,textAlign:'center',fontWeight:700}}/>
+            </div>
+            ${sc&&html`<div style=${{textAlign:'right',fontWeight:800,fontSize:15,color:'#66bb6a'}}>Total Score: ${sc}</div>`}
+          </div>
+        </div>
+        <div style=${{display:'flex',gap:8,flexWrap:'wrap',alignItems:'center'}}>
+          ${!locked&&html`
+            <div style=${{display:'flex',gap:6}}>
+              <${Btn} onClick=${()=>{onEmail(athlete, 'offer');onClose();}} color="#42a5f5">📬 Offer<//>
+              <${Btn} onClick=${()=>{onEmail(athlete, 'report');onClose();}} color="#26c6da" outline style=${{borderWidth:2}}>📊 Report<//>
+            </div>
+          `}
+          ${!locked&&!athlete.hidden&&html`<${Btn} onClick=${()=>{onHide(athlete);onClose();}} danger outline>Hide<//>`}
+          ${athlete.hidden&&html`<${Btn} onClick=${()=>{onUnhide(athlete.id);onClose();}} color="#66bb6a">Unhide<//>`}
+          ${locked&&html`<${Badge} c="#66bb6a">🔒 Accepted "” Locked<//>`}
+          <div style=${{flex:1}}/>
+          <label style=${{fontSize:12,display:'flex',alignItems:'center',gap:6,cursor:'pointer',color:'#78909c'}}>
+            <input type="checkbox" checked=${athlete.teamLocked} onChange=${e=>onChange(athlete.id,{teamLocked:e.target.checked})}/>
+            Lock Profile
+          </label>
+        </div>
+      </div>
+    </div>`;
+}
+
+// â”€â”€ EMAIL MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function getPerformanceReportBody(athlete) {
+  const sc = totalScore(athlete.metrics, athlete.drillScore);
+  const s1Val = athlete.metrics?.s1 || [];
+  const s2Val = athlete.metrics?.s2 || [];
+  
+  return `Hello ${athlete.first},\n\n` +
+         `Here is your Tryout Performance Report for the 2026-2027 season:\n\n` +
+         `Tryout Number: #${athlete.to}\n` +
+         `Age Group: ${athlete.ageGroup}s\n` +
+         `Position: ${athlete.primaryPos}\n\n` +
+         `--- PERFORMANCE METRICS ---\n` +
+         `- Height: ${s1Val[0] || '"”'} in\n` +
+         `- Reach: ${s1Val[1] || '"”'} in\n` +
+         `- Vertical: ${s1Val[2] || '"”'} in\n` +
+         `- Agility (Shuttle Run): ${s2Val[0] || '"”'} sec\n` +
+         `- Coach Drill Score: ${athlete.drillScore || '"”'} / 10\n\n` +
+         `Overall Tryout Score: ${sc || '"”'} / 10\n` +
+         `Roster Status: ${athlete.status.toUpperCase()}\n\n` +
+         `If you have any questions or want to discuss your results, please feel free to reply to this email.\n\n` +
+         `Thank you,\n` +
+         `Mid TN Volleyball Club`;
+}
+
+function EmailModal({athlete,team,onClose,onSend,initialType='offer'}){
+  const [emailType, setEmailType] = useState(initialType);
+  
+  const offerTpl = useMemo(() => {
+    return `Hello,\n\nWe are pleased to offer ${athlete?.first||''} ${athlete?.last||''} a roster spot on Mid TN VBC${team?' "” '+team:''} for the 2026-2027 season.\n\nDetails at www.midtnvbc.com/clubtryouts\n\nPlease reply:\n  1. Accept\n  2. Request a call\n  3. Decline\n\nThank you!\nMid TN VBC`;
+  }, [athlete, team]);
+
+  const reportTpl = useMemo(() => {
+    if (!athlete) return '';
+    return getPerformanceReportBody(athlete);
+  }, [athlete]);
+
+  const [body,setBody]=useState(offerTpl);
+
+  useEffect(() => {
+    setBody(emailType === 'offer' ? offerTpl : reportTpl);
+  }, [emailType, athlete?.id, offerTpl, reportTpl]);
+
+  if(!athlete) return null;
+
+  const emailConfig = (() => {
+    try {
+      return JSON.parse(localStorage.getItem('midtn_email_config') || '{}');
+    } catch (e) {
+      return {};
+    }
+  })();
+
+  const deliveryMethod = emailConfig.method || 'mailto';
+
+  return html`
+    <div class="modal-overlay" onClick=${onClose}>
+      <div class="modal-box" style=${{width:560}} onClick=${e=>e.stopPropagation()}>
+        <div style=${{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
+          <h3 style=${{margin:0,fontSize:16}}>Compose Email "” ${athlete.first} ${athlete.last}</h3>
+          <button onClick=${onClose} style=${{background:'none',border:'none',color:'#666',fontSize:24,cursor:'pointer'}}>×</button>
+        </div>
+        
+        <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12,marginBottom:12}}>
+          <div>
+            <label class="label">Email Template</label>
+            <select class="select" value=${emailType} onChange=${e=>setEmailType(e.target.value)}>
+              <option value="offer">Roster Offer Letter</option>
+              <option value="report">Tryout Performance Report</option>
+            </select>
+          </div>
+          <div>
+            <label class="label">Sending Via</label>
+            <div style=${{padding:'6px 10px',background:'#12151c',borderRadius:6,border:'1px solid #2a2e38',fontSize:12,color:'#66bb6a',fontWeight:700}}>
+              ${deliveryMethod === 'mailto' ? '📧 Local Mail Client (mailto:)' : '🌐 Web API Service'}
+            </div>
+          </div>
+        </div>
+
+        ${team && emailType === 'offer' && html`<p style=${{margin:'0 0 6px',fontSize:12,color:'#f0a500',fontWeight:600}}>Roster Spot: ${team}</p>`}
+        <p style=${{margin:'0 0 14px',fontSize:12,color:'#78909c'}}>${athlete.email||'âš ️ No email on file'}</p>
+        <textarea class="input" rows="12" style=${{lineHeight:1.6,resize:'vertical',height:'auto',marginBottom:14,fontFamily:'monospace',fontSize:12}}
+          value=${body} onInput=${e=>setBody(e.target.value)}></textarea>
+        <div style=${{display:'flex',gap:8}}>
+          <${Btn} onClick=${onClose} color="#2a2e38">Cancel<//>
+          <${Btn} onClick=${()=>navigator.clipboard?.writeText(body)} color="#ffa726" outline>Copy Text<//>
+          <${Btn} onClick=${()=>{onSend(athlete,body,team,emailType);onClose();}} color="#66bb6a" style=${{flex:1}}>
+            ${athlete.email ? (deliveryMethod === 'mailto' ? 'Open Mail App ✓' : 'Send via Web API ✓') : 'Copy & Mark Contacted'}
+          <//>
+        </div>
+      </div>
+    </div>`;
+}
+
+// â”€â”€ HIDE MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function HideModal({athlete,onClose,onHide}){
+  const [reason,setReason]=useState(HIDE_REASONS[0]);
+  const [note,setNote]=useState('');
+  if(!athlete) return null;
+  return html`
+    <div class="modal-overlay" onClick=${onClose}>
+      <div class="modal-box" style=${{width:400}} onClick=${e=>e.stopPropagation()}>
+        <h3 style=${{color:'#ef5350',margin:'0 0 16px'}}>Hide ${athlete.first} ${athlete.last}</h3>
+        <div style=${{marginBottom:12}}><label class="label">Reason</label>
+          <select class="select" value=${reason} onChange=${e=>setReason(e.target.value)}>
+            ${HIDE_REASONS.map(r=>html`<option>${r}</option>`)}</select></div>
+        <div style=${{marginBottom:20}}><label class="label">Notes (optional)</label>
+          <input class="input" value=${note} onInput=${e=>setNote(e.target.value)} placeholder="Additional context..."/></div>
+        <div style=${{display:'flex',gap:8}}>
+          <${Btn} onClick=${onClose} color="#2a2e38" style=${{flex:1}}>Cancel<//>
+          <${Btn} onClick=${()=>{onHide(athlete.id,reason,note);onClose();}} danger style=${{flex:1}}>Hide Athlete<//>
+        </div>
+      </div>
+    </div>`;
+}
+
+// â”€â”€ PLAYER CARD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function PCard({athlete,onClick,compact,showScore,teamKey}){
+  const sc=totalScore(athlete.metrics, athlete.drillScore);
+  const locked=athlete.teamLocked||athlete.status==='accepted';
+  return html`
+    <div class=${'player-card'+(athlete.status==='declined'?' declined':'')+(locked?' locked':'')}
+      draggable=${!locked} onDragStart=${e=>!locked&&e.dataTransfer.setData('text/plain',athlete.id)}
+      onClick=${()=>onClick?.(athlete)}>
+      ${locked&&html`<span title="Locked" style=${{fontSize:10,fontWeight:800,color:'#f0a500'}}>🔒</span>`}
+      <span style=${{fontFamily:'monospace',fontSize:10,color:'#4fc3f7',minWidth:22}}>#${athlete.to}</span>
+      <span style=${{fontWeight:600,fontSize:compact?12:13,flex:1,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}>${athlete.first} ${athlete.last}</span>
+      <${Badge} c="#78909c" sm>${posAbbr(athlete.primaryPos)}<//>
+      ${athlete.altPos&&athlete.altPos!==athlete.primaryPos&&html`<${Badge} c="#3a3f47" sm>${posAbbr(athlete.altPos)}<//>`}
+      ${athlete.wontAccept&&html`<span title=${'WON\'T ACCEPT / RESTRICTION: '+athlete.wontAccept} style=${{fontSize:16,cursor:'help',filter:'drop-shadow(0 0 2px #ffa726)'}}>âš ️</span>`}
+      ${athlete.notes&&html`<span title=${'TRYOUT NOTES: '+athlete.notes} style=${{fontSize:16,cursor:'help',filter:'drop-shadow(0 0 2px #4fc3f7)'}}>📝</span>`}
+      ${showScore&&sc&&html`<${Badge} c=${scoreColor(sc)} sm>${sc}<//>`}
+      <${SBadge} status=${athlete.status}/>
+    </div>`;
+}
+
+// â”€â”€ HEAD COACH â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function HeadCoach({athletes,setAthletes,onLogout}){
+  const [view,setView]=useState('allreg');
+  const [age,setAge]=useState('12');
+  const [selAth,setSelAth]=useState(null);
+  const [emailAth,setEmailAth]=useState(null);
+  const [emailTeam,setEmailTeam]=useState('');
+  const [hideAth,setHideAth]=useState(null);
+  const [teamOfferKey,setTeamOfferKey]=useState(null);
+  const [confirmCheckInAth,setConfirmCheckInAth]=useState(null);
+  const [widePool,setWidePool]=useState(false);
+
+  // -- ADMIN & CONFIG STATE -
+  const [emailConfig, setEmailConfig] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('midtn_email_config') || '{"method":"mailto"}');
+    } catch (e) {
+      return { method: 'mailto' };
+    }
+  });
+  const [emailLogs, setEmailLogs] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('midtn_email_logs') || '[]');
+    } catch (e) {
+      return [];
+    }
+  });
+  const [linkedFolders, setLinkedFolders] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('midtn_linked_folders') || '[]');
+    } catch (e) {
+      return [];
+    }
+  });
+  const [unansweredQ, setUnansweredQ] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('midtn_unanswered_questions') || '[]');
+    } catch (e) {
+      return [];
+    }
+  });
+  const [chatbotSettings, setChatbotSettings] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('midtn_chatbot_settings') || '{"provider":"rag","apiKey":"","modelName":""}');
+    } catch (e) {
+      return { provider: 'rag', apiKey: '', modelName: '' };
+    }
+  });
+  const [kb, setKb] = useState(null);
+
+  const saveChatbotSettings = (settings) => {
+    setChatbotSettings(settings);
+    localStorage.setItem('midtn_chatbot_settings', JSON.stringify(settings));
+    window.dispatchEvent(new StorageEvent('storage', { key: 'midtn_chatbot_settings', newValue: JSON.stringify(settings) }));
+  };
+
+  useEffect(() => {
+    // Load knowledge base
+    const override = localStorage.getItem('midtn_kb_override');
+    if (override) {
+      setKb(JSON.parse(override));
+    } else {
+      fetch('../volley_kb.json')
+        .then(res => res.json())
+        .then(data => {
+          setKb(data);
+          localStorage.setItem('midtn_kb_override', JSON.stringify(data));
+        })
+        .catch(err => console.error('Error loading static KB:', err));
+    }
+
+    // Listen for cross-tab updates
+    const syncLogs = (e) => {
+      if (e.key === 'midtn_email_logs') {
+        try { setEmailLogs(JSON.parse(e.newValue || '[]')); } catch (err) {}
+      }
+      if (e.key === 'midtn_unanswered_questions') {
+        try { setUnansweredQ(JSON.parse(e.newValue || '[]')); } catch (err) {}
+      }
+      if (e.key === 'midtn_chatbot_settings') {
+        try { setChatbotSettings(JSON.parse(e.newValue || '{"provider":"rag","apiKey":"","modelName":""}')); } catch (err) {}
+      }
+      if (e.key === 'midtn_kb_override') {
+        try { setKb(JSON.parse(e.newValue)); } catch (err) {}
+      }
+    };
+    window.addEventListener('storage', syncLogs);
+    return () => window.removeEventListener('storage', syncLogs);
+  }, []);
+
+  const saveKb = (newKb) => {
+    setKb(newKb);
+    localStorage.setItem('midtn_kb_override', JSON.stringify(newKb));
+    window.dispatchEvent(new StorageEvent('storage', { key: 'midtn_kb_override', newValue: JSON.stringify(newKb) }));
+  };
+
+  const saveEmailConfig = (config) => {
+    setEmailConfig(config);
+    localStorage.setItem('midtn_email_config', JSON.stringify(config));
+  };
+
+  const saveLinkedFolders = (folders) => {
+    setLinkedFolders(folders);
+    localStorage.setItem('midtn_linked_folders', JSON.stringify(folders));
+  };
+
+  const upd=useCallback((id,updates)=>{
+    setAthletes(p=>p.map(a=>{
+      if(a.id!==id) return a;
+      let next={...a,...updates};
+      if(updates.primaryPos || updates.altPos) {
+        next.posCategory = classifyPos(next.primaryPos);
+        next.posCategories = getAthleteCategories(next);
+      }
+      if(updates.status==='accepted') next.teamLocked=true;
+      else if(updates.status && a.status==='accepted') next.teamLocked=false;
+      return next;
+    }));
+    setSelAth(p=>{
+      if(p?.id!==id) return p;
+      let next={...p,...updates};
+      if(updates.primaryPos || updates.altPos) {
+        next.posCategory = classifyPos(next.primaryPos);
+        next.posCategories = getAthleteCategories(next);
+      }
+      if(updates.status==='accepted') next.teamLocked=true;
+      else if(updates.status && p.status==='accepted') next.teamLocked=false;
+      return next;
+    });
+  },[]);
+  const updMetric=useCallback((id,key,vals)=>{
+    setAthletes(p=>p.map(a=>a.id===id?{...a,metrics:{...a.metrics,[key]:vals}}:a));
+    setSelAth(p=>p?.id===id?{...p,metrics:{...p.metrics,[key]:vals}}:p);
+  },[]);
+  const addWalkup=useCallback(wu=>{setAthletes(p=>[...p,...initAthletes([wu])]);},[]);
+  const doHide=(id,reason,note)=>upd(id,{hidden:true,hideReason:reason,hideNote:note,teamAssignment:null,teamLocked:false});
+  const doUnhide=id=>upd(id,{hidden:false,hideReason:'',hideNote:''});
+  const doArrive=athlete=>setConfirmCheckInAth(athlete);
+  const handleConfirmArrive=(id,contactInfo)=>{
+    upd(id,{...contactInfo,arrived:true,status:'arrived'});
+    setConfirmCheckInAth(null);
+  };
+  
+  const doEmail=(athlete,body,team,type)=>{
+    upd(athlete.id,{status:['pending','arrived'].includes(athlete.status)?'contacted':athlete.status});
+    const subject = type === 'offer' ? `Mid TN VBC - Offer` + (team ? ` - ${team}` : ``) : `Mid TN VBC Tryout Performance Report`;
+
+    if (emailConfig.method === 'mailto') {
+      if(athlete.email) window.open(`mailto:${athlete.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,'_blank');
+      else navigator.clipboard?.writeText(body);
+      
+      logEmail(athlete.first + ' ' + athlete.last, athlete.email || 'N/A', type || 'offer', 'Copied/Opened Mailto', body);
+      setEmailLogs(JSON.parse(localStorage.getItem('midtn_email_logs') || '[]'));
+    } else {
+      // Send API email
+      const endpoint = emailConfig.api_endpoint || 'https://api.emailjs.com/api/v1.0/email/send';
+      let payload = {};
+      
+      if (endpoint.includes('emailjs.com')) {
+        payload = {
+          service_id: emailConfig.emailjs_service,
+          template_id: emailConfig.emailjs_template,
+          user_id: emailConfig.emailjs_public_key,
+          template_params: {
+            to_email: athlete.email,
+            to_name: `${athlete.first} ${athlete.last}`,
+            message: body,
+            subject: subject
+          }
+        };
+      } else {
+        payload = {
+          to: athlete.email,
+          name: `${athlete.first} ${athlete.last}`,
+          subject: subject,
+          body: body
+        };
+      }
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(res => {
+        if (res.ok) {
+          logEmail(athlete.first + ' ' + athlete.last, athlete.email, type || 'offer', 'Sent (API)', body);
+          alert(`Email successfully sent via API to ${athlete.email}!`);
+        } else {
+          res.text().then(errText => {
+            logEmail(athlete.first + ' ' + athlete.last, athlete.email, type || 'offer', `Failed: ${res.status}`, body);
+            alert(`Failed to send email via API: ${res.status} - ${errText}`);
+          });
+        }
+        setEmailLogs(JSON.parse(localStorage.getItem('midtn_email_logs') || '[]'));
+      })
+      .catch(err => {
+        logEmail(athlete.first + ' ' + athlete.last, athlete.email, type || 'offer', 'Failed (Network Error)', body);
+        alert(`Network error sending email: ${err.message}`);
+        setEmailLogs(JSON.parse(localStorage.getItem('midtn_email_logs') || '[]'));
+      });
+    }
+  };
+
+  const exportToCSV=()=>{
+    const headers=['TO#','First','Last','Age','Primary','Alt','Coach','Status','Team','Score','Drill','Height','Reach','Vertical','Shuttle','Arrived','Notes','WontAccept','Phone','Email'];
+    const data=athletes.filter(a=>!a.hidden).map(a=>[
+      a.to,a.first,a.last,a.ageGroup+'s',a.primaryPos,a.altPos,a.coachPos,a.status,a.teamAssignment||'',totalScore(a.metrics, a.drillScore)||'',
+      a.drillScore||'',(a.metrics?.s1?.[0]||''),(a.metrics?.s1?.[1]||''),(a.metrics?.s1?.[2]||''),(a.metrics?.s2?.[0]||''),
+      a.arrived?'YES':'NO',a.notes,a.wontAccept,a.phone,a.email
+    ]);
+    exportCSV([headers,...data], `midtn_tryouts_export_${new Date().toISOString().slice(0,10)}.csv`);
+  };
+
+  const hidden=athletes.filter(a=>a.hidden);
+  const arrived=athletes.filter(a=>a.arrived&&!a.hidden).length;
+  const assigned=athletes.filter(a=>a.teamAssignment&&!a.hidden).length;
+  const accepted=athletes.filter(a=>a.status==='accepted'&&!a.hidden).length;
+  const walkups=athletes.filter(a=>a.isWalkup&&!a.hidden).length;
+  const VIEWS=['allreg','depth','results','teams','allteams','admin','hidden'];
+  const VLABELS={
+    allreg:'All Reg',
+    depth:'Depth Chart',
+    results:'Results',
+    teams:'Team Builder',
+    allteams:'All Teams',
+    admin: unansweredQ.length > 0 ? html`âš™️ Admin <span style=${{background:'#ffa726',color:'#000',padding:'1px 5px',borderRadius:10,fontSize:10,fontWeight:800,marginLeft:4}}>${unansweredQ.length}</span>` : 'âš™️ Admin',
+    hidden:`Hidden (${hidden.length})`
+  };
+  const showAgeNav=['depth','results','teams'].includes(view);
+
+  // â”€â”€ ALL REG â”€â”€
+  const [regQ,setRegQ]=useState('');
+  const [addWu,setAddWu]=useState(false);
+  const [wuForm,setWuForm]=useState({first:'',last:'',dob:'',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'',phone:'',email:''});
+  const regList=useMemo(()=>{
+    let l=athletes.filter(a=>!a.hidden);
+    if(regQ){const s=regQ.toLowerCase();l=l.filter(a=>a.first.toLowerCase().includes(s)||a.last.toLowerCase().includes(s)||a.to.includes(regQ)||(a.division||'').toLowerCase().includes(s)||(a.primaryPos||'').toLowerCase().includes(s));}
+    return l;
+  },[athletes,regQ]);
+  const submitWu=()=>{
+    const isWuValid = wuForm.first.trim() && wuForm.last.trim() && (wuForm.phone||'').trim().length >= 7 && (wuForm.email||'').trim().includes('@');
+    if(!isWuValid) return;
+    addWalkup({...wuForm,id:`wu-${Date.now()}`,to:String(200+athletes.filter(a=>a.isWalkup).length),isWalkup:true,arrived:true,status:'arrived'});
+    setWuForm({first:'',last:'',dob:'',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'',phone:'',email:''});
+    setAddWu(false);
+  };
+
+  // â”€â”€ DEPTH â”€â”€
+  const depthPool=useMemo(()=>{
+    const pool=athletes.filter(a=>a.ageGroup===age&&!a.hidden);
+    const g={setter:[],middle:[],outside:[],defense:[],unsorted:[]};
+    pool.forEach(a=>{
+      (a.posCategories || [a.posCategory || 'unsorted']).forEach(cat => {
+        if(g[cat]) g[cat].push(a);
+        else g.unsorted.push(a);
+      });
+    });
+    Object.keys(g).forEach(k=>g[k].sort((a,b)=>(Number(totalScore(b.metrics, b.drillScore))||0)-(Number(totalScore(a.metrics, a.drillScore))||0)));
+    return g;
+  },[athletes,age]);
+
+  // â”€â”€ RESULTS â”€â”€
+  const [resSort,setResSort]=useState('score');
+  const resList=useMemo(()=>{
+    const l=athletes.filter(a=>a.ageGroup===age&&!a.hidden);
+    if(resSort==='score') l.sort((a,b)=>(Number(totalScore(b.metrics, b.drillScore))||0)-(Number(totalScore(a.metrics, a.drillScore))||0));
+    else if(resSort==='name') l.sort((a,b)=>a.last.localeCompare(b.last));
+    else l.sort((a,b)=>(sAvg(b.metrics,resSort)||0)-(sAvg(a.metrics,resSort)||0));
+    return l;
+  },[athletes,age,resSort]);
+
+  // â”€â”€ TEAMS â”€â”€
+  const [poolSort,setPoolSort]=useState('pos');
+  const [showPool,setShowPool]=useState(true);
+  const [dragOver,setDragOver]=useState(null);
+  const [showAllPool,setShowAllPool]=useState(true);
+  const ageAths=athletes.filter(a=>a.ageGroup===age&&!a.hidden);
+  const pool=useMemo(()=>{
+    let l=showAllPool ? [...ageAths] : ageAths.filter(a=>!a.teamAssignment);
+    if(poolSort==='score') {
+      l.sort((a,b)=>(Number(totalScore(b.metrics, b.drillScore))||0)-(Number(totalScore(a.metrics, a.drillScore))||0));
+    } else if(poolSort==='name') {
+      l.sort((a,b)=>a.last.localeCompare(b.last));
+    } else if(poolSort==='pos'){
+      const order = {setter:1, middle:2, outside:3, defense:4, unsorted:5};
+      l.sort((a,b)=>{
+        if(a.posCategory !== b.posCategory) return (order[a.posCategory]||99) - (order[b.posCategory]||99);
+        return (Number(totalScore(b.metrics, b.drillScore))||0)-(Number(totalScore(a.metrics, a.drillScore))||0);
+      });
+    }
+    return l;
+  },[ageAths,poolSort,showAllPool]);
+  const drop=(e,teamKey)=>{
+    e.preventDefault();
+    const id=e.dataTransfer.getData('text/plain');
+    const a=athletes.find(x=>x.id===id);
+    const roster=athletes.filter(ath=>ath.teamAssignment===teamKey);
+    const isLocked=roster.length>0&&roster.every(ath=>ath.teamLocked);
+    if(a&&!a.teamLocked&&a.status!=='accepted'&&!isLocked) upd(id,{teamAssignment:teamKey});
+    setDragOver(null);
+  };
+
+  const th={};
+  const td={};
+
+  return html`
+    <div style=${{minHeight:'100vh',background:'#0d1017',paddingBottom:20}}>
+      <div class="sticky-header no-print">
+        <div style=${{display:'flex',alignItems:'center',gap:10,flexWrap:'wrap',marginBottom:10}}>
+          
+          <span style=${{color:'#2a2e38'}}>|</span>
+          <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAABACAYAAABMbHjfAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAHWlUWHRTb2Z0d2FyZQAAAAAAQWRvYmUgSW1hZ2VSZWFkeQatApcAAAOJaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA5LjEtYzAwMiA3OS5hNmE2Mzk2OGEsIDIwMjQvMDMvMDYtMTE6NTI6MDUgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6NWE0YjQwOTYtMmM3NS00ZDBmLThjZjItMTA1ZWFkNWRiMTg2IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkIxNzdGM0JGOEVDNDExRUY4OTQxOTJEMEYyOTFGOUY4IiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkIxNzdGM0JFOEVDNDExRUY4OTQxOTJEMEYyOTFGOUY4IiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE5IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NzcxZWM4ODQtN2Y0Ni00Y2EwLWI3ZTItYzViZGQ4NTE5Yjg0IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90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' alt='Mid TN VBC' style='height:32px;display:block;'/>
+          <div style=${{flex:1}}/>
+          <${Badge} c="#26c6da">${arrived} Arrived<//>
+          <${Badge} c="#66bb6a">${assigned} Assigned<//>
+          <${Badge} c="#ab47bc">${accepted} Accepted<//>
+          <${Badge} c="#ffa726">${walkups} Walkups<//>
+          <${Btn} sm onClick=${exportToCSV} color="#26c6da" outline>Export CSV<//>
+          <${Btn} sm onClick=${()=>window.print()} color="#78909c" outline>Print<//>
+          <${Btn} sm onClick=${onLogout} color="#ef5350" outline>Log Out<//>
+          <${SyncStatus}/>
+        </div>
+        <div style=${{display:'flex',gap:4,flexWrap:'wrap',alignItems:'center'}}>
+          ${VIEWS.map(v=>html`<button key=${v} class=${'nav-tab'+(view===v?' active':'')} onClick=${()=>setView(v)}>${VLABELS[v]}</button>`)}
+          <div style=${{flex:1}}/>
+          ${showAgeNav&&html`
+            <div style=${{display:'flex',gap:2,background:'#12151c',borderRadius:6,padding:2}}>
+              ${AGES.map(a=>html`<button key=${a} class=${'age-tab'+(age===a?' active':'')} onClick=${()=>setAge(a)}>${a}s</button>`)}</div>`}
+          ${view==='allteams'&&html`
+            <${Btn} sm onClick=${()=>exportCSV([['Age','Team','TO#','First','Last','POS','Coach POS','Score','Drill','Height','Reach','Vertical','Shuttle','Status','Phone','Email','Notes','WontAccept'],...athletes.filter(a=>a.teamAssignment&&!a.hidden).map(a=>[a.ageGroup+'s',a.teamAssignment,a.to,a.first,a.last,a.primaryPos,a.coachPos,totalScore(a.metrics, a.drillScore)||'',a.drillScore||'',(a.metrics?.s1?.[0]||''),(a.metrics?.s1?.[1]||''),(a.metrics?.s1?.[2]||''),(a.metrics?.s2?.[0]||''),a.status,a.phone,a.email,a.notes,a.wontAccept])],'MidTN_Teams.csv')} color="#66bb6a" outline>Export CSV<//>
+            <${Btn} sm onClick=${()=>window.print()} color="#4fc3f7" outline>Print<//>
+          `}
+        </div>
+      </div>
+
+      <div style=${{padding:'16px 20px'}}>
+
+        ${view==='allreg'&&html`
+          <div>
+            <div style=${{display:'flex',gap:10,marginBottom:14,alignItems:'center',flexWrap:'wrap'}}>
+              <input class="input" placeholder="Search name, TO#, position..." value=${regQ}
+                onInput=${e=>setRegQ(e.target.value)} style=${{flex:1,minWidth:200,padding:'7px 12px'}}/>
+              <${Badge} c="#26c6da">${regList.filter(a=>a.arrived).length} Arrived<//>
+              <${Badge} c="#78909c">${regList.length} Total<//>
+              <${Btn} sm onClick=${()=>setAddWu(p=>!p)} color="#f0a500" style=${{border:'2px solid #f0a500',boxShadow:'0 0 10px rgba(240,165,0,0.3)'}}>+ Add Walkup<//>
+              <${Btn} sm onClick=${()=>exportCSV([['TO#','First','Last','Division','Primary','Alt','Coach','Score','Drill','Height','Reach','Vertical','Shuttle','Status','Arrived','Walkup','Phone','Email','Notes','WontAccept'],...athletes.filter(a=>!a.hidden).map(a=>[a.to,a.first,a.last,a.division,a.primaryPos,a.altPos,a.coachPos,totalScore(a.metrics, a.drillScore)||'',a.drillScore||'',(a.metrics?.s1?.[0]||''),(a.metrics?.s1?.[1]||''),(a.metrics?.s1?.[2]||''),(a.metrics?.s2?.[0]||''),a.status,a.arrived?'Yes':'',a.isWalkup?'Yes':'',a.phone,a.email,a.notes,a.wontAccept])],'MidTN_Reg.csv')} color="#4fc3f7" outline>Export CSV<//>
+            </div>
+            ${addWu&&html`
+              <div class="card" style=${{padding:16,marginBottom:14,border:'1px solid #f0a50033'}}>
+                <div style=${{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(130px,1fr))',gap:10,marginBottom:10}}>
+                  ${[['First *','first'],['Last *','last'],['DOB','dob'],['Phone *','phone'],['Email *','email']].map(([l,k])=>html`
+                    <div key=${k}><label class="label">${l}</label>
+                      <input class="input" value=${wuForm[k]||''} onInput=${e=>setWuForm(p=>({...p,[k]:e.target.value}))} style=${{padding:'6px 8px',fontSize:12}}/></div>`)}
+                  <div><label class="label">Division *</label>
+                    <select class="select" value=${wuForm.division} onChange=${e=>setWuForm(p=>({...p,division:e.target.value}))} style=${{padding:'6px 8px',fontSize:12}}>
+                      ${AGES.map(a=>html`<option value=${a+' & Under'}>${a}s</option>`)}</select></div>
+                  <div><label class="label">Primary Pos *</label>
+                    <select class="select" value=${wuForm.primaryPos} onChange=${e=>setWuForm(p=>({...p,primaryPos:e.target.value}))} style=${{padding:'6px 8px',fontSize:12}}>
+                      ${['Outside Hitter','Middle Hitter','Setter','Right Side Hitter','Defensive Specialist','Libero','I am unsure'].map(p=>html`<option>${p}</option>`)}</select></div>
+                  <div><label class="label">Alt Position</label>
+                    <select class="select" value=${wuForm.altPos} onChange=${e=>setWuForm(p=>({...p,altPos:e.target.value}))} style=${{padding:'6px 8px',fontSize:12}}>
+                      ${['N/A','Outside Hitter','Middle Hitter','Setter','Right Side Hitter','Defensive Specialist','Libero'].map(p=>html`<option>${p}</option>`)}</select></div>
+                </div>
+                <div style=${{display:'flex',gap:8}}><${Btn} sm onClick=${()=>setAddWu(false)} color="#2a2e38">Cancel<//>
+                  <${Btn} sm onClick=${submitWu} color="#f0a500" disabled=${!(wuForm.first.trim() && wuForm.last.trim() && (wuForm.phone||'').trim().length >= 7 && (wuForm.email||'').trim().includes('@'))}>Add & Check In ✓<//></div>
+              </div>`}
+            <div style=${{overflowX:'auto',maxHeight:'calc(100vh - 280px)'}}>
+              <table>
+                <thead><tr>${['TO#','Name','Div','Primary','Alt','Coach','Drill','Score','Status','Arrived','Notes','Edit','Phone','Email'].map(h=>html`<th key=${h}>${h}</th>`)}</tr></thead>
+                <tbody>
+                  ${regList.map(a=>html`
+                    <tr key=${a.id}>
+                      <td onClick=${()=>setSelAth(a)} style=${{fontFamily:'monospace',color:'#4fc3f7'}}>${a.to}</td>
+                      <td onClick=${()=>setSelAth(a)} style=${{fontWeight:600,whiteSpace:'nowrap'}}>${a.first} ${a.last}${a.isWalkup&&html`<span style=${{marginLeft:4,fontSize:10,color:'#ffa726'}}>WU</span>`}</td>
+                      <td><${Badge} c="#78909c" sm>${a.ageGroup}s<//></td>
+                      <td><${Badge} c="#4fc3f7" sm>${posAbbr(a.primaryPos)}<//></td>
+                      <td><${Badge} c="#546e7a" sm>${posAbbr(a.altPos)}<//></td>
+                      <td>${a.coachPos&&html`<${Badge} c="#ffa726" sm>${a.coachPos}<//>`}</td>
+                      <td>
+                        <input type="number" min="0" max="10" step="0.5" value=${a.drillScore||''} onClick=${e=>e.stopPropagation()}
+                          onInput=${e=>upd(a.id,{drillScore:e.target.value})}
+                          style=${{width:45,padding:'2px 4px',background:'#12151c',border:'1px solid #f0a50088',borderRadius:4,color:'#e8eaed',fontSize:12,textAlign:'center',fontWeight:700}}/>
+                      </td>
+                      <td style=${{fontFamily:'monospace',fontWeight:700,color:totalScore(a.metrics, a.drillScore)?scoreColor(totalScore(a.metrics, a.drillScore)):'#444'}}>${totalScore(a.metrics, a.drillScore)||'"”'}</td>
+                      <td onClick=${()=>setSelAth(a)}><${SBadge} status=${a.status}/></td>
+                      <td>${a.arrived?html`<${Badge} c="#26c6da" sm>✓<//>`
+                        :html`<${Btn} sm onClick=${e=>{e.stopPropagation();doArrive(a);}} color="#26c6da" outline>Check In<//>`}</td>
+                      <td onClick=${()=>setSelAth(a)}>${a.notes&&html`<span title=${'NOTES: ' + a.notes}>📝</span>`}${a.wontAccept&&html`<span title=${'RESTRICTIONS: ' + a.wontAccept} style=${{marginLeft:4}}>âš ️</span>`}</td>
+                      <td onClick=${()=>setSelAth(a)} style=${{fontSize:14,textAlign:'center'}}>âœ️</td>
+                      <td onClick=${()=>setSelAth(a)} style=${{color:'#78909c',whiteSpace:'nowrap',fontSize:11}}>${a.phone}</td>
+                      <td style=${{color:'#78909c',maxWidth:140,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:11}}>${a.email}</td>
+                    </tr>`)}</tbody></table>
+              ${regList.length===0&&html`<div style=${{padding:40,textAlign:'center',color:'#444'}}>No results</div>`}
+            </div>
+          </div>`}
+
+        ${view==='depth'&&html`
+          <div>
+            <h2 style=${{fontSize:17,fontWeight:700,margin:'0 0 14px'}}>${age}'s Depth Chart <span style=${{fontSize:12,color:'#78909c',fontWeight:400}}>primary ranking · secondary visible</span></h2>
+            <div style=${{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))',gap:14}}>
+              ${[...POS_CATS,{key:'unsorted',label:'Unsorted'}].map(cat=>{
+                const list=depthPool[cat.key]||[];
+                return html`
+                  <div key=${cat.key} class="depth-col">
+                    <div class="depth-col-header">
+                      <span style=${{fontWeight:700,fontSize:13,color:cat.key==='unsorted'?'#ffa726':'#4fc3f7'}}>${cat.label}</span>
+                      <span style=${{fontSize:11,color:'#546e7a'}}>${list.length}</span>
+                    </div>
+                    <div style=${{padding:8,overflowY:'auto',maxHeight:420}}>
+                      ${list.map((a,i)=>html`
+                        <div key=${a.id} onClick=${()=>setSelAth(a)} style=${{display:'flex',alignItems:'center',gap:6,padding:'6px 8px',background:'#1a1d24',borderRadius:6,marginBottom:4,cursor:'pointer'}}>
+                          <span style=${{fontSize:11,color:'#546e7a',minWidth:16,textAlign:'right'}}>${i+1}</span>
+                          <span style=${{fontFamily:'monospace',fontSize:10,color:'#4fc3f7',minWidth:24}}>#${a.to}</span>
+                          <span style=${{flex:1,fontSize:12,fontWeight:600}}>${a.first} ${a.last}</span>
+                          <span style=${{fontSize:10,color:'#4fc3f7',background:'rgba(79,195,247,0.1)',padding:'1px 4px',borderRadius:4,marginRight:4,border:'1px solid rgba(79,195,247,0.2)'}}>Sec: ${posAbbr(a.altPos)}</span>
+                          ${totalScore(a.metrics, a.drillScore)&&html`<${Badge} c=${scoreColor(totalScore(a.metrics, a.drillScore))} sm>${totalScore(a.metrics, a.drillScore)}<//>`}
+                          ${a.wontAccept&&html`<span title=${'WON\'T ACCEPT: ' + a.wontAccept}>âš ️</span>`}
+                          ${a.notes&&html`<span title=${'NOTES: ' + a.notes}>📝</span>`}
+                        </div>`)}
+                      ${list.length===0&&html`<div style=${{padding:20,textAlign:'center',color:'#333',fontSize:12}}>None</div>`}
+                    </div>
+                  </div>`;})}</div></div>`}
+
+        ${view==='results'&&html`
+          <div>
+            <div style=${{display:'flex',gap:12,alignItems:'center',marginBottom:14,flexWrap:'wrap'}}>
+              <h2 style=${{margin:0,fontSize:17,fontWeight:700}}>${age}'s Results</h2>
+              <select class="select" style=${{width:'auto'}} value=${resSort} onChange=${e=>setResSort(e.target.value)}>
+                <option value="score">Sort: Total Score</option><option value="name">Sort: Name</option>
+                ${STATIONS.filter(s=>!s.isCheckin).map(s=>html`<option value=${s.key}>Sort: ${s.label}</option>`)}</select></div>
+            <div style=${{overflowX:'auto'}}>
+              <table>
+                <thead><tr>
+                  <th>TO#</th><th>Name</th><th>POS</th><th>Alt</th>
+                  ${STATIONS.filter(s=>!s.isCheckin).map(s=>s.metrics.map((m,i)=>html`<th key=${s.key+i} style=${{color:'#4fc3f7'}}>${m}</th>`))}
+                  ${STATIONS.filter(s=>!s.isCheckin).map(s=>html`<th key=${s.key+'a'} style=${{color:'#ffa726'}}>Avg</th>`)}
+                  <th style=${{color:'#f0a500'}}>Drill</th>
+                  <th style=${{color:'#66bb6a'}}>Total</th><th>Status</th></tr></thead>
+                <tbody>${resList.map((a,ri)=>{const sc=totalScore(a.metrics, a.drillScore);return html`
+                  <tr key=${a.id} onClick=${()=>setSelAth(a)} style=${{background:ri%2===0?'transparent':'#0a0d12'}}>
+                    <td style=${{fontFamily:'monospace',color:'#4fc3f7'}}>${a.to}</td>
+                    <td style=${{fontWeight:600}}>${a.first} ${a.last}${a.isWalkup&&html`<span style=${{marginLeft:4,fontSize:10,color:'#ffa726'}}>WU</span>`}</td>
+                    <td><${Badge} c="#78909c" sm>${posAbbr(a.primaryPos)}<//></td>
+                    <td><${Badge} c="#546e7a" sm>${posAbbr(a.altPos)}<//></td>
+                    ${STATIONS.filter(s=>!s.isCheckin).map(st=>st.metrics.map((m,idx)=>{
+                      const vs=(a.metrics&&a.metrics[st.key])||[];
+                      return html`<td key=${st.key+idx}>
+                        <input type="number" value=${vs[idx]||''} onClick=${e=>e.stopPropagation()}
+                          onInput=${e=>{const nv=[...(a.metrics?.[st.key]||st.metrics.map(()=>''))];nv[idx]=e.target.value;updMetric(a.id,st.key,nv);}}
+                          style=${{width:50,padding:'2px 4px',background:'#12151c',border:'1px solid #2a2e38',borderRadius:4,color:'#e8eaed',fontSize:12,textAlign:'center'}}/></td>`; }))}
+                    ${STATIONS.filter(s=>!s.isCheckin).map(s=>{const av=sAvg(a.metrics,s.key);return html`<td key=${s.key+'a'} style=${{color:'#ffa726',fontWeight:700,fontFamily:'monospace'}}>${av!==null?av.toFixed(1):'"”'}</td>`;})}
+                    <td style=${{color:'#f0a500',fontWeight:700,fontFamily:'monospace'}}>
+                      <input type="number" min="0" max="10" step="0.5" value=${a.drillScore||''} onClick=${e=>e.stopPropagation()}
+                        onInput=${e=>upd(a.id,{drillScore:e.target.value})}
+                        style=${{width:50,padding:'2px 4px',background:'#12151c',border:'1px solid #f0a50088',borderRadius:4,color:'#e8eaed',fontSize:12,textAlign:'center',fontWeight:700}}/>
+                    </td>
+                    <td style=${{fontWeight:800,fontFamily:'monospace',color:sc?scoreColor(sc):'#444'}}>${sc||'"”'}</td>
+                    <td><${SBadge} status=${a.status}/></td>
+                  </tr>`;})}
+                </tbody></table>
+              ${resList.length===0&&html`<div style=${{padding:40,textAlign:'center',color:'#444'}}>No athletes in ${age}s</div>`}
+            </div></div>`}
+
+        ${view==='teams'&&html`
+          <div style=${{display:'flex',gap:14,alignItems:'flex-start'}}>
+            ${showPool&&html`
+              <div style=${{width:widePool?500:320,flexShrink:0,background:'#12151c',borderRadius:12,border:'1px solid #1e222b',maxHeight:'calc(100vh-180px)',display:'flex',flexDirection:'column',transition:'width 0.2s'}}>
+                <div style=${{padding:'10px 14px',borderBottom:'1px solid #1e222b'}}>
+                  <div style=${{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:6}}>
+                    <div style=${{display:'flex',alignItems:'center',gap:6}}>
+                      <span style=${{fontWeight:700,fontSize:13}}>Pool <span style=${{color:'#546e7a',fontWeight:400}}>(${pool.length})</span></span>
+                      <button onClick=${()=>setWidePool(!widePool)} style=${{background:'none',border:'1px solid #2a2e38',color:'#78909c',fontSize:10,padding:'1px 5px',borderRadius:4,cursor:'pointer',marginLeft:8}}>${widePool?'Narrow':'Wide'}</button>
+                    </div>
+                    <div style=${{display:'flex',gap:4}}>
+                      <button class=${'btn btn-sm '+(showAllPool?'btn-primary':'btn-outline')}
+                        onClick=${()=>setShowAllPool(!showAllPool)}
+                        style=${{fontSize:10,padding:'2px 6px',background:showAllPool?'#f0a500':'transparent',color:showAllPool?'#000':'#78909c',border:'1px solid #2a2e38'}}>
+                        ${showAllPool?'Showing All':'Show All'}
+                      </button>
+                      <select class="select" style=${{width:'auto',padding:'2px 6px',fontSize:11}} value=${poolSort} onChange=${e=>setPoolSort(e.target.value)}>
+                        <option value="score">Score</option><option value="pos">Depth Chart</option><option value="name">Name</option></select>
+                    </div>
+                  </div>
+                  <div style=${{fontSize:11,color:'#546e7a'}}>Drag into teams →</div>
+                </div>
+                <div style=${{overflow:'auto',flex:1,padding:8}}>
+                  ${poolSort==='pos'
+                    ? html`<div>
+                        ${[...POS_CATS,{key:'unsorted',label:'Unsorted'}].map(cat => {
+                          const listByCat = pool.filter(a => (a.posCategories || [a.posCategory]).includes(cat.key))
+                                           .sort((a,b)=>(Number(totalScore(b.metrics, b.drillScore))||0)-(Number(totalScore(a.metrics, a.drillScore))||0));
+                          if(listByCat.length === 0) return null;
+                          return html`
+                            <div key=${cat.key} style=${{marginBottom:12,borderBottom:'1px solid #1e222b',paddingBottom:8}}>
+                              <div style=${{fontSize:11,fontWeight:800,color:cat.key==='unsorted'?'#ffa726':'#4fc3f7',textTransform:'uppercase',marginBottom:8,paddingLeft:4,borderLeft:`3px solid ${cat.key==='unsorted'?'#ffa726':'#4fc3f7'}`,display:'flex',justifyContent:'space-between'}}>
+                                <span>${cat.label}</span>
+                                <span style=${{fontSize:10,opacity:.5}}>${listByCat.length}</span>
+                              </div>
+                              ${listByCat.map((a, idx) => html`
+                                <div style=${{opacity:(a.teamAssignment && !showAllPool)?0.35:1,pointerEvents:(a.teamAssignment && !showAllPool)?'none':'auto',marginBottom:2,display:'flex',alignItems:'center',gap:4}}>
+                                  <span style=${{fontSize:10,color:'#546e7a',width:15,textAlign:'right'}}>${idx+1}</span>
+                                  <div style=${{flex:1}}>
+                                    <${PCard} athlete=${a} onClick=${setSelAth} compact showScore/>
+                                  </div>
+                                </div>`)}
+                            </div>`;
+                        })}
+                      </div>`
+                    : pool.map(a=>html`
+                        <div style=${{opacity:a.teamAssignment?.length?0.35:1,pointerEvents:a.teamAssignment?.length?'none':'auto',marginBottom:2}}>
+                          <${PCard} key=${a.id} athlete=${a} onClick=${setSelAth} compact showScore/>
+                        </div>`)
+                  }
+                  ${pool.length===0&&html`<div style=${{padding:24,textAlign:'center',color:'#444',fontSize:12}}>All assigned</div>`}
+                </div>
+              </div>`}
+            <div style=${{flex:1}}>
+              <div style=${{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap',alignItems:'center'}}>
+                <h2 style=${{margin:0,fontSize:17,fontWeight:700}}>${age}'s Teams</h2>
+                <${Btn} sm onClick=${()=>setShowPool(p=>!p)} color="#2a2e38" outline>${showPool?'Hide Pool':'Show Pool'}<//>
+              </div>
+              <div style=${{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:14}}>
+                ${LEVELS.map(lvl=>{
+                  const key=`${age}-${lvl}`;const ts=TEAM_STYLE[lvl];
+                  const roster=ageAths.filter(a=>a.teamAssignment===key);
+                  const isLocked=roster.length>0&&roster.every(a=>a.teamLocked);
+                  const active=roster.filter(a=>a.status!=='declined');
+                  const declined=roster.filter(a=>a.status==='declined');
+                  return html`
+                    <div key=${lvl} class=${'team-card'+(isLocked?' finalized':'')}
+                      style=${{background:ts.bg,borderColor:isLocked?'#f0a500':ts.border}}>
+                      <div style=${{padding:'10px 14px',background:ts.hdr,display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+                        <div style=${{display:'flex',alignItems:'center',gap:8}}>
+                          ${isLocked&&html`<span>🔒</span>`}
+                          <span style=${{fontWeight:800,fontSize:14,color:'#fff'}}>${age} ${lvl}</span>
+                          <span style=${{fontSize:11,color:'rgba(255,255,255,.5)',background:'rgba(255,255,255,.1)',padding:'2px 7px',borderRadius:10}}>${roster.length}/12</span>
+                        </div>
+                        <${Btn} sm onClick=${()=>roster.forEach(a=>upd(a.id,{teamLocked:!isLocked}))}
+                          disabled=${roster.length===0}
+                          color=${isLocked?'#ef5350':'#f0a500'} outline>
+                          ${isLocked?'🔔 Unlock':'🔒 Finalize'}<//>
+                      </div>
+                      <div class=${'drop-zone'+(dragOver===key?' drag-over':'')}
+                        onDragOver=${e=>{e.preventDefault();setDragOver(key);}}
+                        onDragLeave=${()=>setDragOver(null)}
+                        onDrop=${e=>drop(e,key)}>
+                        ${active.length===0&&declined.length===0&&html`
+                          <div style=${{padding:20,textAlign:'center',color:'#555',fontSize:12,border:'2px dashed #333',borderRadius:8}}>
+                            ${isLocked?'Team locked':'Drop athletes here'}</div>`}
+                        ${active.map(a=>html`
+                          <div key=${a.id} style=${{position:'relative'}}>
+                            <${PCard} athlete=${a} onClick=${setSelAth} compact showScore teamKey=${key}/>
+                            ${!isLocked&&html`<button onClick=${()=>upd(a.id,{teamAssignment:null,teamLocked:false})}
+                              style=${{position:'absolute',right:4,top:'50%',transform:'translateY(-50%)',background:'#ef535033',border:'none',borderRadius:4,color:'#ef5350',cursor:'pointer',fontSize:10,padding:'2px 5px'}}>×</button>`}
+                          </div>`)}
+                        ${declined.length>0&&html`
+                          <div style=${{marginTop:6,borderTop:'1px solid rgba(255,255,255,.08)',paddingTop:6}}>
+                            <div style=${{fontSize:10,color:'#ef5350',fontWeight:700,marginBottom:4}}>DECLINED</div>
+                            ${declined.map(a=>html`<${PCard} key=${a.id} athlete=${a} onClick=${setSelAth} compact teamKey=${key}/>`)}</div>`}
+                      </div>
+                      ${roster.length>0&&html`
+                        <${Btn} sm onClick=${()=>setTeamOfferKey(key)}
+                          style=${{width:'100%',background:ts.hdr,border:`1px solid ${ts.border}66`,color:'#fff',cursor:'pointer'}}>
+                          📬 Manage Offers (${roster.filter(a=>!['offered','accepted','declined'].includes(a.status)).length} pending)
+                        <//>`}
+                    </div>`;
+                })}
+              </div>
+            </div>
+          </div>`}
+        ${view==='allteams'&&html`
+          <div>
+            <h2 style=${{fontSize:17,fontWeight:700,margin:'0 0 14px'}}>All Teams</h2>
+            ${AGES.map(ag=>{
+              const hasTeams=LEVELS.some(l=>athletes.some(a=>a.teamAssignment===`${ag}-${l}`&&!a.hidden));
+              if(!hasTeams) return null;
+              return html`
+                <div key=${ag} class="team-print" style=${{marginBottom:24}}>
+                  <h3 style=${{fontSize:15,fontWeight:800,color:'#f0a500',margin:'0 0 10px',paddingBottom:6,borderBottom:'1px solid #1e222b'}}>${ag}'s</h3>
+                  <div style=${{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(200px,1fr))',gap:10}}>
+                    ${LEVELS.map(lvl=>{
+                      const key=`${ag}-${lvl}`;const ts=TEAM_STYLE[lvl];
+                      const roster=athletes.filter(a=>a.teamAssignment===key&&!a.hidden);
+                      if(!roster.length) return null;
+                      const isLocked=roster.every(a=>a.teamLocked);
+                      return html`
+                        <div key=${lvl} class="team-card team-print" style=${{background:ts.bg,borderColor:isLocked?'#f0a500':ts.border}}>
+                          <div style=${{padding:'8px 12px',background:ts.hdr,display:'flex',justifyContent:'space-between'}}>
+                            <span style=${{fontWeight:800,fontSize:13,color:'#fff'}}>${isLocked?'🔒 ':''}${ag} ${lvl}</span>
+                            <span style=${{fontSize:11,color:'rgba(255,255,255,.5)'}}>${roster.length}</span>
+                          </div>
+                          <div style=${{padding:8}}>
+                            ${roster.map(a=>html`
+                              <div key=${a.id} onClick=${()=>setSelAth(a)} style=${{display:'flex',alignItems:'center',gap:5,padding:'4px 5px',borderBottom:`1px solid ${ts.border}22`,cursor:'pointer',fontSize:11}}>
+                                <span style=${{fontFamily:'monospace',color:'#4fc3f7',minWidth:22,fontSize:10}}>#${a.to}</span>
+                                <span style=${{flex:1,fontWeight:600}}>${a.first} ${a.last}</span>
+                                <${Badge} c="#78909c" sm>${a.coachPos||posAbbr(a.primaryPos)}<//>
+                                <${SBadge} status=${a.status}/>
+                              </div>`)}</div></div>`;})}</div></div>`;})}</div>`}
+
+        ${view==='admin'&&html`
+          <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr',gap:24,alignItems:'start',marginTop:14}}>
+            
+            <!-- Column 1: Settings -->
+            <div style=${{display:'flex',flexDirection:'column',gap:20}}>
+              
+              <!-- Email Config Card -->
+              <div class="card" style=${{padding:20,border:'1px solid #f0a50033'}}>
+                <h3 style=${{color:'#f0a500',fontSize:14,fontWeight:800,marginBottom:14,textTransform:'uppercase',letterSpacing:'0.5px'}}>âš™️ Email Service Settings</h3>
+                
+                <div style=${{marginBottom:12}}><label class="label">Sending Method</label>
+                  <select class="select" value=${emailConfig.method || 'mailto'} 
+                    onChange=${e=>saveEmailConfig({...emailConfig, method: e.target.value})}>
+                    <option value="mailto">Native Mail Client (mailto:)</option>
+                    <option value="api">Web API Delivery (EmailJS / Webhook)</option>
+                  </select>
+                </div>
+
+                ${emailConfig.method === 'api' && html`
+                  <div style=${{display:'flex',flexDirection:'column',gap:10,marginTop:12,borderTop:'1px solid #2a2e38',paddingTop:12}}>
+                    <div>
+                      <label class="label">API Endpoint / Webhook</label>
+                      <input class="input" placeholder="e.g. https://api.emailjs.com/api/v1.0/email/send" 
+                        value=${emailConfig.api_endpoint || 'https://api.emailjs.com/api/v1.0/email/send'} 
+                        onInput=${e=>saveEmailConfig({...emailConfig, api_endpoint: e.target.value})}/>
+                    </div>
+                    <div>
+                      <label class="label">EmailJS Service ID</label>
+                      <input class="input" placeholder="e.g. service_midtn" 
+                        value=${emailConfig.emailjs_service || ''} 
+                        onInput=${e=>saveEmailConfig({...emailConfig, emailjs_service: e.target.value})}/>
+                    </div>
+                    <div>
+                      <label class="label">EmailJS Template ID</label>
+                      <input class="input" placeholder="e.g. template_tryouts" 
+                        value=${emailConfig.emailjs_template || ''} 
+                        onInput=${e=>saveEmailConfig({...emailConfig, emailjs_template: e.target.value})}/>
+                    </div>
+                    <div>
+                      <label class="label">EmailJS Public Key (User ID)</label>
+                      <input class="input" placeholder="e.g. user_abcdef123" 
+                        value=${emailConfig.emailjs_public_key || ''} 
+                        onInput=${e=>saveEmailConfig({...emailConfig, emailjs_public_key: e.target.value})}/>
+                    </div>
+                  </div>
+                `}
+
+                <div style=${{marginTop:14,display:'flex',gap:10}}>
+                  <${Btn} sm onClick=${()=>{
+                    const testEmail = prompt("Enter recipient email address for test:");
+                    if (!testEmail) return;
+                    const testAthlete = { first: 'Test', last: 'Player', to: '999', ageGroup: '15', primaryPos: 'Outside Hitter', email: testEmail, status: 'pending', metrics: { s1: ['70', '90', '24'], s2: ['9.45'] }, drillScore: '8.0' };
+                    const testBody = getPerformanceReportBody(testAthlete);
+                    doEmail(testAthlete, testBody, '15 Black', 'report');
+                  }} color="#66bb6a">Send Test Email<//>
+                </div>
+              </div>
+
+              <!-- AI Chatbot Model Settings Card -->
+              <div class="card" style=${{padding:20,border:'1px solid #f0a50033'}}>
+                <h3 style=${{color:'#f0a500',fontSize:14,fontWeight:800,marginBottom:14,textTransform:'uppercase',letterSpacing:'0.5px'}}>🤖 AI Chatbot Model Settings</h3>
+                
+                <div style=${{marginBottom:12}}><label class="label">AI Model Provider</label>
+                  <select class="select" value=${chatbotSettings.provider} 
+                    onChange=${e=>saveChatbotSettings({...chatbotSettings, provider: e.target.value})}>
+                    <option value="rag">Offline Client-Side RAG (Free / Offline)</option>
+                    <option value="gemini">Google Gemini API (API Key required)</option>
+                    <option value="openai">OpenAI GPT API (API Key required)</option>
+                  </select>
+                </div>
+
+                ${chatbotSettings.provider !== 'rag' && html`
+                  <div style=${{display:'flex',flexDirection:'column',gap:10,marginTop:12,borderTop:'1px solid #2a2e38',paddingTop:12}}>
+                    <div>
+                      <label class="label">API Key</label>
+                      <input class="input" type="password" placeholder="Enter API Key" 
+                        value=${chatbotSettings.apiKey || ''} 
+                        onInput=${e=>saveChatbotSettings({...chatbotSettings, apiKey: e.target.value})}/>
+                    </div>
+                    <div>
+                      <label class="label">Model Name</label>
+                      <input class="input" placeholder=${chatbotSettings.provider === 'gemini' ? 'e.g. gemini-1.5-flash' : 'e.g. gpt-4o-mini'} 
+                        value=${chatbotSettings.modelName || ''} 
+                        onInput=${e=>saveChatbotSettings({...chatbotSettings, modelName: e.target.value})}/>
+                    </div>
+                  </div>
+                `}
+              </div>
+
+              <!-- Linked Folder / AI Training Card -->
+              <div class="card" style=${{padding:20,border:'1px solid #f0a50033'}}>
+                <h3 style=${{color:'#f0a500',fontSize:14,fontWeight:800,marginBottom:14,textTransform:'uppercase',letterSpacing:'0.5px'}}>📁 Linked Folders & AI Training Docs</h3>
+                <p style=${{fontSize:11,color:'#78909c',marginBottom:12}}>Link local directories containing club handbooks or rules, or import text documents directly into the chatbot knowledge base.</p>
+                
+                <!-- Linked folders list -->
+                <div style=${{marginBottom:14}}>
+                  <label class="label">Linked Folders</label>
+                  <div style=${{display:'flex',gap:8,marginBottom:8}}>
+                    <input id="new-folder-input" class="input" placeholder="e.g. C:\\MidTN\\RulesDocuments"/>
+                    <${Btn} sm onClick=${()=>{
+                      const inp = document.getElementById('new-folder-input');
+                      const folder = inp.value.trim();
+                      if (folder) {
+                        saveLinkedFolders([...linkedFolders, folder]);
+                        inp.value = '';
+                      }
+                    }} color="#f0a500">+ Link Folder<//>
+                  </div>
+                  <div style=${{maxHeight:120,overflowY:'auto',background:'#12151c',borderRadius:6,border:'1px solid #2a2e38',padding:8}}>
+                    ${linkedFolders.map((f,idx)=>html`
+                      <div key=${idx} style=${{display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:12,padding:'3px 0',borderBottom:'1px solid #1e222b'}}>
+                        <span style=${{fontFamily:'monospace',wordBreak:'break-all'}}>${f}</span>
+                        <button onClick=${()=>saveLinkedFolders(linkedFolders.filter((_,i)=>i!==idx))} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:12}}>âœ•</button>
+                      </div>
+                    `)}
+                    ${!linkedFolders.length && html`<div style=${{color:'#444',textAlign:'center',padding:10}}>No directories linked</div>`}
+                  </div>
+                </div>
+
+                <!-- Document uploader (RAG) -->
+                <div>
+                  <label class="label">Import/Train Document (Text or JSON)</label>
+                  <input type="file" accept=".txt,.json,.md" onChange=${e=>{
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const r = new FileReader();
+                    r.onload = (evt) => {
+                      try {
+                        const content = evt.target.result;
+                        const currentKb = kb || { club_info: {}, news: [], rules_and_regulations: {}, faq: [], active_documents: [] };
+                        const docs = currentKb.active_documents || [];
+                        const nextDocs = [{ name: file.name, content: content }, ...docs];
+                        saveKb({ ...currentKb, active_documents: nextDocs });
+                        alert(`Successfully loaded document "${file.name}" into the AI knowledge base!`);
+                      } catch (err) {
+                        alert("Error reading file: " + err.message);
+                      }
+                    };
+                    r.readAsText(file);
+                  }} style=${{fontSize:11,color:'#78909c'}}/>
+                  
+                  <div style=${{marginTop:10}}>
+                    <label class="label">Trained AI Documents</label>
+                    <div style=${{maxHeight:120,overflowY:'auto',background:'#12151c',borderRadius:6,border:'1px solid #2a2e38',padding:8}}>
+                      ${kb?.active_documents?.map((doc,idx)=>html`
+                        <div key=${idx} style=${{display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:12,padding:'4px 0',borderBottom:'1px solid #1e222b'}}>
+                          <span style=${{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',maxWidth:'80%'}}>📄 ${doc.name} (${doc.content.length} chars)</span>
+                          <button onClick=${()=>{
+                            const docs = kb.active_documents.filter((_,i)=>i!==idx);
+                            saveKb({ ...kb, active_documents: docs });
+                          }} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:12}}>âœ•</button>
+                        </div>
+                      `)}
+                      ${(!kb?.active_documents || !kb?.active_documents?.length) && html`<div style=${{color:'#444',textAlign:'center',padding:10}}>No active training documents loaded</div>`}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Column 2: Chatbot KB Form Editor & AI Retraining Portal -->
+            <div style=${{display:'flex',flexDirection:'column',gap:20}}>
+              
+              <div class="card" style=${{padding:20,border:'1px solid #f0a50033'}}>
+                <h3 style=${{color:'#f0a500',fontSize:14,fontWeight:800,marginBottom:14,textTransform:'uppercase',letterSpacing:'0.5px'}}>🤖 AI Chatbot Knowledge Base Editor</h3>
+                <p style=${{fontSize:11,color:'#78909c',marginBottom:12}}>Directly modify FAQs and rule highlights the chatbot answers on the home page and tryouts dashboard.</p>
+                
+                ${kb ? html`
+                  <div style=${{display:'flex',flexDirection:'column',gap:12}}>
+                    <div>
+                      <label class="label">USA Volleyball Rule Highlight Note</label>
+                      <textarea class="input" rows="2" value=${kb.rules_and_regulations?.usa_volleyball?.expert_note || ''}
+                        onInput=${e=>{
+                          const next = {...kb};
+                          next.rules_and_regulations.usa_volleyball.expert_note = e.target.value;
+                          saveKb(next);
+                        }} style=${{fontSize:12}}></textarea>
+                    </div>
+                    
+                    <div>
+                      <label class="label">SRVA Tryout Policy Note</label>
+                      <textarea class="input" rows="2" value=${kb.rules_and_regulations?.srva?.expert_note || ''}
+                        onInput=${e=>{
+                          const next = {...kb};
+                          next.rules_and_regulations.srva.expert_note = e.target.value;
+                          saveKb(next);
+                        }} style=${{fontSize:12}}></textarea>
+                    </div>
+
+                    <div>
+                      <label class="label" style=${{color:'#4fc3f7'}}>Chatbot Frequently Asked Questions</label>
+                      <div style=${{display:'flex',flexDirection:'column',gap:10,background:'#12151c',padding:10,borderRadius:8,border:'1px solid #2a2e38',maxHeight:240,overflowY:'auto'}}>
+                        ${kb.faq?.map((item,idx)=>html`
+                          <div key=${idx} style=${{borderBottom:'1px solid #2a2e38',paddingBottom:8,marginBottom:4}}>
+                            <div style=${{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:4}}>
+                              <span style=${{fontWeight:700,fontSize:11,color:'#ffa726'}}>Q #${idx+1}</span>
+                              <button onClick=${()=>{
+                                const next = {...kb};
+                                next.faq = next.faq.filter((_,i)=>i!==idx);
+                                saveKb(next);
+                              }} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:11}}>âœ• Remove</button>
+                            </div>
+                            <input class="input" placeholder="Question" value=${item.question}
+                              onInput=${e=>{
+                                const next = {...kb};
+                                next.faq[idx].question = e.target.value;
+                                saveKb(next);
+                              }} style=${{fontSize:11,marginBottom:4,padding:4}}/>
+                            <textarea class="input" rows="2" placeholder="Answer" value=${item.answer}
+                              onInput=${e=>{
+                                const next = {...kb};
+                                next.faq[idx].answer = e.target.value;
+                                saveKb(next);
+                              }} style=${{fontSize:11,padding:4}}></textarea>
+                          </div>
+                        `)}
+                        <${Btn} sm onClick=${()=>{
+                          const next = {...kb};
+                          next.faq = [...(next.faq || []), { question: 'New Question', answer: 'New Answer' }];
+                          saveKb(next);
+                        }} color="#f0a500">+ Add New FAQ<//>
+                      </div>
+                    </div>
+
+                    <div style=${{marginTop:10,display:'flex',gap:10,alignItems:'center'}}>
+                      <${Btn} sm onClick=${()=>{
+                        const jsonStr = JSON.stringify(kb, null, 2);
+                        const blob = new Blob([jsonStr], { type: 'application/json' });
+                        const a = document.createElement('a');
+                        a.href = URL.createObjectURL(blob);
+                        a.download = 'volley_kb.json';
+                        a.click();
+                      }} color="#4fc3f7" outline>Download volley_kb.json<//>
+                      <span style=${{fontSize:9,color:'#546e7a',lineHeight:1.3}}>Download this file and place it in the project root to overwrite volley_kb.json.</span>
+                    </div>
+                  </div>
+                ` : html`<p style=${{color:'#78909c'}}>Loading chatbot knowledge base...</p>`}
+              </div>
+
+              <!-- AI Retraining Portal Card -->
+              <div class="card" style=${{padding:20,border:'1px solid #f0a50033'}}>
+                <h3 style=${{color:'#f0a500',fontSize:14,fontWeight:800,marginBottom:14,textTransform:'uppercase',letterSpacing:'0.5px'}}>🎓 AI Retraining Portal</h3>
+                <p style=${{fontSize:11,color:'#78909c',marginBottom:12}}>Review unanswered user questions here. Provide an answer and click train to add it to the chatbot's FAQs.</p>
+                
+                <div style=${{display:'flex',flexDirection:'column',gap:12,maxHeight:340,overflowY:'auto'}}>
+                  ${unansweredQ.map((q,idx)=>html`
+                    <div key=${q.id} style=${{background:'#12151c',border:'1px solid #2a2e38',borderRadius:8,padding:12,marginBottom:4}}>
+                      <div style=${{display:'flex',justifyContent:'space-between',fontSize:10,color:'#78909c',marginBottom:4}}>
+                        <span>Asked: ${new Date(q.timestamp).toLocaleString()}</span>
+                        <button onClick=${()=>{
+                          const next = unansweredQ.filter(item=>item.id!==q.id);
+                          setUnansweredQ(next);
+                          localStorage.setItem('midtn_unanswered_questions', JSON.stringify(next));
+                        }} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer'}}>Dismiss</button>
+                      </div>
+                      <div style=${{fontSize:12,fontWeight:700,color:'#ffa726',marginBottom:8}}>Q: "${q.question}"</div>
+                      
+                      <div style=${{marginBottom:8}}>
+                        <textarea class="input" placeholder="Type answer to train Volley AI..." rows="2"
+                          value=${q.answer || ''}
+                          onInput=${e=>{
+                            const next = unansweredQ.map(item=>item.id===q.id?{...item,answer:e.target.value}:item);
+                            setUnansweredQ(next);
+                            localStorage.setItem('midtn_unanswered_questions', JSON.stringify(next));
+                          }} style=${{fontSize:11,padding:6}}></textarea>
+                      </div>
+                      
+                      <div style=${{textAlign:'right'}}>
+                        <${Btn} sm onClick=${()=>{
+                          if(!q.answer || !q.answer.trim()) {
+                            alert("Please enter an answer before training!");
+                            return;
+                          }
+                          const currentKb = kb || { club_info: {}, news: [], rules_and_regulations: {}, faq: [], active_documents: [] };
+                          const nextKb = {
+                            ...currentKb,
+                            faq: [...(currentKb.faq || []), { question: q.question, answer: q.answer.trim() }]
+                          };
+                          saveKb(nextKb);
+                          
+                          const nextUnanswered = unansweredQ.filter(item=>item.id!==q.id);
+                          setUnansweredQ(nextUnanswered);
+                          localStorage.setItem('midtn_unanswered_questions', JSON.stringify(nextUnanswered));
+                          alert("AI trained successfully! Volley AI can now answer this question.");
+                        }} disabled=${!q.answer || !q.answer.trim()} color="#66bb6a">Add to FAQ & Train ✓<//>
+                      </div>
+                    </div>
+                  `)}
+                  ${!unansweredQ.length && html`
+                    <div style=${{color:'#66bb6a',textAlign:'center',padding:20,fontSize:12,fontWeight:600}}>
+                      🎉 All user questions are answered! Volley AI is fully trained.
+                    </div>
+                  `}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Email Sent Log Table -->
+          <div class="card" style=${{padding:20,marginTop:20}}>
+            <div style=${{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:14}}>
+              <h3 style=${{color:'#f0a500',fontSize:14,fontWeight:800,margin:0,textTransform:'uppercase',letterSpacing:'0.5px'}}>📊 Outbound Email Log</h3>
+              <${Btn} sm onClick=${()=>{
+                if(confirm("Clear email history?")) {
+                  localStorage.removeItem('midtn_email_logs');
+                  setEmailLogs([]);
+                }
+              }} color="#ef5350" outline>Clear Logs<//>
+            </div>
+            <div style=${{overflowX:'auto',maxHeight:300}}>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date/Time</th>
+                    <th>Recipient</th>
+                    <th>Email Address</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Content Snippet</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${emailLogs.map(log=>html`
+                    <tr key=${log.id}>
+                      <td style=${{whiteSpace:'nowrap',fontSize:11}}>${log.date}</td>
+                      <td style=${{fontWeight:600}}>${log.recipientName}</td>
+                      <td>${log.recipientEmail}</td>
+                      <td><${Badge} c=${log.type === 'offer' ? '#f0a500' : '#26c6da'} sm>${log.type}<//></td>
+                      <td><span style=${{color: log.status.includes('Failed') ? '#ef5350' : '#66bb6a', fontWeight:700}}>${log.status}</span></td>
+                      <td style=${{color:'#78909c',fontFamily:'monospace',fontSize:10}}>${log.content}</td>
+                    </tr>
+                  `)}
+                  ${!emailLogs.length && html`<tr><td colSpan="6" style=${{textAlign:'center',padding:20,color:'#444'}}>No outbound email history</td></tr>`}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        `}
+
+        ${view==='hidden'&&html`
+          <div>
+            <h2 style=${{fontSize:17,fontWeight:700,margin:'0 0 14px'}}>Hidden Athletes (${hidden.length})</h2>
+            ${hidden.map(a=>html`
+              <div key=${a.id} style=${{display:'flex',alignItems:'center',gap:10,padding:'9px 14px',background:'#1a1a10',border:'1px solid #ffa72622',borderRadius:8,marginBottom:4}}>
+                <span style=${{fontFamily:'monospace',color:'#4fc3f7',fontSize:11}}>#${a.to}</span>
+                <span style=${{fontWeight:600,flex:1,cursor:'pointer'}} onClick=${()=>setSelAth(a)}>${a.first} ${a.last}</span>
+                <${Badge} c="#78909c" sm>${a.ageGroup}s<//>
+                <${Badge} c="#ffa726" sm>${a.hideReason||'Hidden'}<//>
+                <${Btn} sm onClick=${()=>doUnhide(a.id)} color="#66bb6a">Unhide<//>
+              </div>`)}
+            ${!hidden.length&&html`<div style=${{padding:40,textAlign:'center',color:'#444'}}>No hidden athletes</div>`}
+          </div>`}
+      </div>
+
+      <${CheckInConfirmModal} athlete=${confirmCheckInAth} onClose=${()=>setConfirmCheckInAth(null)} onConfirm=${handleConfirmArrive}/>
+      <${AthleteModal} athlete=${selAth} onClose=${()=>setSelAth(null)} onChange=${upd}
+        onHide=${a=>{setSelAth(null);setHideAth(a);}} onUnhide=${doUnhide}
+        onEmail=${a=>{setSelAth(null);setEmailAth(a);setEmailTeam(a.teamAssignment||'');}}/>
+      <${EmailModal} athlete=${emailAth} team=${emailTeam} onClose=${()=>{setEmailAth(null);setEmailTeam('');}} onSend=${doEmail}/>
+      <${HideModal} athlete=${hideAth} onClose=${()=>setHideAth(null)} onHide=${doHide}/>
+      <${TeamOfferModal} teamKey=${teamOfferKey} athletes=${athletes} onClose=${()=>setTeamOfferKey(null)} onSendOffer=${(a)=>{setEmailAth(a);setEmailTeam(teamOfferKey);}}/>
+    </div>`;
+}
+
+function TeamOfferModal({teamKey,athletes,onClose,onSendOffer}){
+  if(!teamKey) return null;
+  const roster=athletes.filter(a=>a.teamAssignment===teamKey);
+  const [age,lvl]=teamKey.split('-');
+  return html`
+    <div class="modal-overlay" onClick=${onClose}>
+      <div class="modal-box" style=${{width:500}} onClick=${e=>e.stopPropagation()}>
+        <div style=${{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16}}>
+          <h3 style=${{margin:0}}>${age} ${lvl} — Send Offers</h3>
+          <button onClick=${onClose} style=${{background:'none',border:'none',color:'#666',fontSize:24,cursor:'pointer'}}>×</button>
+        </div>
+        <div style=${{maxHeight:400,overflowY:'auto',marginBottom:16}}>
+          ${roster.map(a=>html`
+            <div key=${a.id} style=${{display:'flex',alignItems:'center',gap:10,padding:'10px 0',borderBottom:'1px solid #2a2e38'}}>
+              <div style=${{flex:1}}>
+                <div style=${{fontWeight:700}}>${a.first} ${a.last}</div>
+                <div style=${{fontSize:11,color:'#78909c'}}>${posAbbr(a.primaryPos)} · ${a.status}</div>
+              </div>
+              ${['accepted','declined','offered'].includes(a.status)
+                ? html`<${Badge} c=${a.status==='accepted'?'#66bb6a':a.status==='declined'?'#ef5350':'#42a5f5'} sm>${a.status}<//>`
+                : html`<${Btn} sm onClick=${()=>onSendOffer(a)} color="#f0a500">Send Offer<//>`}
+            </div>`)}
+        </div>
+        <${Btn} onClick=${onClose} style=${{width:'100%'}} color="#2a2e38">Done<//>
+      </div>
+    </div>`;
+}
+
+// â”€â”€ ROOT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function App(){
+  const [user,setUser]=useState(null);
+  const [athletes,setAthletes]=useState(()=>{
+    const l=loadLocal();
+    return l?initAthletes(l):initAthletes(RAW);
+  });
+
+  const updMetric=useCallback((id,key,vals)=>{
+    setAthletes(p=>p.map(a=>a.id===id?{...a,metrics:{...a.metrics,[key]:vals}}:a));
+  },[]);
+  const doArrive=useCallback((id,contactInfo)=>{setAthletes(p=>p.map(a=>a.id===id?{...a,...(contactInfo||{}),arrived:true,status:'arrived'}:a));},[]);
+  const addWalkup=useCallback(wu=>{setAthletes(p=>[...p,...initAthletes([wu])]);},[]);
+  
+  useEffect(()=>{if(athletes.length) saveLocal(athletes);},[athletes]);
+
+  // Real-time synchronization - local tabs + GitHub cross-machine
+  useEffect(() => {
+    // Local tab sync (same machine)
+    const syncLocal = (e) => {
+      if (e.key === LOCAL_KEY) {
+        const next = loadLocal();
+        if (next) setAthletes(initAthletes(next));
+      }
+    };
+    window.addEventListener('storage', syncLocal);
+
+    // GitHub poll (cross-machine)
+    let pollTimer = null;
+    const poll = async () => {
+      const remote = await ghRead();
+      if (!remote || !remote.length) return;
+      const remoteHash = hashAthletes(remote);
+      if (remoteHash !== _lastRemoteHash) {
+        _lastRemoteHash = remoteHash;
+        // Merge: keep local arrivals/metrics, pull in any remote updates
+        setAthletes(prev => {
+          const remoteMap = Object.fromEntries(remote.map(a => [a.id, a]));
+          return prev.map(a => remoteMap[a.id] ? {...a, ...remoteMap[a.id]} : a);
+        });
+        try { localStorage.setItem(LOCAL_KEY, JSON.stringify(remote)); } catch(e) {}
+      }
+    };
+
+    if (GH_ENABLED()) {
+      poll(); // immediate first poll
+      pollTimer = setInterval(poll, GH_CONFIG.poll);
+    }
+
+    return () => {
+      window.removeEventListener('storage', syncLocal);
+      if (pollTimer) clearInterval(pollTimer);
+    };
+  }, []);
+
+  const isWalkupMode = useMemo(() => {
+    return new URLSearchParams(window.location.search).get('mode') === 'walkup';
+  }, []);
+
+  if (isWalkupMode) {
+    return html`<${WalkupRegister} athletes=${athletes} onAddWalkup=${addWalkup} />`;
+  }
+
+  if(!user) return html`<${Login} onLogin=${setUser}/>`;
+  if(user.role==='staff') return html`<${StaffDashboard} athletes=${athletes} setAthletes=${setAthletes} onArrive=${doArrive} onAddWalkup=${addWalkup} onMetric=${updMetric} onLogout=${()=>setUser(null)} initialTab=${user.tab}/>`;
+  return html`<${HeadCoach} athletes=${athletes} setAthletes=${setAthletes} onLogout=${()=>setUser(null)}/>`;
+}
+render(html`<${App}/>`,document.getElementById('app'));
+</script>
+</body>
+</html>
