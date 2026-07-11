@@ -88,7 +88,7 @@ const html=htm.bind(h);
 
 
 // â”€â”€ CONSTANTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-const LOCAL_KEY='midtn_tryout_v2';
+const LOCAL_KEY='midtn_tryout_v3';
 
 // ── GITHUB SYNC CONFIG ──────────────────────────────────────────
 // Fill these in before tryouts. Get a PAT from:
@@ -214,7 +214,7 @@ const RAW=[
   {to:'155',first:'Leah',last:'Williams',dob:'09/06/2013',division:'13 & Under',primaryPos:'Setter',altPos:'',phone:'615-948-5740',email:'ericandsarahwilliams@gmail.com'},
   {to:'224',first:'Madison',last:'Bayne',dob:'11/06/2013',division:'13 & Under',primaryPos:'Middle Hitter',altPos:'Defensive Specialist',phone:'615-604-5528',email:'bayne5@yahoo.com'},
   {to:'252',first:'Mia',last:'Aguilar',dob:'11/18/2013',division:'13 & Under',primaryPos:'',altPos:'',phone:'6156936760',email:'janet.9412@yahoo.com'},
-  {to:'43',first:'Myla',last:'O‚ÄôKelley',dob:'10/08/2013',division:'13 & Under',primaryPos:'',altPos:'',phone:'6156059739',email:'mitzy66_2000@yahoo.com'},
+  {to:'43',first:'Myla',last:'O\'Kelley',dob:'10/08/2013',division:'13 & Under',primaryPos:'',altPos:'',phone:'6156059739',email:'mitzy66_2000@yahoo.com'},
   {to:'48',first:'Myla',last:'Walden',dob:'07/27/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'Setter',phone:'6156530664',email:'xtraxtrawalden@gmail.com'},
   {to:'9',first:'Nora',last:'Summers',dob:'04/22/2014',division:'13 & Under',primaryPos:'Setter',altPos:'Outside Hitter',phone:'661-904-2066',email:'jensummers08@gmail.com'},
   {to:'38',first:'Olivia',last:'Gonzales',dob:'09/26/2013',division:'13 & Under',primaryPos:'Right Side Hitter',altPos:'Middle Hitter',phone:'6614331989',email:'hazchick@gmail.com'},
@@ -509,7 +509,7 @@ function mkId(){return Math.random().toString(36).substr(2,6);}
 function initAthletes(raw){
   return raw.filter(a=>a.first).map(a=>({
     ...a,
-    id:a.id||`${a.first}-${mkId()}`,
+    id:a.id||(a.to?`to-${a.to}`:`${a.first}-${a.last}-${a.dob}`.toLowerCase().replace(/[^a-z0-9]/g,'-')),
     to:a.to||String(toN++),
     ageGroup:divAge(a.division),
     posCategory:classifyPos(a.primaryPos),
