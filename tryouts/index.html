@@ -770,7 +770,8 @@ function Login({onLogin}){
 
   const walkupUrl = getWalkupUrl();
   const faqUrl = getFaqUrl();
-  const walkupQr = `https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${encodeURIComponent(walkupUrl)}`;
+  const MIDTN_URL = 'https://www.midtnvbc.com';
+  const walkupQr = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(MIDTN_URL)}`;
   const faqQr = `https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${encodeURIComponent(faqUrl)}`;
 
   const printSigns = () => {
@@ -868,11 +869,11 @@ function Login({onLogin}){
             <div style=${{display:'flex',gap:12,flexDirection:'column'}}>
               
               <div style=${{display:'flex',alignItems:'center',gap:12,background:'#12151c',padding:10,borderRadius:8,border:'1px solid #2a2e38'}}>
-                <img src=${walkupQr} alt="Walk-up QR" style=${{border:'3px solid white',borderRadius:4,width:76,height:76,flexShrink:0}}/>
+                <img src=${walkupQr} alt="Mid TN VBC" style=${{border:'3px solid white',borderRadius:4,width:76,height:76,flexShrink:0}}/>
                 <div style=${{textAlign:'left'}}>
-                  <div style=${{fontSize:12,fontWeight:700,color:'#66bb6a'}}>Scan to Register</div>
-                  <div style=${{fontSize:10,color:'#78909c',marginTop:2,lineHeight:1.3}}>For walk-up players to register and check in on their own phones.</div>
-                  <a href=${walkupUrl} target="_blank" style=${{display:'inline-block',fontSize:10,color:'#4fc3f7',marginTop:4,textDecoration:'underline'}}>Open Form</a>
+                  <div style=${{fontSize:12,fontWeight:700,color:'#66bb6a'}}>midtnvbc.com</div>
+                  <div style=${{fontSize:10,color:'#78909c',marginTop:2,lineHeight:1.3}}>Scan to visit the Mid TN VBC website for info, schedules & registration.</div>
+                  <a href=${MIDTN_URL} target="_blank" style=${{display:'inline-block',fontSize:10,color:'#4fc3f7',marginTop:4,textDecoration:'underline'}}>Open Form</a>
                 </div>
               </div>
 
