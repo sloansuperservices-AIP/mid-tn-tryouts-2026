@@ -153,6 +153,7 @@ const STAFF_PIN='1111';
 const HC_PIN='0000';
 const CHECKIN_PIN='9999';
 const STATION2_PIN='2222';
+const ADMIN_PIN='1130';
 const STATIONS=[
   {key:'checkin',label:'Sign In',metrics:[]},
   {key:'s1',label:'Reach & Vertical',metrics:['Height (in)','Reach (in)','Vertical (in)']},
@@ -1288,6 +1289,7 @@ function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric,
                   </div>
                   
                   <div style=${{display:'flex',gap:8}}>
+                    <${Btn} onClick=${()=>{if(confirm('Clear saved physical metrics for '+activeAthlete.first+'?')){onMetric(activeAthlete.id,'s1',['','','']);setActiveAthlete(null);setS1Vals(['','','']);}}} color="#ef5350" outline style=${{flex:1}}>✕ Clear<//>
                     <${Btn} onClick=${()=>setActiveAthlete(null)} color="#2a2e38" style=${{flex:1}}>Cancel<//>
                     <${Btn} onClick=${handleSaveS1} color="#66bb6a" style=${{flex:2}}>Save & Load Next ✓<//>
                   </div>
@@ -1342,6 +1344,7 @@ function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric,
                   </div>
                   
                   <div style=${{display:'flex',gap:8}}>
+                    <${Btn} onClick=${()=>{if(confirm('Clear agility time for '+activeAthlete.first+'?')){onMetric(activeAthlete.id,'s2',['']);setActiveAthlete(null);setS2Val('');}}} color="#ef5350" outline style=${{flex:1}}>✕ Clear<//>
                     <${Btn} onClick=${()=>setActiveAthlete(null)} color="#2a2e38" style=${{flex:1}}>Cancel<//>
                     <${Btn} onClick=${handleSaveS2} color="#66bb6a" style=${{flex:2}}>Save & Load Next ✓<//>
                   </div>
@@ -1392,6 +1395,7 @@ function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric,
                   </div>
                   
                   <div style=${{display:'flex',gap:8}}>
+                    <${Btn} onClick=${()=>{if(confirm('Clear drill score for '+activeAthlete.first+'?')){upd(activeAthlete.id,{drillScore:''});setActiveAthlete(null);setDrillVal('');}}} color="#ef5350" outline style=${{flex:1}}>✕ Clear<//>
                     <${Btn} onClick=${()=>setActiveAthlete(null)} color="#2a2e38" style=${{flex:1}}>Cancel<//>
                     <${Btn} onClick=${handleSaveDrill} color="#66bb6a" style=${{flex:2}}>Save & Load Next ✓<//>
                   </div>
@@ -1713,6 +1717,8 @@ function HeadCoach({athletes,setAthletes,onLogout}){
   const [teamOfferKey,setTeamOfferKey]=useState(null);
   const [confirmCheckInAth,setConfirmCheckInAth]=useState(null);
   const [widePool,setWidePool]=useState(false);
+  const [adminUnlocked,setAdminUnlocked]=useState(false);
+  const [adminPinInput,setAdminPinInput]=useState('');
 
   // -- ADMIN & CONFIG STATE -
   const [emailConfig, setEmailConfig] = useState(() => {
@@ -1921,14 +1927,13 @@ function HeadCoach({athletes,setAthletes,onLogout}){
   const assigned=athletes.filter(a=>a.teamAssignment&&!a.hidden).length;
   const accepted=athletes.filter(a=>a.status==='accepted'&&!a.hidden).length;
   const walkups=athletes.filter(a=>a.isWalkup&&!a.hidden).length;
-  const VIEWS=['allreg','depth','results','teams','allteams','admin','hidden'];
+  const VIEWS=['allreg','depth','results','teams','allteams','hidden'];
   const VLABELS={
     allreg:'All Reg',
     depth:'Depth Chart',
     results:'Results',
     teams:'Team Builder',
     allteams:'All Teams',
-    admin: unansweredQ.length > 0 ? html`âš™️ Admin <span style=${{background:'#ffa726',color:'#000',padding:'1px 5px',borderRadius:10,fontSize:10,fontWeight:800,marginLeft:4}}>${unansweredQ.length}</span>` : 'âš™️ Admin',
     hidden:`Hidden (${hidden.length})`
   };
   const showAgeNav=['depth','results','teams'].includes(view);
@@ -2011,6 +2016,12 @@ function HeadCoach({athletes,setAthletes,onLogout}){
   return html`
     <div style=${{minHeight:'100vh',background:'#0d1017',paddingBottom:20}}>
       <div class="sticky-header no-print">
+        <div style=${{display:'flex',gap:8,padding:'6px 0',borderBottom:'1px solid #1e222b',marginBottom:6}}>
+          <span style=${{fontSize:11,color:'#546e7a',fontWeight:700,alignSelf:'center'}}>STATIONS:</span>
+          <a href="${window.location.origin+window.location.pathname+'?pin='+CHECKIN_PIN}" target="_blank" style=${{padding:'4px 10px',background:'#26c6da22',color:'#26c6da',fontSize:11,fontWeight:700,borderRadius:4,border:'1px solid #26c6da44',textDecoration:'none'}}>📝 Check-In</a>
+          <a href="${window.location.origin+window.location.pathname+'?pin='+STAFF_PIN}" target="_blank" style=${{padding:'4px 10px',background:'#42a5f522',color:'#42a5f5',fontSize:11,fontWeight:700,borderRadius:4,border:'1px solid #42a5f544',textDecoration:'none'}}>📏 Physical</a>
+          <a href="${window.location.origin+window.location.pathname+'?pin='+STATION2_PIN}" target="_blank" style=${{padding:'4px 10px',background:'#ffa72622',color:'#ffa726',fontSize:11,fontWeight:700,borderRadius:4,border:'1px solid #ffa72644',textDecoration:'none'}}>⏱ Agility</a>
+        </div>
         <div style=${{display:'flex',alignItems:'center',gap:10,flexWrap:'wrap',marginBottom:10}}>
           
           <span style=${{color:'#2a2e38'}}>|</span>
@@ -2027,6 +2038,16 @@ function HeadCoach({athletes,setAthletes,onLogout}){
         </div>
         <div style=${{display:'flex',gap:4,flexWrap:'wrap',alignItems:'center'}}>
           ${VIEWS.map(v=>html`<button key=${v} class=${'nav-tab'+(view===v?' active':'')} onClick=${()=>setView(v)}>${VLABELS[v]}</button>`)}
+          <a href="${window.location.href.replace('tryouts/','').replace(/[?#].*$/,'')+'tryouts/?pin=staff'}" target="_blank" style=${{padding:'6px 16px',background:'#f0a500',color:'#000',fontWeight:800,fontSize:13,borderRadius:6,border:'none',cursor:'pointer',textDecoration:'none',marginLeft:8,whiteSpace:'nowrap'}}>🏐 Tryout Stations</a>
+          <button onClick=${()=>{
+            if(adminUnlocked){setView('admin');}
+            else{
+              const p=prompt('Enter Admin PIN:');
+              if(p===ADMIN_PIN){setAdminUnlocked(true);setView('admin');}
+              else if(p!==null)alert('Incorrect PIN');
+            }
+          }} style=${{padding:'6px 12px',background:view==='admin'?'#f0a500':'#1a1e24',color:view==='admin'?'#000':'#78909c',fontWeight:700,fontSize:12,borderRadius:6,border:'1px solid #2a2e38',cursor:'pointer',marginLeft:4}}>⚙️ Admin<//>
+          
           <div style=${{flex:1}}/>
           ${showAgeNav&&html`
             <div style=${{display:'flex',gap:2,background:'#12151c',borderRadius:6,padding:2}}>
@@ -2304,6 +2325,59 @@ function HeadCoach({athletes,setAthletes,onLogout}){
                               </div>`)}</div></div>`;})}</div></div>`;})}</div>`}
 
         ${view==='admin'&&html`
+          <div style=${{marginBottom:20,padding:20,background:'#0d1017',border:'2px solid #f0a50055',borderRadius:12}}>
+            <h3 style=${{color:'#f0a500',fontSize:14,fontWeight:800,marginBottom:14,textTransform:'uppercase',letterSpacing:'0.5px'}}>📥 Import Registration CSV</h3>
+            <p style=${{color:'#78909c',fontSize:12,marginBottom:12}}>Upload a fresh SportsEngine registration export to add last-minute signups without clearing existing check-in data.</p>
+            <input type="file" accept=".csv" onChange=${e=>{
+              const file = e.target.files[0];
+              if(!file) return;
+              const reader = new FileReader();
+              reader.onload = evt => {
+                try {
+                  const lines = evt.target.result.split('\n');
+                  const headers = lines[0].split(',').map(h=>h.replace(/"/g,'').trim());
+                  const toIdx = headers.findIndex(h=>h.includes('TO'));
+                  const firstIdx = headers.findIndex(h=>h==='Name'||h.includes('first_name'));
+                  const lastIdx = headers.findIndex(h=>h==='Last Name'||h.includes('last_name'));
+                  const dobIdx = headers.findIndex(h=>h==='DOB'||h.includes('dob'));
+                  const divIdx = headers.findIndex(h=>h==='Division');
+                  const phoneIdx = headers.findIndex(h=>h==='Phone #'||h.includes('phone'));
+                  const emailIdx = headers.findIndex(h=>h.includes('email'));
+                  const posIdx = headers.findIndex(h=>h==='Primary Position');
+                  const altIdx = headers.findIndex(h=>h==='Secondary Position');
+                  let added=0, skipped=0;
+                  setAthletes(prev => {
+                    const existing = new Set(prev.map(a=>(a.first+a.last+a.dob).toLowerCase().replace(/\s/g,'')));
+                    const newAthletes = [...prev];
+                    lines.slice(1).forEach(line => {
+                      if(!line.trim()) return;
+                      const cols = line.split(',').map(c=>c.replace(/^"|"$/g,'').trim());
+                      const first = cols[firstIdx]||'';
+                      const last = cols[lastIdx]||'';
+                      const dob = cols[dobIdx]||'';
+                      if(!first||!last) return;
+                      const key = (first+last+dob).toLowerCase().replace(/\s/g,'');
+                      if(existing.has(key)){skipped++;return;}
+                      const toNum = toIdx>=0?cols[toIdx]:'';
+                      const div = divIdx>=0?cols[divIdx]:'';
+                      newAthletes.push(initAthletes([{
+                        to:toNum,first,last,dob,
+                        division:div||'12 & Under',
+                        primaryPos:cols[posIdx]||'',
+                        altPos:cols[altIdx]||'',
+                        phone:phoneIdx>=0?cols[phoneIdx]:'',
+                        email:emailIdx>=0?cols[emailIdx]:'',
+                      }])[0]);
+                      added++;
+                    });
+                    return newAthletes;
+                  });
+                  setTimeout(()=>alert('Import complete: '+added+' added, '+skipped+' already existed.'),100);
+                } catch(err){alert('CSV parse error: '+err.message);}
+              };
+              reader.readAsText(file);
+            }} style=${{fontSize:12,color:'#78909c',cursor:'pointer'}}/>
+          </div>
           <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr',gap:24,alignItems:'start',marginTop:14}}>
             
             <!-- Column 1: Settings -->
