@@ -441,7 +441,15 @@ function posAbbr(p){
   return p.substring(0,3).toUpperCase();
 }
 function classifyPos(p){
-  if(!p) return 'unsorted'; const s=p.toLowerCase();
+  if(!p || p==='N/A') return 'unsorted';
+  const s=p.toLowerCase().trim();
+  // Direct full-name matches first
+  if(s==='setter') return 'setter';
+  if(s==='middle hitter' || s==='middle blocker') return 'middle';
+  if(s==='outside hitter') return 'outside';
+  if(s==='right side hitter' || s==='right side' || s==='opposite') return 'outside';
+  if(s==='defensive specialist' || s==='libero') return 'defense';
+  // Then abbreviation matching
   for(const c of POS_CATS) {
     if(c.abbrs.some(a => a.length <= 2 ? s === a : s.includes(a))) return c.key;
   }
@@ -1439,7 +1447,7 @@ function AthleteModal({athlete,onClose,onChange,onHide,onUnhide,onEmail}){
         ?html`<select class="select" value=${ev} onChange=${e=>setEv(e.target.value)} onBlur=${saveEdit} autoFocus>${opts.map(o=>html`<option>${o}</option>`)}</select>`
         :html`<input class="input" value=${ev} onInput=${e=>setEv(e.target.value)} onBlur=${saveEdit} onKeyDown=${e=>e.key==='Enter'&&saveEdit()} autoFocus style=${{fontSize:13,padding:'6px 8px'}}/>`)
       :html`<div onClick=${()=>startEdit(key,athlete[key])} style=${{fontSize:13,color:athlete[key]?'#e8eaed':'#444',cursor:locked?'default':'pointer',padding:'2px 0',borderBottom:'1px dashed #2a2e38',wordBreak:'break-all',minHeight:20}}>
-        ${athlete[key]||'"”'}${!locked&&html`<span style=${{color:'#4fc3f7',marginLeft:4,fontSize:10}}>âœ</span>`}
+        ${athlete[key]||'"”'}${!locked&&html`<span style=${{color:'#4fc3f7',marginLeft:4,fontSize:10}}>✎</span>`}
       </div>`}
     </div>`;
   return html`
@@ -1497,7 +1505,7 @@ function AthleteModal({athlete,onClose,onChange,onHide,onUnhide,onEmail}){
           <div style=${{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:10}}>
             <div style=${{fontSize:13,fontWeight:700,color:'#4fc3f7'}}>Tryout Scores</div>
             <button onClick=${()=>setShowStopwatch(!showStopwatch)} class="btn btn-sm btn-outline" style=${{borderColor:'#ffa726',color:'#ffa726',padding:'2px 8px',fontSize:'11px'}}>
-              ${showStopwatch ? 'âœ• Close Timer' : '⏱️ Open Timer'}
+              ${showStopwatch ? '✕ Close Timer' : '⏱️ Open Timer'}
             </button>
           </div>
           ${showStopwatch && html`
@@ -2083,7 +2091,7 @@ function HeadCoach({athletes,setAthletes,onLogout}){
                       <td>${a.arrived?html`<${Badge} c="#26c6da" sm>✓<//>`
                         :html`<${Btn} sm onClick=${e=>{e.stopPropagation();doArrive(a);}} color="#26c6da" outline>Check In<//>`}</td>
                       <td onClick=${()=>setSelAth(a)}>${a.notes&&html`<span title=${'NOTES: ' + a.notes}>📝</span>`}${a.wontAccept&&html`<span title=${'RESTRICTIONS: ' + a.wontAccept} style=${{marginLeft:4}}>âš ️</span>`}</td>
-                      <td onClick=${()=>setSelAth(a)} style=${{fontSize:14,textAlign:'center'}}>âœ️</td>
+                      <td onClick=${()=>setSelAth(a)} style=${{fontSize:14,textAlign:'center'}}>✎</td>
                       <td onClick=${()=>setSelAth(a)} style=${{color:'#78909c',whiteSpace:'nowrap',fontSize:11}}>${a.phone}</td>
                       <td style=${{color:'#78909c',maxWidth:140,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:11}}>${a.email}</td>
                     </tr>`)}</tbody></table>
@@ -2407,7 +2415,7 @@ function HeadCoach({athletes,setAthletes,onLogout}){
                     ${linkedFolders.map((f,idx)=>html`
                       <div key=${idx} style=${{display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:12,padding:'3px 0',borderBottom:'1px solid #1e222b'}}>
                         <span style=${{fontFamily:'monospace',wordBreak:'break-all'}}>${f}</span>
-                        <button onClick=${()=>saveLinkedFolders(linkedFolders.filter((_,i)=>i!==idx))} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:12}}>âœ•</button>
+                        <button onClick=${()=>saveLinkedFolders(linkedFolders.filter((_,i)=>i!==idx))} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:12}}>✕</button>
                       </div>
                     `)}
                     ${!linkedFolders.length && html`<div style=${{color:'#444',textAlign:'center',padding:10}}>No directories linked</div>`}
@@ -2445,7 +2453,7 @@ function HeadCoach({athletes,setAthletes,onLogout}){
                           <button onClick=${()=>{
                             const docs = kb.active_documents.filter((_,i)=>i!==idx);
                             saveKb({ ...kb, active_documents: docs });
-                          }} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:12}}>âœ•</button>
+                          }} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:12}}>✕</button>
                         </div>
                       `)}
                       ${(!kb?.active_documents || !kb?.active_documents?.length) && html`<div style=${{color:'#444',textAlign:'center',padding:10}}>No active training documents loaded</div>`}
@@ -2496,7 +2504,7 @@ function HeadCoach({athletes,setAthletes,onLogout}){
                                 const next = {...kb};
                                 next.faq = next.faq.filter((_,i)=>i!==idx);
                                 saveKb(next);
-                              }} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:11}}>âœ• Remove</button>
+                              }} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:11}}>✕ Remove</button>
                             </div>
                             <input class="input" placeholder="Question" value=${item.question}
                               onInput=${e=>{
