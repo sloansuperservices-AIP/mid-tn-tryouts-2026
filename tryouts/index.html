@@ -116,7 +116,6 @@ function saveGHToken(t) {
 }
 
 // Internal: track the file's SHA so GitHub lets us update it
-let _ghSha = null;
 let _lastRemoteHash = null;
 
 function hashAthletes(arr) {
@@ -124,33 +123,72 @@ function hashAthletes(arr) {
   return arr.map(a => a.id + (a.arrived||'') + (a.status||'') + JSON.stringify(a.metrics||{}) + (a.drillScore||'') + (a.teamAssignment||'')).join('|');
 }
 
+// ── SYNC ENGINE ────────────────────────────────────────────
+let _ghSha = null;
+let _writeInProgress = false;
+let _pendingWrite = null;
+
 async function ghRead() {
   try {
-    const r = await fetch('https://raw.githubusercontent.com/' + GH_CONFIG.owner + '/' + GH_CONFIG.repo + '/main/' + GH_CONFIG.path, {
-      headers: { 'Authorization': 'token ' + GH_CONFIG.token, 'Cache-Control': 'no-cache' }
+    // Use contents API so we always get the SHA too
+    const r = await fetch(GH_URL() + '?t=' + Date.now(), {
+      headers: { 'Authorization': 'token ' + GH_CONFIG.token, 'Accept': 'application/vnd.github.v3+json' }
     });
     if (!r.ok) return null;
-    return await r.json();
+    const j = await r.json();
+    _ghSha = j.sha;
+    const text = decodeURIComponent(escape(atob(j.content.replace(/\n/g,''))));
+    return JSON.parse(text);
   } catch(e) { console.warn('GH read error', e); return null; }
 }
 
+async function _doWrite(athletes) {
+  if (!_ghSha) {
+    // Need SHA first — do a read
+    await ghRead();
+  }
+  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(athletes))));
+  const r = await fetch(GH_URL(), {
+    method: 'PUT',
+    headers: { 'Authorization': 'token ' + GH_CONFIG.token, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' },
+    body: JSON.stringify({ message: 'sync: ' + new Date().toISOString(), content: encoded, sha: _ghSha })
+  });
+  const j = await r.json();
+  if (j.content && j.content.sha) {
+    _ghSha = j.content.sha;
+    return true;
+  }
+  if (j.message && j.message.includes('does not match')) {
+    // SHA conflict — refresh and retry once
+    _ghSha = null;
+    await ghRead();
+    return _doWrite(athletes);
+  }
+  console.warn('GH write failed', j.message);
+  return false;
+}
+
 async function ghWrite(athletes) {
+  // Queue writes — never run two simultaneously
+  if (_writeInProgress) {
+    _pendingWrite = athletes;
+    return;
+  }
+  _writeInProgress = true;
   try {
-    // Get current SHA
-    const metaR = await fetch(GH_URL(), {
-      headers: { 'Authorization': 'token ' + GH_CONFIG.token, 'Accept': 'application/vnd.github.v3+json' }
-    });
-    const meta = await metaR.json();
-    const sha = meta.sha;
-    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(athletes))));
-    const r = await fetch(GH_URL(), {
-      method: 'PUT',
-      headers: { 'Authorization': 'token ' + GH_CONFIG.token, 'Content-Type': 'application/json', 'Accept': 'application/vnd.github.v3+json' },
-      body: JSON.stringify({ message: 'sync: ' + new Date().toISOString(), content: encoded, sha })
-    });
-    const j = await r.json();
-    if (j.content) _ghSha = j.content.sha;
-  } catch(e) { console.warn('GH write error', e); }
+    await _doWrite(athletes);
+    // If another write was queued while we were busy, send it now
+    if (_pendingWrite) {
+      const next = _pendingWrite;
+      _pendingWrite = null;
+      await _doWrite(next);
+    }
+  } catch(e) {
+    console.warn('GH write error', e);
+    _ghSha = null; // Force SHA refresh on next write
+  } finally {
+    _writeInProgress = false;
+  }
 }
 // ────────────────────────────────────────────────────────────────
 const STAFF_PIN='1111';
@@ -2816,6 +2854,7 @@ function App(){
     // GitHub poll (cross-machine)
     let pollTimer = null;
     const poll = async () => {
+      if (_writeInProgress) return; // Don't poll while writing
       const remote = await ghRead();
       if (!remote || !remote.length) return;
       const remoteHash = hashAthletes(remote);
