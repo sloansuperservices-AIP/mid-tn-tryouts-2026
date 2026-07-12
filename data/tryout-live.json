@@ -180,7 +180,7 @@
     "status": "arrived",
     "teamAssignment": null,
     "teamLocked": false,
-    "coachPos": "",
+    "coachPos": "RS",
     "hidden": false,
     "hideReason": "",
     "isWalkup": false,
@@ -191,7 +191,8 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "updatedAt": 1783899888336
   },
   {
     "to": "53",
