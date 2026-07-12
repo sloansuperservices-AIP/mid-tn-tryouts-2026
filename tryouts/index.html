@@ -99,7 +99,7 @@ const GH_CONFIG = {
   repo:  'mid-tn-tryouts-2026',
   path:  'data/tryout-live.json',
   token: localStorage.getItem('midtn_gh_token') || '',
-  poll:  60000,
+  poll:  10000,
 };
 // Always enabled — Netlify function handles auth server-side
 const SYNC_URL = '/api/sync';
@@ -1083,7 +1083,7 @@ function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric,
           <div>Total Registered: <strong>${athletes.filter(a=>!a.hidden).length}</strong></div>
         </div>
         <${Btn} sm onClick=${onLogout} color="#ef5350" outline>Log Out<//>
-          <${SyncStatus}/>
+          <${SyncStatus} athletes=${athletes} setAthletes=${setAthletes}/>
       </div>
 
       <div style=${{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(130px, 1fr))',gap:12,padding:'20px 20px 10px',maxWidth:800,margin:'0 auto'}}>
