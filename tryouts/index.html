@@ -98,10 +98,12 @@ const GH_CONFIG = {
   owner: 'sloansuperservices-AIP',
   repo:  'mid-tn-tryouts-2026',
   path:  'data/tryout-live.json',
-  token: localStorage.getItem('midtn_gh_token') || '',  // loaded from localStorage
-  poll:  60000,        // ms between polls (1 minute)
+  token: localStorage.getItem('midtn_gh_token') || '',
+  poll:  60000,
 };
-const GH_ENABLED = () => GH_CONFIG.token.length > 0;
+// Always enabled — Netlify function handles auth server-side
+const SYNC_URL = '/api/sync';
+const GH_ENABLED = () => true;
 function saveGHToken(t) {
   localStorage.setItem('midtn_gh_token', t);
   GH_CONFIG.token = t;
@@ -118,17 +120,10 @@ function hashAthletes(arr) {
 }
 
 async function ghRead() {
-  if (!GH_ENABLED()) return null;
   try {
-    const r = await fetch(GH_URL(), {
-      headers: { Authorization: 'token ' + GH_CONFIG.token, Accept: 'application/vnd.github.v3+json' }
-    });
-    if (r.status === 404) return null;   // file doesn't exist yet — first run
-    if (!r.ok) { console.warn('GH read failed', r.status); return null; }
-    const json = await r.json();
-    _ghSha = json.sha;
-    const decoded = json.content.split('\n').join(''); const data = JSON.parse(atob(decoded));
-    return data;
+    const r = await fetch(SYNC_URL);
+    if (!r.ok) return null;
+    return await r.json();
   } catch(e) { console.warn('GH read error', e); return null; }
 }
 
