@@ -931,22 +931,46 @@ function CheckInConfirmModal({ athlete, onClose, onConfirm }) {
 
 // -- STAFF HUB (DASHBOARD & STATIONS) -
 // -- SYNC STATUS INDICATOR ──────────────────────────────────────
-function SyncStatus() {
-  const [status, setStatus] = useState(GH_ENABLED() ? 'syncing' : 'off');
-  // 'off' | 'syncing' | 'ok' | 'error'
+function SyncStatus({athletes, setAthletes}) {
+  const [status, setStatus] = useState('syncing');
+  const [lastSync, setLastSync] = useState(null);
+  const [pushing, setPushing] = useState(false);
+
+  const doSync = async (pushFirst) => {
+    try {
+      setStatus('syncing');
+      if (pushFirst && athletes && athletes.length) {
+        setPushing(true);
+        await ghWrite(athletes);
+      }
+      const remote = await ghRead();
+      if (remote && remote.length) {
+        if(setAthletes) setAthletes(remote);
+        try { localStorage.setItem(LOCAL_KEY, JSON.stringify(remote)); } catch(e) {}
+        setLastSync(new Date().toLocaleTimeString());
+        setStatus('ok');
+      }
+    } catch(e) { setStatus('error'); }
+    finally { setPushing(false); }
+  };
+
   useEffect(() => {
-    if (!GH_ENABLED()) return;
-    // Override ghRead/ghWrite to update status
-    const origRead = window._ghReadOrig || ghRead;
-    window._ghReadOrig = origRead;
-    setStatus('ok');
+    doSync(false);
+    const t = setInterval(() => doSync(false), GH_CONFIG.poll);
+    return () => clearInterval(t);
   }, []);
-  if (!GH_ENABLED()) return html`<span style=${{fontSize:10,color:'#546e7a',fontFamily:'monospace',padding:'2px 6px',background:'#1a1e24',borderRadius:4}}>LOCAL ONLY</span>`;
-  return html`<span style=${{fontSize:10,fontFamily:'monospace',padding:'2px 6px',background:'#1a1e24',borderRadius:4,color:'#66bb6a',display:'flex',alignItems:'center',gap:4}}>
-    <span style=${{width:6,height:6,borderRadius:'50%',background:'#66bb6a',display:'inline-block'}}></span>
-    NETLIFY SYNC
-  </span>`;
+
+  const dotColor = status==='ok'?'#66bb6a':status==='error'?'#ef5350':'#ffa726';
+  const label = status==='ok'?'NETLIFY SYNC':status==='error'?'SYNC ERROR':'SYNCING...';
+  return html`<div style=${{display:'flex',alignItems:'center',gap:6}}>
+    <span style=${{fontSize:11,padding:'2px 8px',color:dotColor,background:'#1a1e24',borderRadius:4,display:'inline-flex',alignItems:'center',gap:4}}>
+      <span style=${{width:6,height:6,borderRadius:'50%',background:dotColor,display:'inline-block'}}></span>
+      ${label}${lastSync?html`<span style=${{color:'#546e7a',marginLeft:4}}>${lastSync}</span>`:''}
+    </span>
+    <button onClick=${()=>doSync(true)} disabled=${pushing} style=${{padding:'3px 10px',background:pushing?'#2a2e38':'#f0a500',color:pushing?'#546e7a':'#000',border:'none',borderRadius:4,fontSize:11,fontWeight:800,cursor:pushing?'wait':'pointer'}}>${pushing?'Syncing...':'Push & Sync'}</button>
+  </div>`;
 }
+
 
 function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric, onLogout, initialTab}) {
   const [activeTab, setActiveTab] = useState(initialTab || 'checkin'); // 'checkin', 's1', 's2'
