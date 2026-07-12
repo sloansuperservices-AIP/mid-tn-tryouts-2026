@@ -128,17 +128,13 @@ async function ghRead() {
 }
 
 async function ghWrite(athletes) {
-  if (!GH_ENABLED()) return;
   try {
-    const body = { message: 'sync: ' + new Date().toISOString(),
-                   content: btoa(unescape(encodeURIComponent(JSON.stringify(athletes)))) };
-    if (_ghSha) body.sha = _ghSha;
-    const r = await fetch(GH_URL(), {
-      method: 'PUT',
-      headers: { Authorization: 'token ' + GH_CONFIG.token, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
-      body: JSON.stringify(body)
+    const r = await fetch(SYNC_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(athletes)
     });
-    if (!r.ok) { console.warn('GH write failed', r.status, await r.text()); return; }
+    if (!r.ok) { console.warn('Netlify sync failed', r.status); return; }
     const json = await r.json();
     _ghSha = json.content.sha;
   } catch(e) { console.warn('GH write error', e); }
