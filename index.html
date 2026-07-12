@@ -88,7 +88,7 @@ const html=htm.bind(h);
 
 
 // â”€â”€ CONSTANTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-const LOCAL_KEY='midtn_tryout_v2';
+const LOCAL_KEY='midtn_tryout_v3';
 
 // ── GITHUB SYNC CONFIG ──────────────────────────────────────────
 // Fill these in before tryouts. Get a PAT from:
@@ -98,10 +98,14 @@ const GH_CONFIG = {
   owner: 'sloansuperservices-AIP',
   repo:  'mid-tn-tryouts-2026',
   path:  'data/tryout-live.json',
-  token: '',           // ← PASTE YOUR TOKEN HERE
+  token: localStorage.getItem('midtn_gh_token') || '',  // loaded from localStorage
   poll:  60000,        // ms between polls (1 minute)
 };
 const GH_ENABLED = () => GH_CONFIG.token.length > 0;
+function saveGHToken(t) {
+  localStorage.setItem('midtn_gh_token', t);
+  GH_CONFIG.token = t;
+}
 const GH_URL = () => `https://api.github.com/repos/${GH_CONFIG.owner}/${GH_CONFIG.repo}/contents/${GH_CONFIG.path}`;
 
 // Internal: track the file's SHA so GitHub lets us update it
@@ -149,6 +153,7 @@ const STAFF_PIN='1111';
 const HC_PIN='0000';
 const CHECKIN_PIN='9999';
 const STATION2_PIN='2222';
+const ADMIN_PIN='1130';
 const STATIONS=[
   {key:'checkin',label:'Sign In',metrics:[]},
   {key:'s1',label:'Reach & Vertical',metrics:['Height (in)','Reach (in)','Vertical (in)']},
@@ -175,254 +180,253 @@ const HIDE_REASONS=['Athlete Declined','Coach Declined','Age/Division Issue','Ot
 
 // â”€â”€ ATHLETES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const RAW=[
-  {first:'Emorie',last:'McCorkle',dob:'01/31/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'slocke1115@hotmail.com'},
-  {first:'Peyton',last:'Lynch',dob:'12/31/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jimmylynch@mac.com'},
-  {first:'Kilby',last:'Wilson',dob:'10/31/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'alysoncwilson@gmail.com'},
-  {first:'Ellie',last:'Parker',dob:'09/04/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'parker22db@gmail.com'},
-  {first:'Madison',last:'Morrison',dob:'03/23/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'joshua.morrison1391@yahoo.com'},
-  {first:'Sophia',last:'Ison',dob:'10/22/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'boandsarah@mac.com'},
-  {first:'Brooke',last:'Ison',dob:'05/20/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'boandsarah@mac.com'},
-  {first:'Addison',last:'Menth',dob:'04/20/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'amenth1003@gmail.com'},
-  {first:'Layla',last:'Ayars',dob:'12/06/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'adrienneayars@gmail.com'},
-  {first:'Paisley',last:'Adams',dob:'09/10/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'ilovetojump@gmail.com'},
-  {first:'Avery',last:'Morgenson',dob:'07/03/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jmorgenson703@gmail.com'},
-  {first:'Jennifer',last:'MacDonald',dob:'01/14/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jennyvizueta@hotmail.com'},
-  {first:'Mattie',last:'Mason',dob:'01/30/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'salaav3@gmail.com'},
-  {first:'Madison',last:'Bayne',dob:'11/06/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'bayne5@yahoo.com'},
-  {first:'Julianna',last:'Daley',dob:'06/05/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'kldetelich@aol.com'},
-  {first:'Abby',last:'Willis',dob:'04/23/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jeremy.w.willis@gmail.com'},
-  {first:'Ruth Ann',last:'Jones',dob:'05/22/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'haj2299@gmail.com'},
-  {first:'Mila',last:'Haliburton',dob:'07/21/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'melodyhaliburton@yahoo.com'},
-  {first:'Annabelle',last:'Acosta',dob:'01/09/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'samantha_acosta1@yahoo.com'},
-  {first:'Whitley',last:'Latimer',dob:'01/09/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'hdplatimer@gmail.com'},
-  {first:'Elizabeth',last:'Elders',dob:'07/20/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'ty.elders@gmail.com'},
-  {first:'Laiklyn',last:'Ferguson',dob:'06/17/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'meagan.ferguson22@gmail.com'},
-  {first:'Bailey',last:'Fowler',dob:'07/31/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'fowleradria78@gmail.com'},
-  {first:'Kimber',last:'Potts',dob:'08/09/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'holley.potts@gmail.com'},
-  {first:'Bria',last:'Crabtree',dob:'07/01/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'madeleinecrabtree@gmail.com'},
-  {first:'Emma',last:'Shrader',dob:'06/29/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'lorijshrader@gmail.com'},
-  {first:'Lilly',last:'Gambill',dob:'09/03/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'mgambill80@gmail.com'},
-  {first:'Cadence',last:'McCarty',dob:'03/13/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'ianmccarty@hotmail.com'},
-  {first:'Taylee',last:'Osburne',dob:'07/24/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'bdstbo2224@aol.com'},
-  {first:'Violet',last:'Summers',dob:'04/26/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jensummers08@gmail.com'},
-  {first:'Nora',last:'Summers',dob:'04/22/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jensummers08@gmail.com'},
-  {first:'Kara',last:'Schweighardt',dob:'09/14/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'tms226@comcast.net'},
-  {first:'Cami',last:'Ford',dob:'07/08/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'courtney.ford@lssd.org'},
-  {first:'Ella',last:'LaChappelle',dob:'10/29/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'slachappelle@gmail.com'},
-  {first:'Ada Lynn',last:'Trotter',dob:'12/02/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'denton01@gmail.com'},
-  {first:'Harley',last:'Vongsavath',dob:'03/03/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'gizazn@yahoo.com'},
-  {first:'Sophia',last:'Smith',dob:'06/19/2009',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'99smith@comcast.net'},
-  {first:'Addison',last:'Martin',dob:'03/18/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'addym3181@icloud.com'},
-  {first:'Leah',last:'Williams',dob:'09/06/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'ericandsarahwilliams@gmail.com'},
-  {first:'Lucy',last:'Marshall',dob:'02/02/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'lucyandnathan@gmail.com'},
-  {first:'Mary',last:'Marshall',dob:'05/24/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'lucyandnathan@gmail.com'},
-  {first:'Megan',last:'Loyacano',dob:'09/17/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'marieloyacano@yahoo.com'},
-  {first:'Brielle',last:'Rees',dob:'06/11/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'katy_rees@yahoo.com'},
-  {first:'Mia',last:'Aguilar',dob:'11/18/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'janet.9412@yahoo.com'},
-  {first:'Abby',last:'Zimmerman',dob:'08/31/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'cookj69@hotmail.com'},
-  {first:'Julia',last:'Crabtree',dob:'09/10/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'cbenedetti19@gmail.com'},
-  {first:'Olivia',last:'Teter',dob:'06/06/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'j.tetermsw@gmail.com'},
-  {first:'Kaidyn',last:'Goins',dob:'02/09/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jvg2a@yahoo.com'},
-  {first:'Emilia',last:'Goh',dob:'04/16/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'idahojinnee@yahoo.com'},
-  {first:'Natalie',last:'Williams',dob:'08/11/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'williamsbeth553@gmail.com'},
-  {first:'Olivia',last:'Gonzales',dob:'09/26/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'hazchick@gmail.com'},
-  {first:'Krislyn',last:'Payton',dob:'09/02/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'sgpayton3@aol.com'},
-  {first:'Desarae',last:'Smith',dob:'02/11/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'smitty37129@gmail.com'},
-  {first:'Posey',last:'Harlow',dob:'02/14/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'sdharlow3@gmail.com'},
-  {first:'Kyleigh',last:'Haynes',dob:'09/02/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'cassie.bynum6925@gmail.com'},
-  {first:'Liberty',last:'Casebolt',dob:'08/08/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'summercasebolt@gmail.com'},
-  {first:'Eloise',last:'Pfahl',dob:'02/15/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'meg.pfahl@gmail.com'},
-  {first:'Joelie',last:'Howson',dob:'11/03/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'bahowson@yahoo.com'},
-  {first:'Nila',last:'Dunn',dob:'10/30/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jamie3dunn@gmail.com'},
-  {first:'Katelynn',last:'Miller',dob:'04/17/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'k.j.alexander1511@gmail.com'},
-  {first:'America-Marie',last:'Lopez',dob:'08/22/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'lopezfamilytn@gmail.com'},
-  {first:'Abby',last:'Marshall',dob:'09/12/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jennifermooremarshall@gmail.com'},
-  {first:'Ivy',last:'Deckert',dob:'08/29/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'derek.deckert@gmail.com'},
-  {first:'Taytum',last:'Walker',dob:'06/17/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'selinawalker35@gmail.com'},
-  {first:'Allisa',last:'Haggenmacher',dob:'12/02/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'ally256@comcast.net'},
-  {first:'Jillian',last:'Harrison',dob:'06/17/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'staystay79@gmail.com'},
-  {first:'Ericellie',last:'Dillman',dob:'03/21/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jodidillman@gmail.com'},
-  {first:'Lauren',last:'Taulbee',dob:'07/08/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'ddtaulbee914@gmail.com'},
-  {first:'Sadie',last:'Driver',dob:'07/15/2008',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'laura.driver77@gmail.com'},
-  {first:'Madelynn',last:'LaFave',dob:'09/05/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'andrealafave@gmail.com'},
-  {first:'Myla',last:'O’Kelley',dob:'10/08/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'mitzy66_2000@yahoo.com'},
-  {first:'Madeline',last:'Neese',dob:'09/24/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'bneese525@gmail.com'},
-  {first:'Elizabeth',last:'McDonald',dob:'10/28/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jessbusby@gmail.com'},
-  {first:'Jaslin',last:'Aquino',dob:'06/09/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'rachel.aquino2011@gmail.com'},
-  {first:'jesse',last:'Nakhla',dob:'09/24/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'erenmansour@icloud.com'},
-  {first:'Kaylen',last:'Hale',dob:'10/16/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'nickihale@yahoo.com'},
-  {first:'Sydney',last:'Farneth',dob:'05/30/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'shanafarneth@gmail.com'},
-  {first:'Kaylie',last:'Cravens',dob:'08/02/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'brandicravens@gmail.com'},
-  {first:'Kennedy',last:'Hale',dob:'09/06/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'nickihale@yahoo.com'},
-  {first:'Rylee',last:'Dillon',dob:'06/04/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'kkmel24@gmail.com'},
-  {first:'Nina',last:'Zambon Sartori',dob:'09/18/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'tzambon@yahoo.com'},
-  {first:'Ayla',last:'OBannon',dob:'09/12/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'christopherobannon36@gmail.com'},
-  {first:'Ella',last:'Akpan',dob:'03/04/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'djnr4@yahoo.com'},
-  {first:'Sydney',last:'Vogt',dob:'10/12/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'paulamvogt97@gmail.com'},
-  {first:'Addison',last:'Vogt',dob:'02/15/2009',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'paulamvogt97@gmail.com'},
-  {first:'Reya',last:'Walters',dob:'05/20/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'rebecca.s.walters@gmail.com'},
-  {first:'Abigail',last:'Carroll',dob:'11/18/2008',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'monwellac@gmail.com'},
-  {first:'Emma',last:'Lewis',dob:'03/28/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'1979klewis@gmail.com'},
-  {first:'Carly',last:'Harvey',dob:'11/15/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'julastro@hotmail.com'},
-  {first:'Jade',last:'Anguiano',dob:'03/26/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'adrianag8711@gmail.com'},
-  {first:'Theola',last:'McQuown',dob:'12/23/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'mcquownsabrina@gmail.com'},
-  {first:'Hanlie',last:'Mohammad',dob:'10/06/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'lesmi0571@gmail.com'},
-  {first:'Lupita',last:'Mata',dob:'06/21/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'addym30@icloud.com'},
-  {first:'Raven',last:'Rose',dob:'09/19/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'rachelmorbitzer@hotmail.com'},
-  {first:'Samantha',last:'Grant',dob:'08/02/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'seagrant25@gmail.com'},
-  {first:'Brenna',last:'Putnam',dob:'03/17/2009',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'kellyputnam13@gmail.com'},
-  {first:'Abigail',last:'Collins',dob:'09/01/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'tiffanycollins26@gmail.com'},
-  {first:'Ella',last:'MacLean',dob:'12/05/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'elisereeves@hotmail.com'},
-  {first:'Emma',last:'Walker',dob:'11/12/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'walkersincolorado@gmail.com'},
-  {first:'Georgia',last:'Quick',dob:'01/09/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'tricia.quick@gmail.com'},
-  {first:'Zoe',last:'Risner',dob:'04/19/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'drisnerii@gmail.com'},
-  {first:'Khloe',last:'Edgell',dob:'04/03/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'deanac01@gmail.com'},
-  {first:'Addisyn',last:'Hawkes',dob:'03/01/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'crystalhawkes1@gmail.com'},
-  {first:'MARIA',last:'LUJANO MENDOZA',dob:'01/12/2009',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jenny170177@gmail.com'},
-  {first:'Amanda',last:'Mas y rubi',dob:'09/11/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'hmasyrubi@gmail.com'},
-  {first:'Berklee',last:'Steward',dob:'10/25/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'asteward1684@gmail.com'},
-  {first:'Makayla',last:'Ardissono',dob:'08/28/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'slardissono@gmail.com'},
-  {first:'Bristol',last:'Ardissono',dob:'12/23/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'slardissono@gmail.com'},
-  {first:'Kayson',last:'Stewart',dob:'01/02/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'robbieadamsstewart@gmail.com'},
-  {first:'Harper',last:'Brown',dob:'11/30/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'alysonbrown5@gmail.com'},
-  {first:'Mallory',last:'Kerperien',dob:'07/09/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'amanda.strohacker@gmail.com'},
-  {first:'Sophia',last:'Yanulaytis-Sola',dob:'06/27/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'wanulayt@aol.com'},
-  {first:'Shelby',last:'Morgan',dob:'09/21/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'klm3503@yahoo.com'},
-  {first:'Claire',last:'Schrems',dob:'01/02/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'courtneyschrems@gmail.com'},
-  {first:'Kaylea',last:'Carver',dob:'03/15/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'lorikayecarver@comcast.net'},
-  {first:'Callie',last:'Culler',dob:'10/30/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'sherry.culler@yahoo.com'},
-  {first:'Gabriella',last:'Baron',dob:'05/25/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'alicia5052@aol.com'},
-  {first:'Hailey',last:'Sica',dob:'08/08/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'msica101@gmail.com'},
-  {first:'McKenzie',last:'Young',dob:'10/03/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'kimberlyrae.young@gmail.com'},
-  {first:'Lacey',last:'Dunn',dob:'02/25/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'t.dunn13ll@gmail.com'},
-  {first:'Norah',last:'Shelton',dob:'12/04/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'eshelton8422@att.net'},
-  {first:'Lilly',last:'Young',dob:'02/03/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'brittney369@gmail.com'},
-  {first:'Emmalee',last:'Bringhurst',dob:'07/15/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'robincluck@hotmail.com'},
-  {first:'Abigail',last:'Frantz',dob:'03/16/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jnfourakre@gmail.com'},
-  {first:'Lily',last:'Frantz',dob:'12/17/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'lynne.frantz@hotmail.com'},
-  {first:'Myla',last:'Walden',dob:'07/27/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'xtraxtrawalden@gmail.com'},
-  {first:'Hailey',last:'Cunningham',dob:'10/04/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'johna_cunningham@yahoo.com'},
-  {first:'Julianna',last:'Sengbouttarath',dob:'12/17/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'dragonlord615@yahoo.com'},
-  {first:'Adelyn',last:'Flores',dob:'01/05/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'kellyd86@hotmail.com'},
-  {first:'Addison',last:'Mcclain',dob:'11/04/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'rebekah.cobb@gmail.com'},
-  {first:'Monroe',last:'Hazelwood',dob:'06/08/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'mollyrocha87@gmail.com'},
-  {first:'Victoria',last:'Fuenmayor',dob:'08/18/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'claudibell@gmail.com'},
-  {first:'Emily',last:'Bauer',dob:'09/27/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'tina@walterhillutilities.com'},
-  {first:'Carlina',last:'Bauer',dob:'06/02/2009',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'tina@walterhillutilities.com'},
-  {first:'Norah',last:'Scruggs',dob:'07/23/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'amandascruggs78@gmail.com'},
-  {first:'Evie',last:'Diamond',dob:'09/06/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'alex.b.diamond@vumc.org'},
-  {first:'Ruthie',last:'Jerkins',dob:'12/13/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'threegirlcircus@gmail.com'},
-  {first:'Anistyn',last:'Craig',dob:'04/19/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'cdscraig@yahoo.com'},
-  {first:'Avalea',last:'Shane',dob:'06/24/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'deleahshane@gmail.com'},
-  {first:'Lynden',last:'Borendame',dob:'12/22/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'g.borendame@gmail.com'},
-  {first:'Ella',last:'Spencer',dob:'04/02/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'meg856@gmail.com'},
-  {first:'Avery',last:'Harlan',dob:'01/06/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'catrinaharlan@hotmail.com'},
-  {first:'Alyssa',last:'Killian',dob:'08/27/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'alyshia122900@gmail.com'},
-  {first:'Madison',last:'Lacas',dob:'02/25/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jlacas72@gmail.com'},
-  {first:'Ava',last:'Leslie',dob:'09/20/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'melaniewleslie@gmail.com'},
-  {first:'Molly Jo',last:'Tignor',dob:'02/16/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'katie.tignor@maplehillchurch.org'},
-  {first:'Ashlynn',last:'French',dob:'03/26/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'dfrench0218@gmail.com'},
-  {first:'Ava',last:'Barry',dob:'09/21/2008',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'saraheharris1978@yahoo.com'},
-  {first:'Alyssa',last:'Swaim',dob:'02/14/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'casieswaim@bellsouth.net'},
-  {first:'Ava',last:'Anderson',dob:'10/10/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'chad351c@yahoo.com'},
-  {first:'Southern',last:'Lemacks',dob:'10/26/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jacques2364@gmail.com'},
-  {first:'Addison',last:'James',dob:'07/12/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'reviewrn@comcast.net'},
-  {first:'Sydney',last:'Bloom',dob:'05/17/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jessicabloom78@gmail.com'},
-  {first:'Emersyn',last:'Drake',dob:'05/21/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jonathandrake12@yahoo.com'},
-  {first:'McKenzie',last:'Vincent',dob:'07/12/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jessica.cannon24@gmail.com'},
-  {first:'Emily Ann',last:'Harvieux',dob:'04/02/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'missy.mcbride@yahoo.com'},
-  {first:'Mackenzie',last:'Jones',dob:'10/04/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jonesdetail2@yahoo.com'},
-  {first:'Gianna',last:'Longbrake',dob:'12/30/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'thelongbrakes@gmail.com'},
-  {first:'Kenna',last:'Harris',dob:'05/05/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'harrisjm101@gmail.com'},
-  {first:'Riley',last:'Morgan',dob:'03/26/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'brittneystewart1@gmail.com'},
-  {first:'Abi Kate',last:'Garrett',dob:'01/27/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'tomgarrett81@hotmail.com'},
-  {first:'Emmelynn',last:'McCarty',dob:'01/01/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'katie.mccarty91@gmail.com'},
-  {first:'Emma-Rae',last:'Epps',dob:'08/16/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'erin.bengough@gmail.com'},
-  {first:'Caroline',last:'Elam',dob:'04/08/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'melam20@gmail.com'},
-  {first:'Vivian',last:'Burchyett',dob:'09/09/2016',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'saburch1@yahoo.com'},
-  {first:'Olivia',last:'Rigsby',dob:'06/19/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'rigsbyfour@gmail.com'},
-  {first:'Lillian',last:'Bolding',dob:'01/28/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'wallstvol@hotmail.com'},
-  {first:'KINSLEY',last:'Richard',dob:'09/16/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'1melissarichard@gmail.com'},
-  {first:'Darby',last:'Douglass',dob:'03/02/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'lesley4678@hotmail.com'},
-  {first:'Lily',last:'Stapp',dob:'07/05/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'robstapp1985@gmail.com'},
-  {first:'Lucy',last:'Martin',dob:'04/20/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'ufjules42@gmail.com'},
-  {first:'Chloe',last:'Roberson',dob:'12/23/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'ktbug123@yahoo.com'},
-  {first:'Sophie',last:'Straley',dob:'01/16/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'angiecarter425@gmail.com'},
-  {first:'Nailah',last:'Camara',dob:'01/07/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'kadyd64@gmail.com'},
-  {first:'Kylie',last:'Degenhardt',dob:'11/14/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'kdegenhardt12@gmail.com'},
-  {first:'Kahmille',last:'Ramsey',dob:'01/09/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jamalramsey1@outlook.com'},
-  {first:'Peyton',last:'Lynch',dob:'12/31/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'amandalynchrealty@gmail.com'},
-  {first:'Mya',last:'Dryden',dob:'03/13/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'melissa.m.dryden@gmail.com'},
-  {first:'Brelynn',last:'Wallace',dob:'07/21/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'caseywallacecpc@gmail.com'},
-  {first:'Avery',last:'Bilter',dob:'02/23/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'ebilter@gmail.com'},
-  {first:'Nola Kate',last:'Miller',dob:'02/16/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'millersabe@gmail.com'},
-  {first:'Kendall',last:'Wojciechowski',dob:'06/30/2009',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'middaughar22@gmail.com'},
-  {first:'Savannah',last:'Maccaron',dob:'09/07/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jaymacc20@yahoo.com'},
-  {first:'Lilly',last:'Regenold',dob:'07/05/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'cassararegenold@gmail.com'},
-  {first:'Avery',last:'Stone',dob:'04/28/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'laurastonemanager@gmail.com'},
-  {first:'Teagan',last:'Honeycutt',dob:'12/31/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'fallon.honeycutt@gmail.com'},
-  {first:'Savannah',last:'Fulton',dob:'05/31/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'mfulton1185@yahoo.com'},
-  {first:'Harley',last:'Berger',dob:'03/14/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'bergers@rcschools.net'},
-  {first:'Emery',last:'Vogel',dob:'05/22/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'amyvogel08@gmail.com'},
-  {first:'Kynlee',last:'Johnson',dob:'07/22/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'ajohnson0719@gmail.com'},
-  {first:'Mckinnley',last:'Riley',dob:'10/02/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'allyriley86@gmail.com'},
-  {first:'Daniela',last:'Rosales',dob:'06/28/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'addym30@icloud.com'},
-  {first:'Fennmore',last:'Waters',dob:'11/04/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'waterskaral99@gmail.com'},
-  {first:'Allison',last:'Ochoa',dob:'09/05/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'kimochoa76@gmail.com'},
-  {first:'Carrington',last:'Jackson',dob:'08/30/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'ncjackson@comcast.net'},
-  {first:'Ava',last:'Shadrake',dob:'05/25/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jessicashadrake@gmail.com'},
-  {first:'Chloe',last:'Hoppes',dob:'07/26/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'sarahjayne.street@yahoo.com'},
-  {first:'Kierstin',last:'DeBerry',dob:'08/13/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'sequoyagreer@yahoo.com'},
-  {first:'Vivian',last:'Taylor',dob:'10/30/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'kristenftaylor@gmail.com'},
-  {first:'Evelyn',last:'Brown',dob:'05/13/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'sdampierphillips@gmail.com'},
-  {first:'Sofia',last:'Carreno',dob:'07/31/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'neydiparra@gmail.com'},
-  {first:'Raquel',last:'Cardona',dob:'11/06/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'salika2012@icloud.com'},
-  {first:'Eliana',last:'Martínez',dob:'07/30/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'kleemartinez16@gmail.com'},
-  {first:'Macie',last:'Gray',dob:'10/28/2008',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'graymlynn@yahoo.com'},
-  {first:'Presley',last:'Glass',dob:'11/05/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'l_caroline@live.com'},
-  {first:'Albany',last:'Murphy',dob:'04/09/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'the1danielle89@gmail.com'},
-  {first:'Charleigh-Ann',last:'Hughes',dob:'03/12/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'hughes9123@gmail.com'},
-  {first:'Aria',last:'Gary',dob:'04/08/2015',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'daviserin4@gmail.com'},
-  {first:'Anna Clayton',last:'Kidd',dob:'06/08/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'malindakidd@yahoo.com'},
-  {first:'Kai',last:'Agyemang',dob:'07/08/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'jasminagyemang@gmail.com'},
-  {first:'Kendall',last:'Cook',dob:'03/18/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'brittany.cook@live.com'},
-  {first:'Aria',last:'Matthias',dob:'02/09/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'alisha1190@gmail.com'},
-  {first:'Rayann',last:'Hines',dob:'02/28/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'moriahal@yahoo.com'},
-  {first:'Isabelle',last:'Gomez',dob:'05/19/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'gomezfamily0282001@yahoo.com'},
-  {first:'Reese',last:'Voss',dob:'04/13/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'aprilnichole11@gmail.com'},
-  {first:'Wendy',last:'Vanhoose',dob:'12/11/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'speckham@gmail.com'},
-  {first:'Krimsyn',last:'Settles',dob:'10/20/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'brittkbs122010@gmail.com'},
-  {first:'Reason',last:'Brown',dob:'11/17/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'mistybrown2871@gmail.com'},
-  {first:'Ashley',last:'Phillips',dob:'06/29/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'tp4faith@gmail.com'},
-  {first:'Ayleigha',last:'Mann',dob:'12/23/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'rpowers1223@gmail.com'},
-  {first:'Gabriella',last:'Casias',dob:'09/27/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'rachelnoellecasias@gmail.com'},
-  {first:'Vanessa',last:'Jacques',dob:'07/07/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'michelle.jacques@comcast.net'},
-  {first:'Alyssa',last:'Hunt',dob:'08/14/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'lbowers10@att.net'},
-  {first:'Jordyn',last:'Hunt',dob:'08/14/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'lbowers10@att.net'},
-  {first:'Caroline',last:'Bowman',dob:'07/11/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'willbowman87@yahoo.com'},
-  {first:'Hayzlee',last:'Keele',dob:'11/26/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'laurakeele@yahoo.com'},
-  {first:'Kalleah',last:'Hall',dob:'06/07/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'brianhall51@gmail.com'},
-  {first:'Kaylee',last:'Lyford',dob:'07/31/2010',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'amberlyford@yahoo.com'},
-  {first:'Caroline',last:'Boyd',dob:'01/14/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'kboyd1982@gmail.com'},
-  {first:'Lily',last:'Crews',dob:'01/24/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'crewsfam2007@gmail.com'},
-  {first:'Joselyn',last:'DeLeon',dob:'08/21/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'joey8764@gmail.com'},
-  {first:'Abigail',last:'Cossin',dob:'09/23/2013',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'melissa.hutchings@hotmail.com'},
-  {first:'Ramsey',last:'Agee',dob:'12/28/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'sa1@secstores.com'},
-  {first:'Berkeley',last:'Cernak',dob:'01/30/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'allthenaks@gmail.com'},
-  {first:'Sofia',last:'Bottoms',dob:'03/31/2009',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'zavala@pcsstn.com'},
-  {first:'Nala',last:'Perry',dob:'10/23/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'adreena.perry@gmail.com'},
-  {first:'Zion',last:'Moore',dob:'09/06/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'tiffanypointer@ymail.com'},
-  {first:'Hensley',last:'Hampton',dob:'03/26/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'kcagee@gmail.com'},
-  {first:'Callie',last:'Ancalade',dob:'11/22/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'hroseburrough@gmail.com'},
-  {first:'Addison',last:'Philippi',dob:'04/12/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'juliephilippi1@yahoo.com'},
-  {first:'Layla',last:'Trzesniak',dob:'01/24/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'ajwojdy@hotmail.com'},
-  {first:'Charlotte',last:'Robinson',dob:'05/10/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'hendricks380@yahoo.com'},
-  {first:'Madilyn',last:'Nundahl',dob:'07/19/2011',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'snundahl486@gmail.com'},
-  {first:'Katharine',last:'Murin',dob:'09/27/2012',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'olevia194@gmail.com'},
-  {first:'Ellie Kate',last:'Knox',dob:'07/22/2009',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'knoxpartyof4@yahoo.com'},
-  {first:'Eleanor',last:'Cowan',dob:'02/25/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'cowan14@gmail.com'},
-  {first:'Leeone',last:'Haley',dob:'02/16/2014',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'lhaley820@hotmail.com'},
-  {first:'Joyce',last:'Liambu',dob:'05/29/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:'dievap75@gmail.com'},
+  {to:'',first:'Vivian',last:'Burchyett',dob:'09/09/2016',division:'12 & Under',primaryPos:'',altPos:'',phone:'615-584-9043',email:'saburch1@yahoo.com'},
+  {to:'',first:'Kylie',last:'Degenhardt',dob:'11/14/2014',division:'12 & Under',primaryPos:'',altPos:'',phone:'6155066524',email:'kdegenhardt12@gmail.com'},
+  {to:'',first:'Vivian',last:'Taylor',dob:'10/30/2014',division:'12 & Under',primaryPos:'',altPos:'',phone:'2059995426',email:'kristenftaylor@gmail.com'},
+  {to:'',first:'Aria',last:'Gary',dob:'04/08/2015',division:'12 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'478-283-8871',email:'daviserin4@gmail.com'},
+  {to:'',first:'Liberty',last:'Casebolt',dob:'08/08/2014',division:'12 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'6155196355',email:'summercasebolt@gmail.com'},
+  {to:'',first:'Mallory',last:'Kerperien',dob:'07/09/2014',division:'12 & Under',primaryPos:'Setter',altPos:'Outside Hitter',phone:'6159712340',email:'amanda.strohacker@gmail.com'},
+  {to:'53',first:'Abigail',last:'Cossin',dob:'09/23/2013',division:'13 & Under',primaryPos:'',altPos:'',phone:'6155741390',email:'melissa.hutchings@hotmail.com'},
+  {to:'35',first:'Addison',last:'Menth',dob:'04/20/2014',division:'13 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'6155566480',email:'amenth1003@gmail.com'},
+  {to:'52',first:'Alyssa',last:'Hunt',dob:'08/14/2013',division:'13 & Under',primaryPos:'',altPos:'',phone:'6158150371',email:'lbowers10@att.net'},
+  {to:'41',first:'America-Marie',last:'Lopez',dob:'08/22/2013',division:'13 & Under',primaryPos:'Middle Hitter',altPos:'Middle Hitter',phone:'615-500-1272',email:'lopezfamilytn@gmail.com'},
+  {to:'153',first:'Annabelle',last:'Acosta',dob:'01/09/2014',division:'13 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'4352380331',email:'samantha_acosta1@yahoo.com'},
+  {to:'51',first:'Avery',last:'Stone',dob:'04/28/2014',division:'13 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'6153396411',email:'laurastonemanager@gmail.com'},
+  {to:'156',first:'Ayla',last:'OBannon',dob:'09/12/2013',division:'13 & Under',primaryPos:'Middle Hitter',altPos:'',phone:'6152679021',email:'christopherobannon36@gmail.com'},
+  {to:'44',first:'Bristol',last:'Ardissono',dob:'12/23/2013',division:'13 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'615-359-8436',email:'slardissono@gmail.com'},
+  {to:'46',first:'Callie',last:'Culler',dob:'10/30/2013',division:'13 & Under',primaryPos:'',altPos:'Setter',phone:'6152997827',email:'sherry.culler@yahoo.com'},
+  {to:'159',first:'Chloe',last:'Hoppes',dob:'07/26/2013',division:'13 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'6155240275',email:'hoppesar100@wcschools.com'},
+  {to:'49',first:'Chloe',last:'Roberson',dob:'12/23/2013',division:'13 & Under',primaryPos:'',altPos:'',phone:'6156036546',email:'ktbug123@yahoo.com'},
+  {to:'45',first:'Claire',last:'Schrems',dob:'01/02/2014',division:'13 & Under',primaryPos:'Right Side Hitter',altPos:'Outside Hitter',phone:'269-365-5008',email:'courtneyschrems@gmail.com'},
+  {to:'154',first:'Ella',last:'LaChappelle',dob:'10/29/2013',division:'13 & Under',primaryPos:'Middle Hitter',altPos:'Defensive Specialist',phone:'810-869-3540',email:'slachappelle@gmail.com'},
+  {to:'151',first:'Ellie',last:'Parker',dob:'09/04/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'615-427-1587',email:'parker22db@gmail.com'},
+  {to:'40',first:'Eloise',last:'Pfahl',dob:'02/15/2014',division:'13 & Under',primaryPos:'Right Side Hitter',altPos:'Outside Hitter',phone:'7703449040',email:'meg.pfahl@gmail.com'},
+  {to:'47',first:'Emmalee',last:'Bringhurst',dob:'07/15/2013',division:'13 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'6158126284',email:'robincluck@hotmail.com'},
+  {to:'150',first:'Emorie',last:'McCorkle',dob:'01/31/2014',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'Middle Hitter',phone:'615-336-0505',email:'slocke1115@hotmail.com'},
+  {to:'42',first:'Ericellie',last:'Dillman',dob:'03/21/2014',division:'13 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'717-357-2597',email:'jodidillman@gmail.com'},
+  {to:'1',first:'Hayzlee',last:'Keele',dob:'11/26/2013',division:'13 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'9315802108',email:'laurakeele@yahoo.com'},
+  {to:'160',first:'Hensley',last:'Hampton',dob:'03/26/2014',division:'13 & Under',primaryPos:'Middle Hitter',altPos:'Right Side Hitter',phone:'2057890312',email:'kcagee@gmail.com'},
+  {to:'36',first:'Jennifer',last:'MacDonald',dob:'01/14/2014',division:'13 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'5086410435',email:'jennyvizueta@hotmail.com'},
+  {to:'6',first:'Jordyn',last:'Hunt',dob:'08/14/2013',division:'13 & Under',primaryPos:'',altPos:'',phone:'6158150371',email:'lbowers10@att.net'},
+  {to:'8',first:'Katelynn',last:'Miller',dob:'04/17/2014',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'Middle Hitter',phone:'6152385290',email:'k.j.alexander1511@gmail.com'},
+  {to:'7',first:'Kennedy',last:'Hale',dob:'09/06/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'Middle Hitter',phone:'419-575-1735',email:'nickihale@yahoo.com'},
+  {to:'39',first:'Kyleigh',last:'Haynes',dob:'09/02/2013',division:'13 & Under',primaryPos:'',altPos:'',phone:'615-545-1546',email:'cassie.bynum6925@gmail.com'},
+  {to:'54',first:'Layla',last:'Trzesniak',dob:'01/24/2014',division:'13 & Under',primaryPos:'Setter',altPos:'',phone:'4103005046',email:'ajwojdy@hotmail.com'},
+  {to:'155',first:'Leah',last:'Williams',dob:'09/06/2013',division:'13 & Under',primaryPos:'Setter',altPos:'',phone:'615-948-5740',email:'ericandsarahwilliams@gmail.com'},
+  {to:'224',first:'Madison',last:'Bayne',dob:'11/06/2013',division:'13 & Under',primaryPos:'Middle Hitter',altPos:'Defensive Specialist',phone:'615-604-5528',email:'bayne5@yahoo.com'},
+  {to:'252',first:'Mia',last:'Aguilar',dob:'11/18/2013',division:'13 & Under',primaryPos:'',altPos:'',phone:'6156936760',email:'janet.9412@yahoo.com'},
+  {to:'43',first:'Myla',last:'O\'Kelley',dob:'10/08/2013',division:'13 & Under',primaryPos:'',altPos:'',phone:'6156059739',email:'mitzy66_2000@yahoo.com'},
+  {to:'48',first:'Myla',last:'Walden',dob:'07/27/2013',division:'13 & Under',primaryPos:'Outside Hitter',altPos:'Setter',phone:'6156530664',email:'xtraxtrawalden@gmail.com'},
+  {to:'9',first:'Nora',last:'Summers',dob:'04/22/2014',division:'13 & Under',primaryPos:'Setter',altPos:'Outside Hitter',phone:'661-904-2066',email:'jensummers08@gmail.com'},
+  {to:'38',first:'Olivia',last:'Gonzales',dob:'09/26/2013',division:'13 & Under',primaryPos:'Right Side Hitter',altPos:'Middle Hitter',phone:'6614331989',email:'hazchick@gmail.com'},
+  {to:'158',first:'Raven',last:'Rose',dob:'09/19/2013',division:'13 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'615-605-4112',email:'rachelmorbitzer@hotmail.com'},
+  {to:'157',first:'Reya',last:'Walters',dob:'05/20/2014',division:'13 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'8636401585',email:'rebecca.s.walters@gmail.com'},
+  {to:'152',first:'Sophia',last:'Ison',dob:'10/22/2013',division:'13 & Under',primaryPos:'Right Side Hitter',altPos:'Setter',phone:'6159007764',email:'boandsarah@mac.com'},
+  {to:'50',first:'Sophie',last:'Straley',dob:'01/16/2014',division:'13 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'6159955885',email:'angiecarter425@gmail.com'},
+  {to:'37',first:'Whitley',last:'Latimer',dob:'01/09/2014',division:'13 & Under',primaryPos:'Middle Hitter',altPos:'Defensive Specialist',phone:'6158094688',email:'hdplatimer@gmail.com'},
+  {to:'20',first:'Jaslin',last:'Aquino',dob:'06/09/2013',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'6154827353',email:'rachel.aquino2011@gmail.com'},
+  {to:'228',first:'Layla',last:'Ayars',dob:'12/06/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Middle Hitter',phone:'602-621-0093',email:'adrienneayars@gmail.com'},
+  {to:'168',first:'Ella',last:'Akpan',dob:'03/04/2013',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Setter',phone:'6158184979',email:'djnr4@yahoo.com'},
+  {to:'88',first:'Avery',last:'Morgenson',dob:'07/03/2012',division:'14 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'6152680278',email:'jmorgenson703@gmail.com'},
+  {to:'85',first:'Cadence',last:'McCarty',dob:'03/13/2013',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'7164748331',email:'ianmccarty@hotmail.com'},
+  {to:'102',first:'Brielle',last:'Rees',dob:'06/11/2013',division:'14 & Under',primaryPos:'Right Side Hitter',altPos:'',phone:'435-272-6020',email:'katy_rees@yahoo.com'},
+  {to:'5',first:'Mackenzie',last:'Jones',dob:'10/04/2012',division:'14 & Under',primaryPos:'Setter',altPos:'Middle Hitter',phone:'615-500-2896',email:'jonesdetail2@yahoo.com'},
+  {to:'73',first:'Leeone',last:'Haley',dob:'02/16/2014',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'2707790450',email:'lhaley820@hotmail.com'},
+  {to:'229',first:'Ivy',last:'Deckert',dob:'08/29/2012',division:'14 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'2182513729',email:'derek.deckert@gmail.com'},
+  {to:'230',first:'Lilly',last:'Young',dob:'02/03/2013',division:'14 & Under',primaryPos:'',altPos:'',phone:'6158013659',email:'brittney369@gmail.com'},
+  {to:'174',first:'Kara',last:'Schweighardt',dob:'09/14/2012',division:'14 & Under',primaryPos:'Middle Hitter',altPos:'Right Side Hitter',phone:'615-712-3928',email:'tms226@comcast.net'},
+  {to:'173',first:'Jillian',last:'Harrison',dob:'06/17/2013',division:'14 & Under',primaryPos:'Right Side Hitter',altPos:'Outside Hitter',phone:'615-603-8562',email:'staystay79@gmail.com'},
+  {to:'172',first:'Madeline',last:'Neese',dob:'09/24/2012',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'9548185746',email:'bneese525@gmail.com'},
+  {to:'171',first:'Elizabeth',last:'McDonald',dob:'10/28/2012',division:'14 & Under',primaryPos:'',altPos:'Setter',phone:'6153649501',email:'jessbusby@gmail.com'},
+  {to:'170',first:'Sydney',last:'Farneth',dob:'05/30/2013',division:'14 & Under',primaryPos:'Setter',altPos:'Outside Hitter',phone:'3129611983',email:'shanafarneth@gmail.com'},
+  {to:'169',first:'Rylee',last:'Dillon',dob:'06/04/2013',division:'14 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'6159341658',email:'kkmel24@gmail.com'},
+  {to:'167',first:'Shelby',last:'Morgan',dob:'09/21/2012',division:'14 & Under',primaryPos:'Setter',altPos:'',phone:'615-804-3865',email:'klm3503@yahoo.com'},
+  {to:'164',first:'Kahmille',last:'Ramsey',dob:'01/09/2013',division:'14 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'6156036591',email:'jamalramsey1@outlook.com'},
+  {to:'163',first:'Emery',last:'Vogel',dob:'05/22/2013',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'',phone:'615-336-7328',email:'amyvogel08@gmail.com'},
+  {to:'162',first:'Evelyn',last:'Brown',dob:'05/13/2013',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Setter',phone:'615-927-5691',email:'sdampierphillips@gmail.com'},
+  {to:'161',first:'Albany',last:'Murphy',dob:'04/09/2013',division:'14 & Under',primaryPos:'Right Side Hitter',altPos:'Defensive Specialist',phone:'931-652-8618',email:'the1danielle89@gmail.com'},
+  {to:'122',first:'Kendall',last:'Cook',dob:'03/18/2013',division:'14 & Under',primaryPos:'',altPos:'',phone:'6154385158',email:'brittanycook21@gmail.com'},
+  {to:'123',first:'Krimsyn',last:'Settles',dob:'10/20/2012',division:'14 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'615-997-8257',email:'brittkbs122010@gmail.com'},
+  {to:'124',first:'Caroline',last:'Bowman',dob:'07/11/2013',division:'14 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'615-424-6414',email:'willbowman87@yahoo.com'},
+  {to:'125',first:'Nala',last:'Perry',dob:'10/23/2012',division:'14 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'6154035571',email:'adreena.perry@gmail.com'},
+  {to:'126',first:'Katharine',last:'Murin',dob:'09/27/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'615-715-9797',email:'olevia194@gmail.com'},
+  {to:'89',first:'Paisley',last:'Adams',dob:'09/10/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'6144021180',email:'ilovetojump@gmail.com'},
+  {to:'86',first:'Laiklyn',last:'Ferguson',dob:'06/17/2013',division:'14 & Under',primaryPos:'Right Side Hitter',altPos:'Outside Hitter',phone:'615-417-3112',email:'meagan.ferguson22@gmail.com'},
+  {to:'84',first:'Harley',last:'Vongsavath',dob:'03/03/2013',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'615-710-4447',email:'allen.vongsavath@gmail.com'},
+  {to:'101',first:'Nila',last:'Dunn',dob:'10/30/2012',division:'14 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'6155452260',email:'jamie3dunn@gmail.com'},
+  {to:'100',first:'Taytum',last:'Walker',dob:'06/17/2013',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'615-584-4143',email:'selinawalker35@gmail.com'},
+  {to:'95',first:'Madelynn',last:'LaFave',dob:'09/05/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'615-944-3999',email:'andrealafave@gmail.com'},
+  {to:'94',first:'Amanda',last:'Mas y rubi',dob:'09/11/2012',division:'14 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'615-573-4532',email:'hecnely@hotmail.com'},
+  {to:'93',first:'Berklee',last:'Steward',dob:'10/25/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'615-542-3810',email:'astrawn1684@gmail.com'},
+  {to:'92',first:'Kayson',last:'Stewart',dob:'01/02/2013',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'6158099168',email:'robbieadamsstewart@gmail.com'},
+  {to:'91',first:'Evie',last:'Diamond',dob:'09/06/2012',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'615-289-9129',email:'alex.b.diamond@vumc.org'},
+  {to:'90',first:'Ashlynn',last:'French',dob:'03/26/2013',division:'14 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'3156810993',email:'dfrench0218@gmail.com'},
+  {to:'63',first:'Southern',last:'Lemacks',dob:'10/26/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'6159640108',email:'marc.lemacks70@gmail.com'},
+  {to:'62',first:'Emersyn',last:'Drake',dob:'05/21/2013',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Middle Hitter',phone:'615-604-1477',email:'jonathandrake12@yahoo.com'},
+  {to:'61',first:'Emmelynn',last:'McCarty',dob:'01/01/2013',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'224-430-7284',email:'katie.mccarty91@gmail.com'},
+  {to:'60',first:'Emma-Rae',last:'Epps',dob:'08/16/2012',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'6155461308',email:'erin.bengough@gmail.com'},
+  {to:'99',first:'Caroline',last:'Elam',dob:'04/08/2013',division:'14 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'6157965611',email:'melam20@gmail.com'},
+  {to:'98',first:'Peyton',last:'Lynch',dob:'12/31/2012',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'6158876370',email:'amandalynchrealty@gmail.com'},
+  {to:'97',first:'Harley',last:'Berger',dob:'03/14/2013',division:'14 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'615-962-0905',email:'bergers8208@yahoo.com'},
+  {to:'71',first:'Mckinnley',last:'Riley',dob:'10/02/2012',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'9313954836',email:'allyriley86@gmail.com'},
+  {to:'70',first:'Daniela',last:'Rosales',dob:'06/28/2013',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'615-481-5899',email:'addym30@icloud.com'},
+  {to:'69',first:'Allison',last:'Ochoa',dob:'09/05/2012',division:'14 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'6159575102',email:'kimochoa76@gmail.com'},
+  {to:'68',first:'Ava',last:'Shadrake',dob:'05/25/2013',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'6154988530',email:'jessicashadrake@gmail.com'},
+  {to:'66',first:'Raquel',last:'Cardona',dob:'11/06/2012',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'615-668-0027',email:'salika2012@icloud.com'},
+  {to:'65',first:'Charleigh-Ann',last:'Hughes',dob:'03/12/2013',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'6292858858',email:'hughes123@gmail.com'},
+  {to:'64',first:'Charlotte',last:'Robinson',dob:'05/10/2013',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'Right Side Hitter',phone:'6154850831',email:'hendricks380@yahoo.com'},
+  {to:'72',first:'Joyce',last:'Liambu',dob:'05/29/2013',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'6155683475',email:'dieavp75@gmail.com'},
+  {to:'254',first:'Norah',last:'Shelton',dob:'12/04/2012',division:'14 & Under',primaryPos:'Middle Hitter',altPos:'Setter',phone:'6159736702',email:'eshelton8422@att.net'},
+  {to:'19',first:'Addisyn',last:'Hawkes',dob:'03/01/2013',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'6155170486',email:'crystalhawkes1@gmail.com'},
+  {to:'18',first:'Riley',last:'Morgan',dob:'03/26/2013',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'Defensive Specialist',phone:'6155941885',email:'brittneystewart1@gmail.com'},
+  {to:'17',first:'Eleanor',last:'Cowan',dob:'02/25/2013',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'6154488884',email:'cowan14@gmail.com'},
+  {to:'176',first:'Bailey',last:'Fowler',dob:'07/31/2012',division:'14 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'6153375060',email:'fowleradria78@gmail.com'},
+  {to:'175',first:'Bria',last:'Crabtree',dob:'07/01/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Middle Hitter',phone:'3609200626',email:'madeleinecrabtree@gmail.com'},
+  {to:'166',first:'Addison',last:'James',dob:'07/12/2012',division:'14 & Under',primaryPos:'Outside Hitter',altPos:'Setter',phone:'615-975-0378',email:'reviewrn@comcast.net'},
+  {to:'165',first:'Lily',last:'Stapp',dob:'07/05/2012',division:'14 & Under',primaryPos:'Middle Hitter',altPos:'Middle Hitter',phone:'6154988302',email:'robstapp1985@gmail.com'},
+  {to:'87',first:'Elizabeth',last:'Elders',dob:'07/20/2012',division:'14 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'9314785904',email:'ty.elders@gmail.com'},
+  {to:'96',first:'Lauren',last:'Taulbee',dob:'07/08/2012',division:'14 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'6155000444',email:'ddtaulbee914@gmail.com'},
+  {to:'67',first:'Kierstin',last:'DeBerry',dob:'08/13/2012',division:'14 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'731-394-3822',email:'sequoyagreer@yahoo.com'},
+  {to:'251',first:'Brelynn',last:'Wallace',dob:'07/21/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'6155008368',email:'caseywallacecpc@gmail.com'},
+  {to:'202',first:'Mila',last:'Haliburton',dob:'07/21/2011',division:'15 & Under',primaryPos:'Right Side Hitter',altPos:'Middle Hitter',phone:'615-554-0836',email:'melodyhaliburton@yahoo.com'},
+  {to:'180',first:'Kai',last:'Agyemang',dob:'07/08/2011',division:'15 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'615-584-8561',email:'jasminagyemang@gmail.com'},
+  {to:'57',first:'Savannah',last:'Maccaron',dob:'09/07/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'631-939-1194',email:'jaymacc20@yahoo.com'},
+  {to:'119',first:'Avalea',last:'Shane',dob:'06/24/2012',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'Setter',phone:'6154381366',email:'deleahshane@gmail.com'},
+  {to:'249',first:'Madison',last:'Morrison',dob:'03/23/2012',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'Outside Hitter',phone:'615-210-6654',email:'joshua.morrison1391@yahoo.com'},
+  {to:'216',first:'Olivia',last:'Rigsby',dob:'06/19/2012',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'6154190750',email:'rigsbyfour@gmail.com'},
+  {to:'105',first:'Lilly',last:'Gambill',dob:'09/03/2011',division:'15 & Under',primaryPos:'',altPos:'Defensive Specialist',phone:'615-848-4209',email:'mgambill80@gmail.com'},
+  {to:'115',first:'McKenzie',last:'Young',dob:'10/03/2012',division:'15 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'7706809476',email:'kimberlyrae.young@outlook.com'},
+  {to:'13',first:'Mya',last:'Dryden',dob:'03/13/2012',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'9012333339',email:'melissa.m.dryden@gmail.com'},
+  {to:'250',first:'Megan',last:'Loyacano',dob:'09/17/2011',division:'15 & Under',primaryPos:'Middle Hitter',altPos:'Right Side Hitter',phone:'6154815757',email:'marieloyacano@yahoo.com'},
+  {to:'227',first:'Ramsey',last:'Agee',dob:'12/28/2011',division:'15 & Under',primaryPos:'Middle Hitter',altPos:'Right Side Hitter',phone:'931-252-5399',email:'sa1@secstores.com'},
+  {to:'200',first:'Mattie',last:'Mason',dob:'01/30/2012',division:'15 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'615-971-9926',email:'salaav3@gmail.com'},
+  {to:'201',first:'Ruth Ann',last:'Jones',dob:'05/22/2012',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'9312476422',email:'haj2299@gmail.com'},
+  {to:'203',first:'Kimber',last:'Potts',dob:'08/09/2011',division:'15 & Under',primaryPos:'Right Side Hitter',altPos:'Middle Hitter',phone:'615-400-9833',email:'holley.potts@gmail.com'},
+  {to:'204',first:'Ada Lynn',last:'Trotter',dob:'12/02/2011',division:'15 & Under',primaryPos:'Middle Hitter',altPos:'',phone:'6155458142',email:'denton01@gmail.com'},
+  {to:'205',first:'Mary',last:'Marshall',dob:'05/24/2012',division:'15 & Under',primaryPos:'',altPos:'',phone:'941-328-2153',email:'lucyandnathan@gmail.com'},
+  {to:'206',first:'Emilia',last:'Goh',dob:'04/16/2012',division:'15 & Under',primaryPos:'Setter',altPos:'Outside Hitter',phone:'2405200784',email:'idahojinnee@yahoo.com'},
+  {to:'207',first:'Desarae',last:'Smith',dob:'02/11/2012',division:'15 & Under',primaryPos:'',altPos:'',phone:'6153594886',email:'smitty37130@gmail.com'},
+  {to:'208',first:'Posey',last:'Harlow',dob:'02/14/2012',division:'15 & Under',primaryPos:'Right Side Hitter',altPos:'Defensive Specialist',phone:'615-300-6921',email:'sdharlow3@gmail.com'},
+  {to:'209',first:'jesse',last:'Nakhla',dob:'09/24/2011',division:'15 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'6156935487',email:'erenmansour@icloud.com'},
+  {to:'210',first:'Kaylen',last:'Hale',dob:'10/16/2011',division:'15 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'419-575-1735',email:'nickihale@yahoo.com'},
+  {to:'211',first:'Khloe',last:'Edgell',dob:'04/03/2012',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'615-423-2824',email:'deanac01@gmail.com'},
+  {to:'212',first:'Adelyn',last:'Flores',dob:'01/05/2012',division:'15 & Under',primaryPos:'Right Side Hitter',altPos:'Middle Hitter',phone:'6156036790',email:'kellyd86@hotmail.com'},
+  {to:'213',first:'Monroe',last:'Hazelwood',dob:'06/08/2012',division:'15 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'6158104011',email:'mollyrocha87@gmail.com'},
+  {to:'214',first:'Norah',last:'Scruggs',dob:'07/23/2011',division:'15 & Under',primaryPos:'Right Side Hitter',altPos:'Outside Hitter',phone:'6154999633',email:'amandascruggs78@gmail.com'},
+  {to:'215',first:'Emily Ann',last:'Harvieux',dob:'04/02/2012',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'615-498-5581',email:'nashvegas22@hotmail.com'},
+  {to:'217',first:'KINSLEY',last:'Richard',dob:'09/16/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'6154816632',email:'1melissarichard@gmail.com'},
+  {to:'218',first:'Nola Kate',last:'Miller',dob:'02/16/2012',division:'15 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'5742651889',email:'scmamiller@gmail.com'},
+  {to:'181',first:'Kalleah',last:'Hall',dob:'06/07/2012',division:'15 & Under',primaryPos:'Setter',altPos:'Outside Hitter',phone:'6154792651',email:'nikkihall0709@gmail.com'},
+  {to:'103',first:'Kilby',last:'Wilson',dob:'10/31/2011',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'6159675569',email:'alysoncwilson@gmail.com'},
+  {to:'104',first:'Julianna',last:'Daley',dob:'06/05/2012',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Defensive Specialist',phone:'859-240-4843',email:'kldetelich@aol.com'},
+  {to:'106',first:'Violet',last:'Summers',dob:'04/26/2012',division:'15 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'661-904-2066',email:'jensummers08@gmail.com'},
+  {to:'107',first:'Kaidyn',last:'Goins',dob:'02/09/2012',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'615-969-6522',email:'tag92509@gmail.com'},
+  {to:'108',first:'Krislyn',last:'Payton',dob:'09/02/2011',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Defensive Specialist',phone:'615-648-3225',email:'sgpayton3@aol.com'},
+  {to:'109',first:'Joelie',last:'Howson',dob:'11/03/2011',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'440-334-8416',email:'bahowson@yahoo.com'},
+  {to:'110',first:'Allisa',last:'Haggenmacher',dob:'12/02/2011',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Middle Hitter',phone:'615-631-3535',email:'ally256@comcast.net'},
+  {to:'111',first:'Kaylie',last:'Cravens',dob:'08/02/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'6154063050',email:'brandicravens@gmail.com'},
+  {to:'112',first:'Nina',last:'Zambon Sartori',dob:'09/18/2011',division:'15 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'6292567333',email:'tzambon@yahoo.com'},
+  {to:'113',first:'Sophia',last:'Yanulaytis-Sola',dob:'06/27/2012',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Right Side Hitter',phone:'7143813284',email:'wanulayt@aol.com'},
+  {to:'114',first:'Hailey',last:'Sica',dob:'08/08/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'615-962-5003',email:'msica101@gmail.com'},
+  {to:'116',first:'Hailey',last:'Cunningham',dob:'10/04/2011',division:'15 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'3082581148',email:'johna_cunningham@yahoo.com'},
+  {to:'117',first:'Addison',last:'Mcclain',dob:'11/04/2011',division:'15 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'615-556-4370',email:'rebekah.cobb@gmail.com'},
+  {to:'118',first:'Anistyn',last:'Craig',dob:'04/19/2012',division:'15 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'931-267-6482',email:'cdscraig@yahoo.com'},
+  {to:'120',first:'Ella',last:'Spencer',dob:'04/02/2012',division:'15 & Under',primaryPos:'Setter',altPos:'Outside Hitter',phone:'615-636-7749',email:'meg856@gmail.com'},
+  {to:'121',first:'Gianna',last:'Longbrake',dob:'12/30/2011',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'6159755346',email:'alan.longbrake@gmail.com'},
+  {to:'56',first:'Darby',last:'Douglass',dob:'03/02/2012',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Defensive Specialist',phone:'8592302305',email:'lesley4678@gmail.com'},
+  {to:'55',first:'Lilly',last:'Regenold',dob:'07/05/2012',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'9312002743',email:'cassararegenold@gmail.com'},
+  {to:'34',first:'Carrington',last:'Jackson',dob:'08/30/2011',division:'15 & Under',primaryPos:'Middle Hitter',altPos:'Right Side Hitter',phone:'615-430-7369',email:'ncjackson@comcast.net'},
+  {to:'33',first:'Isabelle',last:'Gomez',dob:'05/19/2012',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'6157964660',email:'gomezfamily0282001@yahoo.com'},
+  {to:'32',first:'Lily',last:'Crews',dob:'01/24/2012',division:'15 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'615-497-3077',email:'rebeccacrews77@gmail.com'},
+  {to:'31',first:'Joselyn',last:'DeLeon',dob:'08/21/2011',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'8282804954',email:'christyd24@gmail.com'},
+  {to:'30',first:'Zion',last:'Moore',dob:'09/06/2011',division:'15 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'6152953135',email:'tiffanypointer@ymail.com'},
+  {to:'29',first:'Callie',last:'Ancalade',dob:'11/22/2011',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'9857189932',email:'hroseburrough@gmail.com'},
+  {to:'28',first:'Addison',last:'Philippi',dob:'04/12/2012',division:'15 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'615-495-3997',email:'juliephilippi1@yahoo.com'},
+  {to:'256',first:'Madison',last:'Lacas',dob:'02/25/2012',division:'15 & Under',primaryPos:'',altPos:'',phone:'615-556-1292',email:'jlacas72@gmail.com'},
+  {to:'11',first:'Olivia',last:'Teter',dob:'06/06/2012',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Defensive Specialist',phone:'6154275813',email:'j.tetermsw@gmail.com'},
+  {to:'12',first:'Lynden',last:'Borendame',dob:'12/22/2011',division:'15 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'6152953607',email:'g.borendame@gmail.com'},
+  {to:'239',first:'Julia',last:'Crabtree',dob:'09/10/2010',division:'16 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'615-636-3047',email:'cbenedetti19@gmail.com'},
+  {to:'240',first:'Natalie',last:'Williams',dob:'08/11/2011',division:'16 & Under',primaryPos:'Middle Hitter',altPos:'Right Side Hitter',phone:'6157678888',email:'williamsbeth553@gmail.com'},
+  {to:'241',first:'Georgia',last:'Quick',dob:'01/09/2011',division:'16 & Under',primaryPos:'Middle Hitter',altPos:'Middle Hitter',phone:'661-350-4183',email:'tricia.quick@gmail.com'},
+  {to:'242',first:'Ruthie',last:'Jerkins',dob:'12/13/2010',division:'16 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'6153967988',email:'threegirlcircus@gmail.com'},
+  {to:'243',first:'Kenna',last:'Harris',dob:'05/05/2011',division:'16 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'901 870-0643',email:'harrisjm101@gmail.com'},
+  {to:'244',first:'Anna Clayton',last:'Kidd',dob:'06/08/2011',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'6153082351',email:'malindakidd@yahoo.com'},
+  {to:'245',first:'Wendy',last:'Vanhoose',dob:'12/11/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'615-521-1135',email:'speckham@gmail.com'},
+  {to:'219',first:'Sydney',last:'Vogt',dob:'10/12/2010',division:'16 & Under',primaryPos:'Setter',altPos:'Setter',phone:'7089217883',email:'paulamvogt97@gmail.com'},
+  {to:'220',first:'Theola',last:'McQuown',dob:'12/23/2010',division:'16 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'570-494-8949',email:'mcquownsabrina@gmail.com'},
+  {to:'221',first:'Zoe',last:'Risner',dob:'04/19/2011',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'6154262967',email:'drisnerii@gmail.com'},
+  {to:'222',first:'Avery',last:'Harlan',dob:'01/06/2011',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'615-984-8467',email:'catrinaharlan@hotmail.com'},
+  {to:'223',first:'Ava',last:'Leslie',dob:'09/20/2010',division:'16 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'6154433594',email:'melaniewleslie@gmail.com'},
+  {to:'177',first:'Sydney',last:'Bloom',dob:'05/17/2011',division:'16 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'6155193776',email:'jessicabloom78@gmail.com'},
+  {to:'178',first:'Abi Kate',last:'Garrett',dob:'01/27/2011',division:'16 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'6155891440',email:'tomgarrett81@hotmail.com'},
+  {to:'179',first:'Lillian',last:'Bolding',dob:'01/28/2011',division:'16 & Under',primaryPos:'Middle Hitter',altPos:'Right Side Hitter',phone:'615-423-9797',email:'jjpattion10@aol.com'},
+  {to:'182',first:'Avery',last:'Bilter',dob:'02/23/2011',division:'16 & Under',primaryPos:'Right Side Hitter',altPos:'Outside Hitter',phone:'6308548682',email:'ebilter@gmail.com'},
+  {to:'183',first:'Teagan',last:'Honeycutt',dob:'12/31/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'7752876943',email:'fallon.honeycutt@gmail.com'},
+  {to:'184',first:'Fennmore',last:'Waters',dob:'11/04/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'5159714832',email:'waterskaral99@gmail.com'},
+  {to:'186',first:'Eliana',last:'Mart√≠nez',dob:'07/30/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'6154064552',email:'kleemartinez16@gmail.com'},
+  {to:'187',first:'Aria',last:'Matthias',dob:'02/09/2011',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'6155428895',email:'alisha1190@gmail.com'},
+  {to:'189',first:'Caroline',last:'Boyd',dob:'01/14/2011',division:'16 & Under',primaryPos:'Middle Hitter',altPos:'Right Side Hitter',phone:'9312245507',email:'kboyd1982@gmail.com'},
+  {to:'26',first:'Addison',last:'Martin',dob:'03/18/2011',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'6156531897',email:'sayora123@yahoo.com'},
+  {to:'25',first:'Jade',last:'Anguiano',dob:'03/26/2011',division:'16 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'6159754368',email:'adrianag8711@gmail.com'},
+  {to:'24',first:'Samantha',last:'Grant',dob:'08/02/2011',division:'16 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'614-746-6986',email:'seagrant25@gmail.com'},
+  {to:'27',first:'Emma',last:'Walker',dob:'11/12/2010',division:'16 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'720-204-0396',email:'walkersincolorado@gmail.com'},
+  {to:'74',first:'Julianna',last:'Sengbouttarath',dob:'12/17/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'615-617-9816',email:'dragonlord615@yahoo.com'},
+  {to:'75',first:'Emily',last:'Bauer',dob:'09/27/2010',division:'16 & Under',primaryPos:'Right Side Hitter',altPos:'Setter',phone:'615-504-7727',email:'tina@walterhillutilities.com'},
+  {to:'76',first:'Alyssa',last:'Swaim',dob:'02/14/2011',division:'16 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'6156928016',email:'casieswaim@bellsouth.net'},
+  {to:'77',first:'Ava',last:'Anderson',dob:'10/10/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'9315807551',email:'chad351c@yahoo.com'},
+  {to:'78',first:'Nailah',last:'Camara',dob:'01/07/2011',division:'16 & Under',primaryPos:'',altPos:'',phone:'6156056855',email:'kadyd64@gmail.com'},
+  {to:'79',first:'Savannah',last:'Fulton',dob:'05/31/2011',division:'16 & Under',primaryPos:'Defensive Specialist',altPos:'Defensive Specialist',phone:'256-347-7268',email:'mfulton1185@yahoo.com'},
+  {to:'80',first:'Presley',last:'Glass',dob:'11/05/2010',division:'16 & Under',primaryPos:'Defensive Specialist',altPos:'Defensive Specialist',phone:'4233426006',email:'l_caroline@live.com'},
+  {to:'81',first:'Gabriella',last:'Casias',dob:'09/27/2010',division:'16 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'7194802268',email:'rachelnoellecasias@gmail.com'},
+  {to:'10',first:'Rayann',last:'Hines',dob:'02/28/2011',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'6153351374',email:'moriahal@yahoo.com'},
+  {to:'185',first:'Sofia',last:'Carreno',dob:'07/31/2010',division:'16 & Under',primaryPos:'Defensive Specialist',altPos:'Right Side Hitter',phone:'4709099098',email:'neydiparra@gmail.com'},
+  {to:'188',first:'Kaylee',last:'Lyford',dob:'07/31/2010',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'2703070687',email:'amberlyford@yahoo.com'},
+  {to:'82',first:'Berkeley',last:'Cernak',dob:'01/30/2011',division:'16 & Under',primaryPos:'Outside Hitter',altPos:'Outside Hitter',phone:'6159482970',email:'allthenaks@gmail.com'},
+  {to:'83',first:'Madilyn',last:'Nundahl',dob:'07/19/2011',division:'16 & Under',primaryPos:'Right Side Hitter',altPos:'Outside Hitter',phone:'6154808266',email:'snundahl486@gmail.com'},
+  {to:'246',first:'Ella',last:'MacLean',dob:'12/05/2009',division:'17 & Under',primaryPos:'Middle Hitter',altPos:'Right Side Hitter',phone:'270-564-9774',email:'elisereeves@hotmail.com'},
+  {to:'247',first:'Ashley',last:'Phillips',dob:'06/29/2010',division:'17 & Under',primaryPos:'Right Side Hitter',altPos:'Middle Hitter',phone:'9517048811',email:'tp4faith@gmail.com'},
+  {to:'190',first:'Brooke',last:'Ison',dob:'05/20/2010',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'6159007764',email:'boandsarah@mac.com'},
+  {to:'191',first:'Abby',last:'Willis',dob:'04/23/2010',division:'17 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'615-500-9556',email:'bwillis1532@gmail.com'},
+  {to:'192',first:'Emma',last:'Shrader',dob:'06/29/2010',division:'17 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'901-634-7003',email:'lorijshrader@gmail.com'},
+  {to:'197',first:'Lupita',last:'Mata',dob:'06/21/2010',division:'17 & Under',primaryPos:'Right Side Hitter',altPos:'Setter',phone:'615-481-899',email:'addym30@icloud.com'},
+  {to:'130',first:'Gabriella',last:'Baron',dob:'05/25/2010',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'6156318695',email:'alicia5052@aol.com'},
+  {to:'225',first:'Makayla',last:'Ardissono',dob:'08/28/2010',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'Middle Hitter',phone:'615-359-8436',email:'slardissono@gmail.com'},
+  {to:'226',first:'McKenzie',last:'Vincent',dob:'07/12/2010',division:'17 & Under',primaryPos:'Right Side Hitter',altPos:'Setter',phone:'6155879170',email:'jessica.cannon24@gmail.com'},
+  {to:'248',first:'Ayleigha',last:'Mann',dob:'12/23/2009',division:'17 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'6158919205',email:'rpowers1223@gmail.com'},
+  {to:'193',first:'Abby',last:'Zimmerman',dob:'08/31/2009',division:'17 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'615-809-8165',email:'cookj69@hotmail.com'},
+  {to:'194',first:'Emma',last:'Lewis',dob:'03/28/2010',division:'17 & Under',primaryPos:'Middle Hitter',altPos:'Right Side Hitter',phone:'269-598-7855',email:'1979klewis@gmail.com'},
+  {to:'195',first:'Carly',last:'Harvey',dob:'11/15/2009',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'',phone:'615-337-7904',email:'julharvey034@gmail.com'},
+  {to:'196',first:'Hanlie',last:'Mohammad',dob:'10/06/2009',division:'17 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'6154918768',email:'lesmi0571@gmail.com'},
+  {to:'198',first:'Abigail',last:'Collins',dob:'09/01/2009',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'615-887-1864',email:'tiffanycollins26@gmail.com'},
+  {to:'199',first:'Harper',last:'Brown',dob:'11/30/2009',division:'17 & Under',primaryPos:'Middle Hitter',altPos:'Right Side Hitter',phone:'8654065586',email:'alysonbrown5@gmail.com'},
+  {to:'131',first:'Kaylea',last:'Carver',dob:'03/15/2010',division:'17 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'615-308-4577',email:'lorikayecarver@comcast.net'},
+  {to:'132',first:'Abigail',last:'Frantz',dob:'03/16/2010',division:'17 & Under',primaryPos:'Right Side Hitter',altPos:'Outside Hitter',phone:'6156313243',email:'jnfourakre@gmail.com'},
+  {to:'133',first:'Lily',last:'Frantz',dob:'12/17/2009',division:'17 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'6155661559',email:'lynne.frantz@hotmail.com'},
+  {to:'134',first:'Reason',last:'Brown',dob:'11/17/2009',division:'17 & Under',primaryPos:'Right Side Hitter',altPos:'Setter',phone:'615-542-7070',email:'mistybrown2871@gmail.com'},
+  {to:'21',first:'Taylee',last:'Osburne',dob:'07/24/2010',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'6153308900',email:'bdstbo2224@aol.com'},
+  {to:'22',first:'Cami',last:'Ford',dob:'07/08/2010',division:'17 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'6152184391',email:'courtney.ford@lssd.org'},
+  {to:'23',first:'Lucy',last:'Marshall',dob:'02/02/2010',division:'17 & Under',primaryPos:'',altPos:'',phone:'941-328-2153',email:'lucyandnathan@gmail.com'},
+  {to:'58',first:'Abby',last:'Marshall',dob:'09/12/2009',division:'17 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'6155948299',email:'jennifermooremarshall@gmail.com'},
+  {to:'59',first:'Lacey',last:'Dunn',dob:'02/25/2010',division:'17 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'6156537696',email:'t.dunn13ll@gmail.com'},
+  {to:'4',first:'Alyssa',last:'Killian',dob:'08/27/2009',division:'17 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'9312056704',email:'alyshia122900@gmail.com'},
+  {to:'2',first:'Molly Jo',last:'Tignor',dob:'02/16/2010',division:'17 & Under',primaryPos:'Middle Hitter',altPos:'Outside Hitter',phone:'615-491-3461',email:'katie.tignor@maplehillchurch.org'},
+  {to:'15',first:'Lucy',last:'Martin',dob:'04/20/2010',division:'17 & Under',primaryPos:'Defensive Specialist',altPos:'',phone:'352-875-1757',email:'ufjules42@gmail.com'},
+  {to:'3',first:'Kynlee',last:'Johnson',dob:'07/22/2010',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'615-988-7808',email:'ajohnson0719@gmail.com'},
+  {to:'14',first:'Vanessa',last:'Jacques',dob:'07/07/2009',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'7744888127',email:'michelle.jacques@comcast.net'},
+  {to:'135',first:'Ellie Kate',last:'Knox',dob:'07/22/2009',division:'17 & Under',primaryPos:'Setter',altPos:'Right Side Hitter',phone:'6158044912',email:'knoxpartyof4@yahoo.com'},
+  {to:'253',first:'Reese',last:'Voss',dob:'04/13/2010',division:'17 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'6155567804',email:'aprilnichole11@gmail.com'},
+  {to:'16',first:'Victoria',last:'Fuenmayor',dob:'08/18/2009',division:'17 & Under',primaryPos:'Defensive Specialist',altPos:'Defensive Specialist',phone:'6156254732',email:'claudibell@gmail.com'},
+  {to:'139',first:'Sophia',last:'Smith',dob:'06/19/2009',division:'18 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'6157850822',email:'99smith@comcast.net'},
+  {to:'136',first:'Kendall',last:'Wojciechowski',dob:'06/30/2009',division:'18 & Under',primaryPos:'Right Side Hitter',altPos:'Outside Hitter',phone:'6152945303',email:'middaughar22@gmail.com'},
+  {to:'234',first:'Ava',last:'Barry',dob:'09/21/2008',division:'18 & Under',primaryPos:'Defensive Specialist',altPos:'Outside Hitter',phone:'931-797-0025',email:'saraheharris1978@gmail.com'},
+  {to:'144',first:'Sadie',last:'Driver',dob:'07/15/2008',division:'18 & Under',primaryPos:'Right Side Hitter',altPos:'Setter',phone:'6157794270',email:'laura.driver77@gmail.com'},
+  {to:'143',first:'Addison',last:'Vogt',dob:'02/15/2009',division:'18 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'7089217883',email:'paulamvogt@yahoo.com'},
+  {to:'142',first:'Abigail',last:'Carroll',dob:'11/18/2008',division:'18 & Under',primaryPos:'Outside Hitter',altPos:'Defensive Specialist',phone:'6152996493',email:'monwellac@gmail.com'},
+  {to:'141',first:'Carlina',last:'Bauer',dob:'06/02/2009',division:'18 & Under',primaryPos:'Outside Hitter',altPos:'Right Side Hitter',phone:'615-504-7727',email:'tina@walterhillutilities.com'},
+  {to:'140',first:'Macie',last:'Gray',dob:'10/28/2008',division:'18 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'615-429-6458',email:'graymlynn@yahoo.com'},
+  {to:'138',first:'MARIA',last:'LUJANO MENDOZA',dob:'01/12/2009',division:'18 & Under',primaryPos:'Defensive Specialist',altPos:'Setter',phone:'6153325482',email:'jenny170177@gmail.com'},
+  {to:'146',first:'Sofia',last:'Bottoms',dob:'03/31/2009',division:'18 & Under',primaryPos:'Setter',altPos:'Defensive Specialist',phone:'931-265-1069',email:'zavala@pcsstn.com'},
+  {to:'145',first:'Brenna',last:'Putnam',dob:'03/17/2009',division:'18 & Under',primaryPos:'Defensive Specialist',altPos:'Defensive Specialist',phone:'615-653-3175',email:'kellyputnam13@gmail.com'},
 ];
 
 // â”€â”€ UTILS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -438,7 +442,15 @@ function posAbbr(p){
   return p.substring(0,3).toUpperCase();
 }
 function classifyPos(p){
-  if(!p) return 'unsorted'; const s=p.toLowerCase();
+  if(!p || p==='N/A') return 'unsorted';
+  const s=p.toLowerCase().trim();
+  // Direct full-name matches first
+  if(s==='setter') return 'setter';
+  if(s==='middle hitter' || s==='middle blocker') return 'middle';
+  if(s==='outside hitter') return 'outside';
+  if(s==='right side hitter' || s==='right side' || s==='opposite') return 'outside';
+  if(s==='defensive specialist' || s==='libero') return 'defense';
+  // Then abbreviation matching
   for(const c of POS_CATS) {
     if(c.abbrs.some(a => a.length <= 2 ? s === a : s.includes(a))) return c.key;
   }
@@ -498,7 +510,7 @@ function mkId(){return Math.random().toString(36).substr(2,6);}
 function initAthletes(raw){
   return raw.filter(a=>a.first).map(a=>({
     ...a,
-    id:a.id||`${a.first}-${mkId()}`,
+    id:a.id||(a.to?`to-${a.to}`:`${a.first}-${a.last}-${a.dob}`.toLowerCase().replace(/[^a-z0-9]/g,'-')),
     to:a.to||String(toN++),
     ageGroup:divAge(a.division),
     posCategory:classifyPos(a.primaryPos),
@@ -734,7 +746,7 @@ function WalkupRegister({ athletes, onAddWalkup }) {
           </button>
           
           <div style=${{ textAlign: 'center', fontSize: '12px' }}>
-            <a href=${faqUrl} target="_blank" style=${{ color: '#4fc3f7', textDecoration: 'none' }}>
+            <a href=${MIDTN_URL} target="_blank" style=${{ color: '#4fc3f7', textDecoration: 'none' }}>
               Need Help? Read Tryout FAQ / Instructions
             </a>
           </div>
@@ -758,8 +770,9 @@ function Login({onLogin}){
 
   const walkupUrl = getWalkupUrl();
   const faqUrl = getFaqUrl();
-  const walkupQr = `https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${encodeURIComponent(walkupUrl)}`;
-  const faqQr = `https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${encodeURIComponent(faqUrl)}`;
+  const MIDTN_URL = 'https://www.midtnvbc.com';
+  const walkupQr = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(MIDTN_URL)}`;
+  const faqQr = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(MIDTN_URL)}`;
 
   const printSigns = () => {
     const printWin = window.open('', '_blank');
@@ -830,6 +843,22 @@ function Login({onLogin}){
               <div>Station2: <span style=${{color:'#ffa726',fontFamily:'monospace',fontWeight:700}}>2222</span></div>
             </div>
           </div>
+
+          <!-- GitHub Sync Token -->
+          <div style=${{borderTop:'1px solid #2a2e38',paddingTop:14,marginTop:4}}>
+            <div style=${{fontSize:10,fontWeight:700,color:'#546e7a',textTransform:'uppercase',letterSpacing:1,marginBottom:6}}>GitHub Sync Token</div>
+            ${GH_ENABLED()
+              ? html`<div style=${{fontSize:11,color:'#66bb6a',display:'flex',alignItems:'center',gap:4}}><span style=${{width:6,height:6,borderRadius:'50%',background:'#66bb6a',display:'inline-block'}}></span>Sync active</div>`
+              : html`<div>
+                  <input id="gh-token-input" type="password" placeholder="Paste GitHub token to enable sync"
+                    style=${{width:'100%',padding:'6px 8px',background:'#12151c',border:'1px solid #2a2e38',borderRadius:6,color:'#e8eaed',fontSize:11,marginBottom:6,boxSizing:'border-box'}}/>
+                  <button onClick=${()=>{
+                    const t=document.getElementById('gh-token-input').value.trim();
+                    if(t){saveGHToken(t);window.location.reload();}
+                  }} style=${{width:'100%',padding:'5px',background:'#1a2a1a',border:'1px solid #26c6da',borderRadius:6,color:'#26c6da',fontSize:11,cursor:'pointer'}}>Enable Sync</button>
+                </div>`
+            }
+          </div>
         </div>
 
         <!-- QR Code Card -->
@@ -840,11 +869,11 @@ function Login({onLogin}){
             <div style=${{display:'flex',gap:12,flexDirection:'column'}}>
               
               <div style=${{display:'flex',alignItems:'center',gap:12,background:'#12151c',padding:10,borderRadius:8,border:'1px solid #2a2e38'}}>
-                <img src=${walkupQr} alt="Walk-up QR" style=${{border:'3px solid white',borderRadius:4,width:76,height:76,flexShrink:0}}/>
+                <img src=${walkupQr} alt="Mid TN VBC" style=${{border:'3px solid white',borderRadius:4,width:76,height:76,flexShrink:0}}/>
                 <div style=${{textAlign:'left'}}>
-                  <div style=${{fontSize:12,fontWeight:700,color:'#66bb6a'}}>Scan to Register</div>
-                  <div style=${{fontSize:10,color:'#78909c',marginTop:2,lineHeight:1.3}}>For walk-up players to register and check in on their own phones.</div>
-                  <a href=${walkupUrl} target="_blank" style=${{display:'inline-block',fontSize:10,color:'#4fc3f7',marginTop:4,textDecoration:'underline'}}>Open Form</a>
+                  <div style=${{fontSize:12,fontWeight:700,color:'#66bb6a'}}>midtnvbc.com</div>
+                  <div style=${{fontSize:10,color:'#78909c',marginTop:2,lineHeight:1.3}}>Scan to visit the Mid TN VBC website for info, schedules & registration.</div>
+                  <a href=${MIDTN_URL} target="_blank" style=${{display:'inline-block',fontSize:10,color:'#4fc3f7',marginTop:4,textDecoration:'underline'}}>Open Form</a>
                 </div>
               </div>
 
@@ -945,6 +974,9 @@ function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric,
   const [walkupForm, setWalkupForm] = useState({first:'', last:'', dob:'', division:'12 & Under', primaryPos:'Outside Hitter', altPos:'N/A', phone:'', email:''});
   const [recentCheckins, setRecentCheckins] = useState([]);
   const [confirmCheckInAth, setConfirmCheckInAth] = useState(null);
+  const [emailAth, setEmailAth] = useState(null);
+  const [emailTeam, setEmailTeam] = useState('');
+  const [hideAth, setHideAth] = useState(null);
 
   // Helper: update a single athlete by id
   const upd = (id, updates) => setAthletes(p => p.map(a => a.id === id ? {...a, ...updates} : a));
@@ -973,8 +1005,10 @@ function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric,
     const q = globalSearch.trim().toLowerCase();
     if (!q) return [];
     return athletes.filter(a => !a.hidden && (
-      a.first.toLowerCase().includes(q) || 
-      a.last.toLowerCase().includes(q) || 
+      a.first.toLowerCase().includes(q) ||
+      a.last.toLowerCase().includes(q) ||
+      (a.first+' '+a.last).toLowerCase().includes(q) ||
+      (a.first.trim()+' '+a.last.trim()).toLowerCase().includes(q) ||
       a.to.includes(q)
     ));
   }, [globalSearch, athletes]);
@@ -1064,8 +1098,7 @@ function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric,
       <div style=${{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(130px, 1fr))',gap:12,padding:'20px 20px 10px',maxWidth:800,margin:'0 auto'}}>
         ${[
           {key:'checkin',label:'Sign In',desc:'Arrived / Walkups',icon:'📝',c:'#26c6da'},
-          {key:'s1',label:'Reach & Vertical',desc:'Physical Measurements',icon:'📏',c:'#42a5f5'},
-          {key:'s2',label:'Agility',desc:'Stopwatch & Agility',icon:'⏱️',c:'#ffa726'}
+          {key:'s1',label:'Stations',desc:'Physical · Agility · Drills',icon:'📏',c:'#42a5f5'}
         ].map(tile => {
           const active = activeTab === tile.key;
           return html`
@@ -1178,7 +1211,7 @@ function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric,
                     const toN = String(200+athletes.filter(a=>a.isWalkup).length);
                     onAddWalkup({...walkupForm,id,to:toN,isWalkup:true,arrived:true,status:'arrived'});
                     setRecentCheckins(p=>[{...walkupForm,to:toN,isWalkup:true},...p].slice(0,6));
-                    setWalkupForm({first:'',last:'',dob:'',division:'12 & Under',primaryPos:'Outside Hitter',altPos:'N/A',phone:'',email:''});
+                    setWalkupForm({first:'',last:'',dob:'',division:'12 & Under',primaryPos:'',altPos:'',phone:'',email:''});
                     setShowWalkup(false);
                   }} disabled=${!(walkupForm.first.trim() && walkupForm.last.trim() && walkupForm.phone.trim().length >= 7 && walkupForm.email.trim().includes('@'))} style=${{width:'100%',padding:10}}>Register & Check In ✓<//>
                 </div>
@@ -1257,6 +1290,7 @@ function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric,
                   </div>
                   
                   <div style=${{display:'flex',gap:8}}>
+                    <${Btn} onClick=${()=>{if(confirm('Clear saved physical metrics for '+activeAthlete.first+'?')){onMetric(activeAthlete.id,'s1',['','','']);setActiveAthlete(null);setS1Vals(['','','']);}}} color="#ef5350" outline style=${{flex:1}}>✕ Clear<//>
                     <${Btn} onClick=${()=>setActiveAthlete(null)} color="#2a2e38" style=${{flex:1}}>Cancel<//>
                     <${Btn} onClick=${handleSaveS1} color="#66bb6a" style=${{flex:2}}>Save & Load Next ✓<//>
                   </div>
@@ -1283,7 +1317,7 @@ function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric,
             </div>
           `}
 
-          ${activeTab === 's2' && html`
+          ${(activeTab === 's2' || activeTab === 's1') && html`
             <div>
               <h2 style=${{fontSize:16,fontWeight:800,marginBottom:12,color:'#ffa726'}}>Agility Station</h2>
               
@@ -1311,6 +1345,7 @@ function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric,
                   </div>
                   
                   <div style=${{display:'flex',gap:8}}>
+                    <${Btn} onClick=${()=>{if(confirm('Clear agility time for '+activeAthlete.first+'?')){onMetric(activeAthlete.id,'s2',['']);setActiveAthlete(null);setS2Val('');}}} color="#ef5350" outline style=${{flex:1}}>✕ Clear<//>
                     <${Btn} onClick=${()=>setActiveAthlete(null)} color="#2a2e38" style=${{flex:1}}>Cancel<//>
                     <${Btn} onClick=${handleSaveS2} color="#66bb6a" style=${{flex:2}}>Save & Load Next ✓<//>
                   </div>
@@ -1337,7 +1372,7 @@ function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric,
             </div>
           `}
 
-          ${activeTab === 'drills' && html`
+          ${(activeTab === 'drills' || activeTab === 's1') && html`
             <div>
               <h2 style=${{fontSize:16,fontWeight:800,marginBottom:12,color:'#66bb6a'}}>Drills Station</h2>
               
@@ -1361,6 +1396,7 @@ function StaffDashboard({athletes, setAthletes, onArrive, onAddWalkup, onMetric,
                   </div>
                   
                   <div style=${{display:'flex',gap:8}}>
+                    <${Btn} onClick=${()=>{if(confirm('Clear drill score for '+activeAthlete.first+'?')){upd(activeAthlete.id,{drillScore:''});setActiveAthlete(null);setDrillVal('');}}} color="#ef5350" outline style=${{flex:1}}>✕ Clear<//>
                     <${Btn} onClick=${()=>setActiveAthlete(null)} color="#2a2e38" style=${{flex:1}}>Cancel<//>
                     <${Btn} onClick=${handleSaveDrill} color="#66bb6a" style=${{flex:2}}>Save & Load Next ✓<//>
                   </div>
@@ -1416,7 +1452,7 @@ function AthleteModal({athlete,onClose,onChange,onHide,onUnhide,onEmail}){
         ?html`<select class="select" value=${ev} onChange=${e=>setEv(e.target.value)} onBlur=${saveEdit} autoFocus>${opts.map(o=>html`<option>${o}</option>`)}</select>`
         :html`<input class="input" value=${ev} onInput=${e=>setEv(e.target.value)} onBlur=${saveEdit} onKeyDown=${e=>e.key==='Enter'&&saveEdit()} autoFocus style=${{fontSize:13,padding:'6px 8px'}}/>`)
       :html`<div onClick=${()=>startEdit(key,athlete[key])} style=${{fontSize:13,color:athlete[key]?'#e8eaed':'#444',cursor:locked?'default':'pointer',padding:'2px 0',borderBottom:'1px dashed #2a2e38',wordBreak:'break-all',minHeight:20}}>
-        ${athlete[key]||'â€”'}${!locked&&html`<span style=${{color:'#4fc3f7',marginLeft:4,fontSize:10}}>âœ</span>`}
+        ${athlete[key]||'"”'}${!locked&&html`<span style=${{color:'#4fc3f7',marginLeft:4,fontSize:10}}>✎</span>`}
       </div>`}
     </div>`;
   return html`
@@ -1436,7 +1472,7 @@ function AthleteModal({athlete,onClose,onChange,onHide,onUnhide,onEmail}){
               ${athlete.wontAccept&&html`<span title=${athlete.wontAccept}>âš ️</span>`}
             </div>
           </div>
-          <button onClick=${onClose} style=${{background:'none',border:'none',color:'#666',fontSize:24,cursor:'pointer'}}>Ã—</button>
+          <button onClick=${onClose} style=${{background:'none',border:'none',color:'#666',fontSize:24,cursor:'pointer'}}>×</button>
         </div>
         <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'12px 20px',marginBottom:16}}>
           ${F('First Name','first')}${F('Last Name','last')}
@@ -1474,7 +1510,7 @@ function AthleteModal({athlete,onClose,onChange,onHide,onUnhide,onEmail}){
           <div style=${{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:10}}>
             <div style=${{fontSize:13,fontWeight:700,color:'#4fc3f7'}}>Tryout Scores</div>
             <button onClick=${()=>setShowStopwatch(!showStopwatch)} class="btn btn-sm btn-outline" style=${{borderColor:'#ffa726',color:'#ffa726',padding:'2px 8px',fontSize:'11px'}}>
-              ${showStopwatch ? 'âœ• Close Timer' : '⏱️ Open Timer'}
+              ${showStopwatch ? '✕ Close Timer' : '⏱️ Open Timer'}
             </button>
           </div>
           ${showStopwatch && html`
@@ -1525,7 +1561,7 @@ function AthleteModal({athlete,onClose,onChange,onHide,onUnhide,onEmail}){
           `}
           ${!locked&&!athlete.hidden&&html`<${Btn} onClick=${()=>{onHide(athlete);onClose();}} danger outline>Hide<//>`}
           ${athlete.hidden&&html`<${Btn} onClick=${()=>{onUnhide(athlete.id);onClose();}} color="#66bb6a">Unhide<//>`}
-          ${locked&&html`<${Badge} c="#66bb6a">🔒 Accepted â€” Locked<//>`}
+          ${locked&&html`<${Badge} c="#66bb6a">🔒 Accepted "” Locked<//>`}
           <div style=${{flex:1}}/>
           <label style=${{fontSize:12,display:'flex',alignItems:'center',gap:6,cursor:'pointer',color:'#78909c'}}>
             <input type="checkbox" checked=${athlete.teamLocked} onChange=${e=>onChange(athlete.id,{teamLocked:e.target.checked})}/>
@@ -1548,12 +1584,12 @@ function getPerformanceReportBody(athlete) {
          `Age Group: ${athlete.ageGroup}s\n` +
          `Position: ${athlete.primaryPos}\n\n` +
          `--- PERFORMANCE METRICS ---\n` +
-         `- Height: ${s1Val[0] || 'â€”'} in\n` +
-         `- Reach: ${s1Val[1] || 'â€”'} in\n` +
-         `- Vertical: ${s1Val[2] || 'â€”'} in\n` +
-         `- Agility (Shuttle Run): ${s2Val[0] || 'â€”'} sec\n` +
-         `- Coach Drill Score: ${athlete.drillScore || 'â€”'} / 10\n\n` +
-         `Overall Tryout Score: ${sc || 'â€”'} / 10\n` +
+         `- Height: ${s1Val[0] || '"”'} in\n` +
+         `- Reach: ${s1Val[1] || '"”'} in\n` +
+         `- Vertical: ${s1Val[2] || '"”'} in\n` +
+         `- Agility (Shuttle Run): ${s2Val[0] || '"”'} sec\n` +
+         `- Coach Drill Score: ${athlete.drillScore || '"”'} / 10\n\n` +
+         `Overall Tryout Score: ${sc || '"”'} / 10\n` +
          `Roster Status: ${athlete.status.toUpperCase()}\n\n` +
          `If you have any questions or want to discuss your results, please feel free to reply to this email.\n\n` +
          `Thank you,\n` +
@@ -1564,7 +1600,7 @@ function EmailModal({athlete,team,onClose,onSend,initialType='offer'}){
   const [emailType, setEmailType] = useState(initialType);
   
   const offerTpl = useMemo(() => {
-    return `Hello,\n\nWe are pleased to offer ${athlete?.first||''} ${athlete?.last||''} a roster spot on Mid TN VBC${team?' â€” '+team:''} for the 2026-2027 season.\n\nDetails at www.midtnvbc.com/clubtryouts\n\nPlease reply:\n  1. Accept\n  2. Request a call\n  3. Decline\n\nThank you!\nMid TN VBC`;
+    return `Hello,\n\nWe are pleased to offer ${athlete?.first||''} ${athlete?.last||''} a roster spot on Mid TN VBC${team?' "” '+team:''} for the 2026-2027 season.\n\nDetails at www.midtnvbc.com/clubtryouts\n\nPlease reply:\n  1. Accept\n  2. Request a call\n  3. Decline\n\nThank you!\nMid TN VBC`;
   }, [athlete, team]);
 
   const reportTpl = useMemo(() => {
@@ -1594,8 +1630,8 @@ function EmailModal({athlete,team,onClose,onSend,initialType='offer'}){
     <div class="modal-overlay" onClick=${onClose}>
       <div class="modal-box" style=${{width:560}} onClick=${e=>e.stopPropagation()}>
         <div style=${{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:12}}>
-          <h3 style=${{margin:0,fontSize:16}}>Compose Email â€” ${athlete.first} ${athlete.last}</h3>
-          <button onClick=${onClose} style=${{background:'none',border:'none',color:'#666',fontSize:24,cursor:'pointer'}}>Ã—</button>
+          <h3 style=${{margin:0,fontSize:16}}>Compose Email "” ${athlete.first} ${athlete.last}</h3>
+          <button onClick=${onClose} style=${{background:'none',border:'none',color:'#666',fontSize:24,cursor:'pointer'}}>×</button>
         </div>
         
         <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12,marginBottom:12}}>
@@ -1682,6 +1718,8 @@ function HeadCoach({athletes,setAthletes,onLogout}){
   const [teamOfferKey,setTeamOfferKey]=useState(null);
   const [confirmCheckInAth,setConfirmCheckInAth]=useState(null);
   const [widePool,setWidePool]=useState(false);
+  const [adminUnlocked,setAdminUnlocked]=useState(false);
+  const [adminPinInput,setAdminPinInput]=useState('');
 
   // -- ADMIN & CONFIG STATE -
   const [emailConfig, setEmailConfig] = useState(() => {
@@ -1890,14 +1928,13 @@ function HeadCoach({athletes,setAthletes,onLogout}){
   const assigned=athletes.filter(a=>a.teamAssignment&&!a.hidden).length;
   const accepted=athletes.filter(a=>a.status==='accepted'&&!a.hidden).length;
   const walkups=athletes.filter(a=>a.isWalkup&&!a.hidden).length;
-  const VIEWS=['allreg','depth','results','teams','allteams','admin','hidden'];
+  const VIEWS=['allreg','depth','results','teams','allteams','hidden'];
   const VLABELS={
     allreg:'All Reg',
     depth:'Depth Chart',
     results:'Results',
     teams:'Team Builder',
     allteams:'All Teams',
-    admin: unansweredQ.length > 0 ? html`âš™️ Admin <span style=${{background:'#ffa726',color:'#000',padding:'1px 5px',borderRadius:10,fontSize:10,fontWeight:800,marginLeft:4}}>${unansweredQ.length}</span>` : 'âš™️ Admin',
     hidden:`Hidden (${hidden.length})`
   };
   const showAgeNav=['depth','results','teams'].includes(view);
@@ -1980,6 +2017,12 @@ function HeadCoach({athletes,setAthletes,onLogout}){
   return html`
     <div style=${{minHeight:'100vh',background:'#0d1017',paddingBottom:20}}>
       <div class="sticky-header no-print">
+        <div style=${{display:'flex',gap:8,padding:'6px 0',borderBottom:'1px solid #1e222b',marginBottom:6}}>
+          <span style=${{fontSize:11,color:'#546e7a',fontWeight:700,alignSelf:'center'}}>STATIONS:</span>
+          <a href="${window.location.origin+window.location.pathname+'?pin='+CHECKIN_PIN}" target="_blank" style=${{padding:'4px 10px',background:'#26c6da22',color:'#26c6da',fontSize:11,fontWeight:700,borderRadius:4,border:'1px solid #26c6da44',textDecoration:'none'}}>📝 Check-In</a>
+          <a href="${window.location.origin+window.location.pathname+'?pin='+STAFF_PIN}" target="_blank" style=${{padding:'4px 10px',background:'#42a5f522',color:'#42a5f5',fontSize:11,fontWeight:700,borderRadius:4,border:'1px solid #42a5f544',textDecoration:'none'}}>📏 Physical</a>
+          <a href="${window.location.origin+window.location.pathname+'?pin='+STATION2_PIN}" target="_blank" style=${{padding:'4px 10px',background:'#ffa72622',color:'#ffa726',fontSize:11,fontWeight:700,borderRadius:4,border:'1px solid #ffa72644',textDecoration:'none'}}>⏱ Agility</a>
+        </div>
         <div style=${{display:'flex',alignItems:'center',gap:10,flexWrap:'wrap',marginBottom:10}}>
           
           <span style=${{color:'#2a2e38'}}>|</span>
@@ -1996,6 +2039,16 @@ function HeadCoach({athletes,setAthletes,onLogout}){
         </div>
         <div style=${{display:'flex',gap:4,flexWrap:'wrap',alignItems:'center'}}>
           ${VIEWS.map(v=>html`<button key=${v} class=${'nav-tab'+(view===v?' active':'')} onClick=${()=>setView(v)}>${VLABELS[v]}</button>`)}
+          <a href="${window.location.href.replace('tryouts/','').replace(/[?#].*$/,'')+'tryouts/?pin=staff'}" target="_blank" style=${{padding:'6px 16px',background:'#f0a500',color:'#000',fontWeight:800,fontSize:13,borderRadius:6,border:'none',cursor:'pointer',textDecoration:'none',marginLeft:8,whiteSpace:'nowrap'}}>🏐 Tryout Stations</a>
+          <button onClick=${()=>{
+            if(adminUnlocked){setView('admin');}
+            else{
+              const p=prompt('Enter Admin PIN:');
+              if(p===ADMIN_PIN){setAdminUnlocked(true);setView('admin');}
+              else if(p!==null)alert('Incorrect PIN');
+            }
+          }} style=${{padding:'6px 12px',background:view==='admin'?'#f0a500':'#1a1e24',color:view==='admin'?'#000':'#78909c',fontWeight:700,fontSize:12,borderRadius:6,border:'1px solid #2a2e38',cursor:'pointer',marginLeft:4}}>⚙️ Admin<//>
+          
           <div style=${{flex:1}}/>
           ${showAgeNav&&html`
             <div style=${{display:'flex',gap:2,background:'#12151c',borderRadius:6,padding:2}}>
@@ -2055,12 +2108,12 @@ function HeadCoach({athletes,setAthletes,onLogout}){
                           onInput=${e=>upd(a.id,{drillScore:e.target.value})}
                           style=${{width:45,padding:'2px 4px',background:'#12151c',border:'1px solid #f0a50088',borderRadius:4,color:'#e8eaed',fontSize:12,textAlign:'center',fontWeight:700}}/>
                       </td>
-                      <td style=${{fontFamily:'monospace',fontWeight:700,color:totalScore(a.metrics, a.drillScore)?scoreColor(totalScore(a.metrics, a.drillScore)):'#444'}}>${totalScore(a.metrics, a.drillScore)||'â€”'}</td>
+                      <td style=${{fontFamily:'monospace',fontWeight:700,color:totalScore(a.metrics, a.drillScore)?scoreColor(totalScore(a.metrics, a.drillScore)):'#444'}}>${totalScore(a.metrics, a.drillScore)||'"”'}</td>
                       <td onClick=${()=>setSelAth(a)}><${SBadge} status=${a.status}/></td>
                       <td>${a.arrived?html`<${Badge} c="#26c6da" sm>✓<//>`
                         :html`<${Btn} sm onClick=${e=>{e.stopPropagation();doArrive(a);}} color="#26c6da" outline>Check In<//>`}</td>
                       <td onClick=${()=>setSelAth(a)}>${a.notes&&html`<span title=${'NOTES: ' + a.notes}>📝</span>`}${a.wontAccept&&html`<span title=${'RESTRICTIONS: ' + a.wontAccept} style=${{marginLeft:4}}>âš ️</span>`}</td>
-                      <td onClick=${()=>setSelAth(a)} style=${{fontSize:14,textAlign:'center'}}>âœ️</td>
+                      <td onClick=${()=>setSelAth(a)} style=${{fontSize:14,textAlign:'center'}}>✎</td>
                       <td onClick=${()=>setSelAth(a)} style=${{color:'#78909c',whiteSpace:'nowrap',fontSize:11}}>${a.phone}</td>
                       <td style=${{color:'#78909c',maxWidth:140,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:11}}>${a.email}</td>
                     </tr>`)}</tbody></table>
@@ -2122,13 +2175,13 @@ function HeadCoach({athletes,setAthletes,onLogout}){
                         <input type="number" value=${vs[idx]||''} onClick=${e=>e.stopPropagation()}
                           onInput=${e=>{const nv=[...(a.metrics?.[st.key]||st.metrics.map(()=>''))];nv[idx]=e.target.value;updMetric(a.id,st.key,nv);}}
                           style=${{width:50,padding:'2px 4px',background:'#12151c',border:'1px solid #2a2e38',borderRadius:4,color:'#e8eaed',fontSize:12,textAlign:'center'}}/></td>`; }))}
-                    ${STATIONS.filter(s=>!s.isCheckin).map(s=>{const av=sAvg(a.metrics,s.key);return html`<td key=${s.key+'a'} style=${{color:'#ffa726',fontWeight:700,fontFamily:'monospace'}}>${av!==null?av.toFixed(1):'â€”'}</td>`;})}
+                    ${STATIONS.filter(s=>!s.isCheckin).map(s=>{const av=sAvg(a.metrics,s.key);return html`<td key=${s.key+'a'} style=${{color:'#ffa726',fontWeight:700,fontFamily:'monospace'}}>${av!==null?av.toFixed(1):'"”'}</td>`;})}
                     <td style=${{color:'#f0a500',fontWeight:700,fontFamily:'monospace'}}>
                       <input type="number" min="0" max="10" step="0.5" value=${a.drillScore||''} onClick=${e=>e.stopPropagation()}
                         onInput=${e=>upd(a.id,{drillScore:e.target.value})}
                         style=${{width:50,padding:'2px 4px',background:'#12151c',border:'1px solid #f0a50088',borderRadius:4,color:'#e8eaed',fontSize:12,textAlign:'center',fontWeight:700}}/>
                     </td>
-                    <td style=${{fontWeight:800,fontFamily:'monospace',color:sc?scoreColor(sc):'#444'}}>${sc||'â€”'}</td>
+                    <td style=${{fontWeight:800,fontFamily:'monospace',color:sc?scoreColor(sc):'#444'}}>${sc||'"”'}</td>
                     <td><${SBadge} status=${a.status}/></td>
                   </tr>`;})}
                 </tbody></table>
@@ -2225,7 +2278,7 @@ function HeadCoach({athletes,setAthletes,onLogout}){
                           <div key=${a.id} style=${{position:'relative'}}>
                             <${PCard} athlete=${a} onClick=${setSelAth} compact showScore teamKey=${key}/>
                             ${!isLocked&&html`<button onClick=${()=>upd(a.id,{teamAssignment:null,teamLocked:false})}
-                              style=${{position:'absolute',right:4,top:'50%',transform:'translateY(-50%)',background:'#ef535033',border:'none',borderRadius:4,color:'#ef5350',cursor:'pointer',fontSize:10,padding:'2px 5px'}}>Ã—</button>`}
+                              style=${{position:'absolute',right:4,top:'50%',transform:'translateY(-50%)',background:'#ef535033',border:'none',borderRadius:4,color:'#ef5350',cursor:'pointer',fontSize:10,padding:'2px 5px'}}>×</button>`}
                           </div>`)}
                         ${declined.length>0&&html`
                           <div style=${{marginTop:6,borderTop:'1px solid rgba(255,255,255,.08)',paddingTop:6}}>
@@ -2273,6 +2326,59 @@ function HeadCoach({athletes,setAthletes,onLogout}){
                               </div>`)}</div></div>`;})}</div></div>`;})}</div>`}
 
         ${view==='admin'&&html`
+          <div style=${{marginBottom:20,padding:20,background:'#0d1017',border:'2px solid #f0a50055',borderRadius:12}}>
+            <h3 style=${{color:'#f0a500',fontSize:14,fontWeight:800,marginBottom:14,textTransform:'uppercase',letterSpacing:'0.5px'}}>📥 Import Registration CSV</h3>
+            <p style=${{color:'#78909c',fontSize:12,marginBottom:12}}>Upload a fresh SportsEngine registration export to add last-minute signups without clearing existing check-in data.</p>
+            <input type="file" accept=".csv" onChange=${e=>{
+              const file = e.target.files[0];
+              if(!file) return;
+              const reader = new FileReader();
+              reader.onload = evt => {
+                try {
+                  const lines = evt.target.result.split('\n');
+                  const headers = lines[0].split(',').map(h=>h.replace(/"/g,'').trim());
+                  const toIdx = headers.findIndex(h=>h.includes('TO'));
+                  const firstIdx = headers.findIndex(h=>h==='Name'||h.includes('first_name'));
+                  const lastIdx = headers.findIndex(h=>h==='Last Name'||h.includes('last_name'));
+                  const dobIdx = headers.findIndex(h=>h==='DOB'||h.includes('dob'));
+                  const divIdx = headers.findIndex(h=>h==='Division');
+                  const phoneIdx = headers.findIndex(h=>h==='Phone #'||h.includes('phone'));
+                  const emailIdx = headers.findIndex(h=>h.includes('email'));
+                  const posIdx = headers.findIndex(h=>h==='Primary Position');
+                  const altIdx = headers.findIndex(h=>h==='Secondary Position');
+                  let added=0, skipped=0;
+                  setAthletes(prev => {
+                    const existing = new Set(prev.map(a=>(a.first+a.last+a.dob).toLowerCase().replace(/\s/g,'')));
+                    const newAthletes = [...prev];
+                    lines.slice(1).forEach(line => {
+                      if(!line.trim()) return;
+                      const cols = line.split(',').map(c=>c.replace(/^"|"$/g,'').trim());
+                      const first = cols[firstIdx]||'';
+                      const last = cols[lastIdx]||'';
+                      const dob = cols[dobIdx]||'';
+                      if(!first||!last) return;
+                      const key = (first+last+dob).toLowerCase().replace(/\s/g,'');
+                      if(existing.has(key)){skipped++;return;}
+                      const toNum = toIdx>=0?cols[toIdx]:'';
+                      const div = divIdx>=0?cols[divIdx]:'';
+                      newAthletes.push(initAthletes([{
+                        to:toNum,first,last,dob,
+                        division:div||'12 & Under',
+                        primaryPos:cols[posIdx]||'',
+                        altPos:cols[altIdx]||'',
+                        phone:phoneIdx>=0?cols[phoneIdx]:'',
+                        email:emailIdx>=0?cols[emailIdx]:'',
+                      }])[0]);
+                      added++;
+                    });
+                    return newAthletes;
+                  });
+                  setTimeout(()=>alert('Import complete: '+added+' added, '+skipped+' already existed.'),100);
+                } catch(err){alert('CSV parse error: '+err.message);}
+              };
+              reader.readAsText(file);
+            }} style=${{fontSize:12,color:'#78909c',cursor:'pointer'}}/>
+          </div>
           <div style=${{display:'grid',gridTemplateColumns:'1fr 1fr',gap:24,alignItems:'start',marginTop:14}}>
             
             <!-- Column 1: Settings -->
@@ -2384,7 +2490,7 @@ function HeadCoach({athletes,setAthletes,onLogout}){
                     ${linkedFolders.map((f,idx)=>html`
                       <div key=${idx} style=${{display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:12,padding:'3px 0',borderBottom:'1px solid #1e222b'}}>
                         <span style=${{fontFamily:'monospace',wordBreak:'break-all'}}>${f}</span>
-                        <button onClick=${()=>saveLinkedFolders(linkedFolders.filter((_,i)=>i!==idx))} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:12}}>âœ•</button>
+                        <button onClick=${()=>saveLinkedFolders(linkedFolders.filter((_,i)=>i!==idx))} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:12}}>✕</button>
                       </div>
                     `)}
                     ${!linkedFolders.length && html`<div style=${{color:'#444',textAlign:'center',padding:10}}>No directories linked</div>`}
@@ -2422,7 +2528,7 @@ function HeadCoach({athletes,setAthletes,onLogout}){
                           <button onClick=${()=>{
                             const docs = kb.active_documents.filter((_,i)=>i!==idx);
                             saveKb({ ...kb, active_documents: docs });
-                          }} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:12}}>âœ•</button>
+                          }} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:12}}>✕</button>
                         </div>
                       `)}
                       ${(!kb?.active_documents || !kb?.active_documents?.length) && html`<div style=${{color:'#444',textAlign:'center',padding:10}}>No active training documents loaded</div>`}
@@ -2473,7 +2579,7 @@ function HeadCoach({athletes,setAthletes,onLogout}){
                                 const next = {...kb};
                                 next.faq = next.faq.filter((_,i)=>i!==idx);
                                 saveKb(next);
-                              }} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:11}}>âœ• Remove</button>
+                              }} style=${{background:'none',border:'none',color:'#ef5350',cursor:'pointer',fontSize:11}}>✕ Remove</button>
                             </div>
                             <input class="input" placeholder="Question" value=${item.question}
                               onInput=${e=>{
@@ -2646,8 +2752,8 @@ function TeamOfferModal({teamKey,athletes,onClose,onSendOffer}){
     <div class="modal-overlay" onClick=${onClose}>
       <div class="modal-box" style=${{width:500}} onClick=${e=>e.stopPropagation()}>
         <div style=${{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:16}}>
-          <h3 style=${{margin:0}}>${age} ${lvl} â€” Send Offers</h3>
-          <button onClick=${onClose} style=${{background:'none',border:'none',color:'#666',fontSize:24,cursor:'pointer'}}>Ã—</button>
+          <h3 style=${{margin:0}}>${age} ${lvl} — Send Offers</h3>
+          <button onClick=${onClose} style=${{background:'none',border:'none',color:'#666',fontSize:24,cursor:'pointer'}}>×</button>
         </div>
         <div style=${{maxHeight:400,overflowY:'auto',marginBottom:16}}>
           ${roster.map(a=>html`
