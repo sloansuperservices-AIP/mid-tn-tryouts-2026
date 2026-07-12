@@ -944,7 +944,7 @@ function SyncStatus() {
   if (!GH_ENABLED()) return html`<span style=${{fontSize:10,color:'#546e7a',fontFamily:'monospace',padding:'2px 6px',background:'#1a1e24',borderRadius:4}}>LOCAL ONLY</span>`;
   return html`<span style=${{fontSize:10,fontFamily:'monospace',padding:'2px 6px',background:'#1a1e24',borderRadius:4,color:'#66bb6a',display:'flex',alignItems:'center',gap:4}}>
     <span style=${{width:6,height:6,borderRadius:'50%',background:'#66bb6a',display:'inline-block'}}></span>
-    GITHUB SYNC
+    NETLIFY SYNC
   </span>`;
 }
 
@@ -2807,7 +2807,7 @@ function App(){
       }
     };
 
-    if (GH_ENABLED()) {
+    {
       poll(); // immediate first poll
       pollTimer = setInterval(poll, GH_CONFIG.poll);
     }
