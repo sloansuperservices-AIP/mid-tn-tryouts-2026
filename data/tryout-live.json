@@ -8222,5 +8222,35 @@
     "metrics": {},
     "updatedAt": 1783910289840,
     "teamPriority": 9
+  },
+  {
+    "first": "G'anni",
+    "last": "Milton",
+    "dob": "",
+    "division": "15 & Under",
+    "primaryPos": "Right Side Hitter",
+    "altPos": "",
+    "phone": "(615) 546-8372",
+    "email": "alsupmonique@yahoo.com",
+    "id": "wu-1783910796754",
+    "to": "203",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "15",
+    "posCategory": "outside",
+    "posCategories": [
+      "outside"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1783910796754
   }
 ]
