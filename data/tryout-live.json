@@ -1710,7 +1710,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "14-Black",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -1723,7 +1723,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 6,
+    "updatedAt": 1783912495654
   },
   {
     "to": "229",
