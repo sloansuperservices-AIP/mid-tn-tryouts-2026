@@ -8387,5 +8387,35 @@
     "metrics": {},
     "updatedAt": 1783912147500,
     "teamPriority": 8
+  },
+  {
+    "first": "Britta",
+    "last": "Lamb",
+    "dob": "",
+    "division": "14 & Under",
+    "primaryPos": "Setter",
+    "altPos": "",
+    "phone": "(615) 473-3098",
+    "email": "katiellamb5@gmail.com",
+    "id": "wu-1783912656031",
+    "to": "206",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "14",
+    "posCategory": "setter",
+    "posCategories": [
+      "setter"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1783912656031
   }
 ]
