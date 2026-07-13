@@ -8334,5 +8334,35 @@
     "metrics": {},
     "updatedAt": 1783911189018,
     "teamPriority": 2
+  },
+  {
+    "first": "Selah",
+    "last": "Cole",
+    "dob": "",
+    "division": "13 & Under",
+    "primaryPos": "Outside Hitter",
+    "altPos": "",
+    "phone": "(615) 423-0151",
+    "email": "alanamac@yahoo.com",
+    "id": "wu-1783912125103",
+    "to": "205",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "13",
+    "posCategory": "outside",
+    "posCategories": [
+      "outside"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1783912125103
   }
 ]
