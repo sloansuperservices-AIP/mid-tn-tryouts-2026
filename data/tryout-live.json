@@ -8428,5 +8428,35 @@
     "metrics": {},
     "updatedAt": 1783912701141,
     "teamPriority": 0
+  },
+  {
+    "first": "Delaney",
+    "last": "Edwards",
+    "dob": "",
+    "division": "18 & Under",
+    "primaryPos": "Outside Hitter",
+    "altPos": "",
+    "phone": "(615) 479-5738",
+    "email": "sarah28edwards@gmail.com",
+    "id": "wu-1783914156775",
+    "to": "207",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "18",
+    "posCategory": "outside",
+    "posCategories": [
+      "outside"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1783914156775
   }
 ]
