@@ -5378,7 +5378,7 @@
       "setter"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "15-Black",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -5391,7 +5391,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 3,
+    "updatedAt": 1783910551126
   },
   {
     "to": "239",
