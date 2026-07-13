@@ -3974,7 +3974,7 @@
       "middle"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "15-Blue",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -3987,7 +3987,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 7,
+    "updatedAt": 1783911491940
   },
   {
     "to": "204",
@@ -4615,8 +4617,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 7,
-    "updatedAt": 1783911387056
+    "teamPriority": 8,
+    "updatedAt": 1783911491940
   },
   {
     "to": "108",
