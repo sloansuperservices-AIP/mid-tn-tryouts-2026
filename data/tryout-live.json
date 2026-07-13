@@ -3770,7 +3770,7 @@
       "outside"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "15-Black",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -3783,7 +3783,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 0,
+    "updatedAt": 1783910567090
   },
   {
     "to": "13",
@@ -3817,8 +3819,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 2,
-    "updatedAt": 1783910534195
+    "teamPriority": 3,
+    "updatedAt": 1783910567090
   },
   {
     "to": "250",
@@ -4407,8 +4409,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 1,
-    "updatedAt": 1783910529040
+    "teamPriority": 2,
+    "updatedAt": 1783910567090
   },
   {
     "to": "218",
@@ -4442,8 +4444,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 0,
-    "updatedAt": 1783910368922
+    "teamPriority": 1,
+    "updatedAt": 1783910567090
   },
   {
     "to": "181",
@@ -5392,8 +5394,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 3,
-    "updatedAt": 1783910551126
+    "teamPriority": 4,
+    "updatedAt": 1783910567090
   },
   {
     "to": "239",
