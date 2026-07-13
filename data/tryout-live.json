@@ -8175,5 +8175,35 @@
       "s1": [],
       "s2": []
     }
+  },
+  {
+    "first": "Kathryn",
+    "last": "Wisniowski",
+    "dob": "",
+    "division": "17 & Under",
+    "primaryPos": "Defensive Specialist",
+    "altPos": "",
+    "phone": "(615) 410-6263",
+    "email": "angela.wisniowski@comcast.net",
+    "id": "wu-1783910267949",
+    "to": "202",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "17",
+    "posCategory": "defense",
+    "posCategories": [
+      "defense"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1783910267950
   }
 ]
