@@ -8257,5 +8257,35 @@
     "metrics": {},
     "updatedAt": 1783910828684,
     "teamPriority": 2
+  },
+  {
+    "first": "Paislee",
+    "last": "Cutter",
+    "dob": "",
+    "division": "15 & Under",
+    "primaryPos": "Defensive Specialist",
+    "altPos": "",
+    "phone": "(615) 904-4300",
+    "email": "s.bullock1@outlook.com",
+    "id": "wu-1783911147227",
+    "to": "204",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "15",
+    "posCategory": "defense",
+    "posCategories": [
+      "defense"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1783911147227
   }
 ]
