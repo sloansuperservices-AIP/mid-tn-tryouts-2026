@@ -801,7 +801,7 @@
       "setter"
     ],
     "status": "arrived",
-    "teamAssignment": null,
+    "teamAssignment": "13-Black",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -814,7 +814,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 3,
+    "updatedAt": 1783911811132
   },
   {
     "to": "160",
@@ -881,8 +883,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 3,
-    "updatedAt": 1783911806327
+    "teamPriority": 4,
+    "updatedAt": 1783911811132
   },
   {
     "to": "6",
