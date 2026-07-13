@@ -354,8 +354,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 5,
-    "updatedAt": 1783912203149
+    "teamPriority": 4,
+    "updatedAt": 1783912026593
   },
   {
     "to": "51",
@@ -1445,7 +1445,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": "13-Blue",
+    "teamAssignment": null,
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -1458,9 +1458,7 @@
     "metrics": {
       "s1": [],
       "s2": []
-    },
-    "teamPriority": 4,
-    "updatedAt": 1783912203149
+    }
   },
   {
     "to": "20",
