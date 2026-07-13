@@ -8195,7 +8195,7 @@
     "posCategories": [
       "defense"
     ],
-    "teamAssignment": null,
+    "teamAssignment": "17-Blue",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -8204,6 +8204,7 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1783910267950
+    "updatedAt": 1783910289840,
+    "teamPriority": 9
   }
 ]
