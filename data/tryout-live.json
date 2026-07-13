@@ -7046,7 +7046,7 @@
       "outside"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "17-Black",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -7059,7 +7059,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 2,
+    "updatedAt": 1783908724789
   },
   {
     "to": "196",
@@ -7356,8 +7358,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 2,
-    "updatedAt": 1783908710725
+    "teamPriority": 3,
+    "updatedAt": 1783908724789
   },
   {
     "to": "23",
