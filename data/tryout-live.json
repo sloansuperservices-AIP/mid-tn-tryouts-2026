@@ -4391,7 +4391,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "15-Black",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -4404,7 +4404,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 1,
+    "updatedAt": 1783910529040
   },
   {
     "to": "218",
@@ -4424,7 +4426,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "15-Black",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -4437,7 +4439,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 0,
+    "updatedAt": 1783910368922
   },
   {
     "to": "181",
