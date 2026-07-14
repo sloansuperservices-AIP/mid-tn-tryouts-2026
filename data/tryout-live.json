@@ -9096,5 +9096,35 @@
     "metrics": {},
     "updatedAt": 1784001955671,
     "teamPriority": 6
+  },
+  {
+    "first": "Jasmyn",
+    "last": "Bernard",
+    "dob": "",
+    "division": "18 & Under",
+    "primaryPos": "Middle Hitter",
+    "altPos": "",
+    "phone": "(954) 260-0257",
+    "email": "deanbernard@gmail.com",
+    "id": "wu-1784002022506",
+    "to": "223",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "18",
+    "posCategory": "middle",
+    "posCategories": [
+      "middle"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1784002022506
   }
 ]
