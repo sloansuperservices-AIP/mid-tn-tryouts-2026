@@ -8635,5 +8635,35 @@
     "metrics": {},
     "updatedAt": 1783992044584,
     "teamPriority": 10
+  },
+  {
+    "first": "McKenzie",
+    "last": "Greer",
+    "dob": "",
+    "division": "14 & Under",
+    "primaryPos": "Right Side Hitter",
+    "altPos": "",
+    "phone": "(615) 785-3020",
+    "email": "jamesongreer212@gmail.com",
+    "id": "wu-1783993096077",
+    "to": "212",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "14",
+    "posCategory": "outside",
+    "posCategories": [
+      "outside"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1783993096077
   }
 ]
