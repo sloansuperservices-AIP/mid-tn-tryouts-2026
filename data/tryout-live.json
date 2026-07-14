@@ -8766,5 +8766,35 @@
     "metrics": {},
     "updatedAt": 1783994394118,
     "teamPriority": 9
+  },
+  {
+    "first": "Zeriyah",
+    "last": "Sanders",
+    "dob": "",
+    "division": "14 & Under",
+    "primaryPos": "Defensive Specialist",
+    "altPos": "",
+    "phone": "(931) 539-2783",
+    "email": "shakeria_2010@yahoo.com",
+    "id": "wu-1783994707680",
+    "to": "215",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "14",
+    "posCategory": "defense",
+    "posCategories": [
+      "defense"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1783994707681
   }
 ]
