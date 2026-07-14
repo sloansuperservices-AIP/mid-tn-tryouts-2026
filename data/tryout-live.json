@@ -8937,5 +8937,35 @@
     "metrics": {},
     "updatedAt": 1784000372369,
     "teamPriority": 6
+  },
+  {
+    "first": "Layla",
+    "last": "Galloway",
+    "dob": "",
+    "division": "12 & Under",
+    "primaryPos": "Outside Hitter",
+    "altPos": "",
+    "phone": "(571) 242-8235",
+    "email": "tonyandheather.galloway@gmail.com",
+    "id": "wu-1784000455852",
+    "to": "218",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "12",
+    "posCategory": "outside",
+    "posCategories": [
+      "outside"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1784000455852
   }
 ]
