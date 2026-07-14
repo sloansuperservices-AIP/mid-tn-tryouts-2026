@@ -4158,7 +4158,7 @@
       "s2": []
     },
     "teamPriority": 4,
-    "updatedAt": 1783997842220
+    "updatedAt": 1783998089522
   },
   {
     "to": "204",
@@ -4393,8 +4393,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 6,
-    "updatedAt": 1783911387056
+    "teamPriority": 5,
+    "updatedAt": 1784000361552
   },
   {
     "to": "211",
@@ -4515,7 +4515,7 @@
       "outside"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "15-Blue",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -4528,7 +4528,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 8,
+    "updatedAt": 1784000361552
   },
   {
     "to": "215",
@@ -4836,8 +4838,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 7,
-    "updatedAt": 1783997510922
+    "teamPriority": 6,
+    "updatedAt": 1784000361552
   },
   {
     "to": "109",
@@ -8530,8 +8532,8 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1783997510922,
-    "teamPriority": 8
+    "updatedAt": 1784000361552,
+    "teamPriority": 7
   },
   {
     "first": "Selah",
