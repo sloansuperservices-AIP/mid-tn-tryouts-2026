@@ -1646,7 +1646,7 @@
       "outside"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "14-Silver",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -1659,7 +1659,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 10,
+    "updatedAt": 1783994106703
   },
   {
     "to": "102",
@@ -3005,8 +3007,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 10,
-    "updatedAt": 1783994012789
+    "teamPriority": 11,
+    "updatedAt": 1783994106703
   },
   {
     "to": "70",
