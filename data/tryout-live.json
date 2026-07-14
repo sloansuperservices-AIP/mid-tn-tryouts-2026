@@ -614,7 +614,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": "13-Silver",
+    "teamAssignment": "13-Blue",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -628,8 +628,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 0,
-    "updatedAt": 1783990467470
+    "teamPriority": 7,
+    "updatedAt": 1783991093069
   },
   {
     "to": "151",
