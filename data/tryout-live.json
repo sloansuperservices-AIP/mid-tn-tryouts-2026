@@ -4158,7 +4158,7 @@
       "s2": []
     },
     "teamPriority": 4,
-    "updatedAt": 1783997842220
+    "updatedAt": 1783998089522
   },
   {
     "to": "204",
@@ -7487,7 +7487,7 @@
       "s2": []
     },
     "teamPriority": 4,
-    "updatedAt": 1783908966080
+    "updatedAt": 1784001738609
   },
   {
     "to": "133",
@@ -8207,8 +8207,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 6,
-    "updatedAt": 1784001894029
+    "teamPriority": 7,
+    "updatedAt": 1784001955671
   },
   {
     "to": "141",
@@ -9085,7 +9085,7 @@
     "posCategories": [
       "defense"
     ],
-    "teamAssignment": null,
+    "teamAssignment": "18-Black",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -9094,6 +9094,7 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784001929682
+    "updatedAt": 1784001955671,
+    "teamPriority": 6
   }
 ]
