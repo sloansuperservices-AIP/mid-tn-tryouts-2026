@@ -2979,7 +2979,7 @@
       "setter"
     ],
     "status": "pending",
-    "teamAssignment": "14-Blue",
+    "teamAssignment": "14-Silver",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -2993,8 +2993,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 7,
-    "updatedAt": 1783993377577
+    "teamPriority": 6,
+    "updatedAt": 1783993380130
   },
   {
     "to": "70",
