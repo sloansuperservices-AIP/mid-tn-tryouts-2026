@@ -6883,8 +6883,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 8,
-    "updatedAt": 1783989676168
+    "teamPriority": 9,
+    "updatedAt": 1783989740454
   },
   {
     "to": "197",
@@ -7560,7 +7560,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "17-Silver",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -7573,7 +7573,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 8,
+    "updatedAt": 1783989740454
   },
   {
     "to": "4",
