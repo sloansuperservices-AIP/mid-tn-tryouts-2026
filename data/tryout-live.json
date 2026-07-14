@@ -2715,7 +2715,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "14-Yellow",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -2728,7 +2728,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 0,
+    "updatedAt": 1783993597753
   },
   {
     "to": "63",
@@ -2896,8 +2898,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 0,
-    "updatedAt": 1783993589855
+    "teamPriority": 1,
+    "updatedAt": 1783993597753
   },
   {
     "to": "98",
