@@ -3733,7 +3733,7 @@
       "outside"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "15-Black",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -3746,7 +3746,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 4,
+    "updatedAt": 1783997563063
   },
   {
     "to": "57",
@@ -3813,8 +3815,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 4,
-    "updatedAt": 1783910828684
+    "teamPriority": 5,
+    "updatedAt": 1783997563063
   },
   {
     "to": "249",
@@ -3980,8 +3982,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 5,
-    "updatedAt": 1783910828684
+    "teamPriority": 6,
+    "updatedAt": 1783997563063
   },
   {
     "to": "250",
@@ -4147,8 +4149,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 5,
-    "updatedAt": 1783997509144
+    "teamPriority": 6,
+    "updatedAt": 1783997510922
   },
   {
     "to": "204",
@@ -4782,8 +4784,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 8,
-    "updatedAt": 1783911491940
+    "teamPriority": 5,
+    "updatedAt": 1783997510922
   },
   {
     "to": "108",
@@ -4816,8 +4818,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 6,
-    "updatedAt": 1783997509144
+    "teamPriority": 7,
+    "updatedAt": 1783997510922
   },
   {
     "to": "109",
@@ -5284,8 +5286,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 7,
-    "updatedAt": 1783910891015
+    "teamPriority": 8,
+    "updatedAt": 1783997563063
   },
   {
     "to": "33",
@@ -5581,8 +5583,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 6,
-    "updatedAt": 1783910828684
+    "teamPriority": 7,
+    "updatedAt": 1783997563063
   },
   {
     "to": "239",
@@ -8492,8 +8494,8 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1783997509144,
-    "teamPriority": 7
+    "updatedAt": 1783997510922,
+    "teamPriority": 8
   },
   {
     "first": "Selah",
