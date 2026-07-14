@@ -2326,9 +2326,9 @@
       "middle",
       "outside"
     ],
-    "status": "pending",
+    "status": "accepted",
     "teamAssignment": "14-Black",
-    "teamLocked": false,
+    "teamLocked": true,
     "coachPos": "",
     "hidden": false,
     "hideReason": "",
@@ -2342,7 +2342,7 @@
       "s2": []
     },
     "teamPriority": 4,
-    "updatedAt": 1783999693162
+    "updatedAt": 1783999705093
   },
   {
     "to": "126",
