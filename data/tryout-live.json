@@ -9030,5 +9030,35 @@
     "metrics": {},
     "updatedAt": 1784001738609,
     "teamPriority": 6
+  },
+  {
+    "first": "Kendall",
+    "last": "Wojciechowski",
+    "dob": "",
+    "division": "17 & Under",
+    "primaryPos": "Middle Hitter",
+    "altPos": "",
+    "phone": "(615) 294-5303",
+    "email": "middaughar22@gmail.com",
+    "id": "wu-1784001835851",
+    "to": "221",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "17",
+    "posCategory": "middle",
+    "posCategories": [
+      "middle"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1784001835852
   }
 ]
