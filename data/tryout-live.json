@@ -4158,7 +4158,7 @@
       "s2": []
     },
     "teamPriority": 4,
-    "updatedAt": 1783997842220
+    "updatedAt": 1783998089522
   },
   {
     "to": "204",
@@ -7085,9 +7085,9 @@
       "outside",
       "defense"
     ],
-    "status": "pending",
+    "status": "accepted",
     "teamAssignment": "17-Black",
-    "teamLocked": false,
+    "teamLocked": true,
     "coachPos": "",
     "hidden": false,
     "hideReason": "",
@@ -7101,7 +7101,7 @@
       "s2": []
     },
     "teamPriority": 3,
-    "updatedAt": 1784001738609
+    "updatedAt": 1784002641798
   },
   {
     "to": "225",
@@ -7487,7 +7487,7 @@
       "s2": []
     },
     "teamPriority": 4,
-    "updatedAt": 1783908966080
+    "updatedAt": 1784001738609
   },
   {
     "to": "133",
