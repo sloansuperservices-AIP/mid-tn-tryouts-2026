@@ -9116,7 +9116,7 @@
     "posCategories": [
       "middle"
     ],
-    "teamAssignment": null,
+    "teamAssignment": "18-Black",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -9125,6 +9125,7 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784002022506
+    "updatedAt": 1784002033303,
+    "teamPriority": 8
   }
 ]
