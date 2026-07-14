@@ -4158,7 +4158,7 @@
       "s2": []
     },
     "teamPriority": 4,
-    "updatedAt": 1783998089522
+    "updatedAt": 1783997842220
   },
   {
     "to": "204",
@@ -7487,7 +7487,7 @@
       "s2": []
     },
     "teamPriority": 4,
-    "updatedAt": 1784001738609
+    "updatedAt": 1783908966080
   },
   {
     "to": "133",
@@ -8211,8 +8211,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 9,
-    "updatedAt": 1784002180885
+    "teamPriority": 7,
+    "updatedAt": 1784001955671
   },
   {
     "to": "141",
@@ -9100,8 +9100,8 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784002180885,
-    "teamPriority": 8
+    "updatedAt": 1784001955671,
+    "teamPriority": 6
   },
   {
     "first": "Jasmyn",
@@ -9131,8 +9131,8 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784002180885,
-    "teamPriority": 6
+    "updatedAt": 1784002033303,
+    "teamPriority": 8
   },
   {
     "first": "Brooke",
@@ -9164,36 +9164,5 @@
     "metrics": {},
     "updatedAt": 1784002103847,
     "teamPriority": 3
-  },
-  {
-    "first": "Jillian",
-    "last": "Unland",
-    "dob": "",
-    "division": "18 & Under",
-    "primaryPos": "Middle Hitter",
-    "altPos": "",
-    "phone": "(615) 308-3521",
-    "email": "unlandsportsies@gmail.com",
-    "id": "wu-1784002162730",
-    "to": "225",
-    "isWalkup": true,
-    "arrived": true,
-    "status": "arrived",
-    "ageGroup": "18",
-    "posCategory": "middle",
-    "posCategories": [
-      "middle"
-    ],
-    "teamAssignment": "18-Black",
-    "teamLocked": false,
-    "coachPos": "",
-    "hidden": false,
-    "hideReason": "",
-    "notes": "",
-    "wontAccept": "",
-    "drillScore": "",
-    "metrics": {},
-    "updatedAt": 1784002180885,
-    "teamPriority": 7
   }
 ]
