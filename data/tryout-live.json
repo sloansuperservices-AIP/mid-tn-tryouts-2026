@@ -2796,7 +2796,7 @@
       "outside"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "14-Blue",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -2809,7 +2809,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 5,
+    "updatedAt": 1783993161518
   },
   {
     "to": "60",
