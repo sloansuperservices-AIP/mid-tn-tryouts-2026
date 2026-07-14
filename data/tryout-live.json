@@ -8735,5 +8735,35 @@
     "metrics": {},
     "updatedAt": 1783994251282,
     "teamPriority": 2
+  },
+  {
+    "first": "Ava",
+    "last": "Jimenez",
+    "dob": "",
+    "division": "13 & Under",
+    "primaryPos": "Defensive Specialist",
+    "altPos": "",
+    "phone": "(661) 637-9069",
+    "email": "breanakarr@gmail.com",
+    "id": "wu-1783994345277",
+    "to": "214",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "13",
+    "posCategory": "defense",
+    "posCategories": [
+      "defense"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1783994345277
   }
 ]
