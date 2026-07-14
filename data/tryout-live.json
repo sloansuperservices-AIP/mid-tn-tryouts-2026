@@ -8704,5 +8704,35 @@
     "metrics": {},
     "updatedAt": 1783993250283,
     "teamPriority": 2
+  },
+  {
+    "first": "Paula",
+    "last": "Walker",
+    "dob": "",
+    "division": "14 & Under",
+    "primaryPos": "Right Side Hitter",
+    "altPos": "",
+    "phone": "(615) 624-3455",
+    "email": "tajhel03@gmail.com",
+    "id": "wu-1783994234317",
+    "to": "213",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "14",
+    "posCategory": "outside",
+    "posCategories": [
+      "outside"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1783994234317
   }
 ]
