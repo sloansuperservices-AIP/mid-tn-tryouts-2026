@@ -8724,7 +8724,7 @@
     "posCategories": [
       "outside"
     ],
-    "teamAssignment": null,
+    "teamAssignment": "14-Blue",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -8733,6 +8733,7 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1783994234317
+    "updatedAt": 1783994248531,
+    "teamPriority": 9
   }
 ]
