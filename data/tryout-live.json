@@ -1709,7 +1709,7 @@
       "middle"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "14-Silver",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -1722,7 +1722,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 2,
+    "updatedAt": 1783993297116
   },
   {
     "to": "73",
