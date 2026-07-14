@@ -8513,7 +8513,7 @@
     "posCategories": [
       "outside"
     ],
-    "teamAssignment": null,
+    "teamAssignment": "17-Silver",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -8522,6 +8522,7 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1783989353912
+    "updatedAt": 1783989373078,
+    "teamPriority": 0
   }
 ]
