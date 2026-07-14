@@ -356,8 +356,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 5,
-    "updatedAt": 1783990770770
+    "teamPriority": 6,
+    "updatedAt": 1783990937105
   },
   {
     "to": "51",
@@ -1451,7 +1451,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "13-Blue",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -1464,7 +1464,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 4,
+    "updatedAt": 1783990937105
   },
   {
     "to": "20",
@@ -8577,7 +8579,7 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1783990770770,
-    "teamPriority": 4
+    "updatedAt": 1783990937105,
+    "teamPriority": 5
   }
 ]
