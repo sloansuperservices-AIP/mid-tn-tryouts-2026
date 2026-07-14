@@ -8090,7 +8090,7 @@
       "outside"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "18-Blue",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -8103,7 +8103,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 2,
+    "updatedAt": 1784002090918
   },
   {
     "to": "144",
