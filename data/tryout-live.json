@@ -8960,12 +8960,13 @@
     "teamAssignment": null,
     "teamLocked": false,
     "coachPos": "",
-    "hidden": false,
-    "hideReason": "",
+    "hidden": true,
+    "hideReason": "Athlete Declined",
     "notes": "",
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784000455852
+    "updatedAt": 1784000477432,
+    "hideNote": ""
   }
 ]
