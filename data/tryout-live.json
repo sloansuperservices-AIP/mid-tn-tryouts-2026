@@ -4648,7 +4648,7 @@
       "outside"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "15-Yellow",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -4661,7 +4661,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 3,
+    "updatedAt": 1783999025474
   },
   {
     "to": "103",
@@ -5234,8 +5236,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 3,
-    "updatedAt": 1783998534477
+    "teamPriority": 4,
+    "updatedAt": 1783999025474
   },
   {
     "to": "55",
