@@ -4393,8 +4393,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 5,
-    "updatedAt": 1784000316888
+    "teamPriority": 6,
+    "updatedAt": 1783997842220
   },
   {
     "to": "211",
@@ -4836,8 +4836,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 6,
-    "updatedAt": 1784000316888
+    "teamPriority": 7,
+    "updatedAt": 1783997510922
   },
   {
     "to": "109",
@@ -8530,8 +8530,8 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784000316888,
-    "teamPriority": 7
+    "updatedAt": 1783997510922,
+    "teamPriority": 8
   },
   {
     "first": "Selah",
@@ -8924,7 +8924,7 @@
     "posCategories": [
       "defense"
     ],
-    "teamAssignment": "15-Blue",
+    "teamAssignment": null,
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -8933,7 +8933,6 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784000316888,
-    "teamPriority": 8
+    "updatedAt": 1784000304930
   }
 ]
