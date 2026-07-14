@@ -1797,8 +1797,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 5,
-    "updatedAt": 1783996492452
+    "teamPriority": 6,
+    "updatedAt": 1783996622062
   },
   {
     "to": "230",
@@ -1898,8 +1898,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 9,
-    "updatedAt": 1783996492452
+    "teamPriority": 10,
+    "updatedAt": 1783996622062
   },
   {
     "to": "172",
@@ -2374,8 +2374,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 3,
-    "updatedAt": 1783996492452
+    "teamPriority": 4,
+    "updatedAt": 1783996622062
   },
   {
     "to": "89",
@@ -2429,7 +2429,7 @@
       "outside"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "14-Yellow",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -2442,7 +2442,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 3,
+    "updatedAt": 1783996622062
   },
   {
     "to": "84",
@@ -2818,8 +2820,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 10,
-    "updatedAt": 1783996492452
+    "teamPriority": 11,
+    "updatedAt": 1783996622062
   },
   {
     "to": "61",
@@ -2922,8 +2924,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 7,
-    "updatedAt": 1783996492452
+    "teamPriority": 8,
+    "updatedAt": 1783996622062
   },
   {
     "to": "98",
@@ -3199,8 +3201,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 6,
-    "updatedAt": 1783996492452
+    "teamPriority": 7,
+    "updatedAt": 1783996622062
   },
   {
     "to": "64",
@@ -3402,8 +3404,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 4,
-    "updatedAt": 1783996492452
+    "teamPriority": 5,
+    "updatedAt": 1783996622062
   },
   {
     "to": "176",
@@ -8765,8 +8767,8 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1783996492452,
-    "teamPriority": 8
+    "updatedAt": 1783996622062,
+    "teamPriority": 9
   },
   {
     "first": "Ava",
