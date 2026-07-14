@@ -8211,8 +8211,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 7,
-    "updatedAt": 1784001955671
+    "teamPriority": 8,
+    "updatedAt": 1784002174746
   },
   {
     "to": "141",
@@ -9100,8 +9100,8 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784001955671,
-    "teamPriority": 6
+    "updatedAt": 1784002174746,
+    "teamPriority": 7
   },
   {
     "first": "Jasmyn",
@@ -9131,8 +9131,8 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784002033303,
-    "teamPriority": 8
+    "updatedAt": 1784002174746,
+    "teamPriority": 9
   },
   {
     "first": "Brooke",
@@ -9184,7 +9184,7 @@
     "posCategories": [
       "middle"
     ],
-    "teamAssignment": null,
+    "teamAssignment": "18-Black",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -9193,6 +9193,7 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784002162730
+    "updatedAt": 1784002174746,
+    "teamPriority": 6
   }
 ]
