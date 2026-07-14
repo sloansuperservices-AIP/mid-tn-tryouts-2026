@@ -2299,7 +2299,7 @@
       "outside"
     ],
     "status": "pending",
-    "teamAssignment": "14-Black",
+    "teamAssignment": "14-Silver",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -2313,8 +2313,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 3,
-    "updatedAt": 1783990252344
+    "teamPriority": 0,
+    "updatedAt": 1783992666027
   },
   {
     "to": "126",
