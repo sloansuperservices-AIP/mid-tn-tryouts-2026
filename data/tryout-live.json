@@ -9127,5 +9127,35 @@
     "metrics": {},
     "updatedAt": 1784002033303,
     "teamPriority": 8
+  },
+  {
+    "first": "Brooke",
+    "last": "Becker",
+    "dob": "",
+    "division": "18 & Under",
+    "primaryPos": "Right Side Hitter",
+    "altPos": "",
+    "phone": "(615) 796-8424",
+    "email": "\t egbecker4@gmail.com",
+    "id": "wu-1784002077269",
+    "to": "224",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "18",
+    "posCategory": "outside",
+    "posCategories": [
+      "outside"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1784002077270
   }
 ]
