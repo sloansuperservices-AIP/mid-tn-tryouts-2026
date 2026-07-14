@@ -9065,5 +9065,35 @@
     "metrics": {},
     "updatedAt": 1784001847896,
     "teamPriority": 6
+  },
+  {
+    "first": "Stella",
+    "last": "Logan",
+    "dob": "",
+    "division": "18 & Under",
+    "primaryPos": "Libero",
+    "altPos": "",
+    "phone": "(615) 506-4250",
+    "email": "\t jelogan@comcast.net",
+    "id": "wu-1784001929681",
+    "to": "222",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "18",
+    "posCategory": "defense",
+    "posCategories": [
+      "defense"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1784001929682
   }
 ]
