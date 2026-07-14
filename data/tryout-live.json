@@ -1831,8 +1831,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 10,
-    "updatedAt": 1783996680110
+    "teamPriority": 11,
+    "updatedAt": 1783996742229
   },
   {
     "to": "174",
@@ -2237,8 +2237,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 1,
-    "updatedAt": 1783996542650
+    "teamPriority": 2,
+    "updatedAt": 1783996742229
   },
   {
     "to": "123",
@@ -2480,8 +2480,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 3,
-    "updatedAt": 1783996542650
+    "teamPriority": 4,
+    "updatedAt": 1783996742229
   },
   {
     "to": "101",
@@ -2616,8 +2616,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 6,
-    "updatedAt": 1783996542650
+    "teamPriority": 7,
+    "updatedAt": 1783996742229
   },
   {
     "to": "93",
@@ -2720,8 +2720,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 4,
-    "updatedAt": 1783996542650
+    "teamPriority": 5,
+    "updatedAt": 1783996742229
   },
   {
     "to": "90",
@@ -2996,8 +2996,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 8,
-    "updatedAt": 1783996542650
+    "teamPriority": 9,
+    "updatedAt": 1783996742229
   },
   {
     "to": "71",
@@ -3066,8 +3066,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 2,
-    "updatedAt": 1783996542650
+    "teamPriority": 3,
+    "updatedAt": 1783996742229
   },
   {
     "to": "69",
@@ -3136,8 +3136,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 7,
-    "updatedAt": 1783996542650
+    "teamPriority": 8,
+    "updatedAt": 1783996742229
   },
   {
     "to": "66",
@@ -3238,8 +3238,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 5,
-    "updatedAt": 1783996542650
+    "teamPriority": 6,
+    "updatedAt": 1783996742229
   },
   {
     "to": "72",
@@ -3273,8 +3273,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 9,
-    "updatedAt": 1783996542650
+    "teamPriority": 10,
+    "updatedAt": 1783996742229
   },
   {
     "to": "254",
@@ -3294,7 +3294,7 @@
       "setter"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "14-White",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -3307,7 +3307,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 1,
+    "updatedAt": 1783996742229
   },
   {
     "to": "19",
