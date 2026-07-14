@@ -8904,5 +8904,35 @@
     "metrics": {},
     "updatedAt": 1784000215191,
     "teamPriority": 0
+  },
+  {
+    "first": "Lola",
+    "last": "Krauss",
+    "dob": "",
+    "division": "15 & Under",
+    "primaryPos": "Defensive Specialist",
+    "altPos": "",
+    "phone": "(931) 510-1669",
+    "email": "\t loriekrauss@gmail.com",
+    "id": "wu-1784000304930",
+    "to": "217",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "15",
+    "posCategory": "defense",
+    "posCategories": [
+      "defense"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1784000304930
   }
 ]
