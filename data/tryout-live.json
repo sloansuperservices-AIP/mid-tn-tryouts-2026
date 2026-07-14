@@ -1525,8 +1525,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 6,
-    "updatedAt": 1783912701141
+    "teamPriority": 7,
+    "updatedAt": 1783990252344
   },
   {
     "to": "168",
@@ -1724,8 +1724,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 7,
-    "updatedAt": 1783912701141
+    "teamPriority": 8,
+    "updatedAt": 1783990252344
   },
   {
     "to": "229",
@@ -1888,8 +1888,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 8,
-    "updatedAt": 1783912701141
+    "teamPriority": 9,
+    "updatedAt": 1783990252344
   },
   {
     "to": "171",
@@ -2282,8 +2282,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 2,
-    "updatedAt": 1783912701141
+    "teamPriority": 3,
+    "updatedAt": 1783990252344
   },
   {
     "to": "126",
@@ -2450,8 +2450,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 3,
-    "updatedAt": 1783912701141
+    "teamPriority": 4,
+    "updatedAt": 1783990252344
   },
   {
     "to": "100",
@@ -2810,8 +2810,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 1,
-    "updatedAt": 1783912701141
+    "teamPriority": 2,
+    "updatedAt": 1783990252344
   },
   {
     "to": "99",
@@ -3340,8 +3340,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 4,
-    "updatedAt": 1783912701141
+    "teamPriority": 5,
+    "updatedAt": 1783990252344
   },
   {
     "to": "175",
@@ -3375,8 +3375,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 5,
-    "updatedAt": 1783912701141
+    "teamPriority": 6,
+    "updatedAt": 1783990252344
   },
   {
     "to": "166",
@@ -3461,7 +3461,7 @@
       "outside"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "14-Black",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -3474,7 +3474,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 0,
+    "updatedAt": 1783990252344
   },
   {
     "to": "96",
@@ -8445,8 +8447,8 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1783912701141,
-    "teamPriority": 0
+    "updatedAt": 1783990252344,
+    "teamPriority": 1
   },
   {
     "first": "Delaney",
