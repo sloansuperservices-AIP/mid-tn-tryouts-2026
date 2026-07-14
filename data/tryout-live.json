@@ -3245,7 +3245,7 @@
       "setter"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "14-White",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -3258,7 +3258,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 7,
+    "updatedAt": 1783995270891
   },
   {
     "to": "254",
