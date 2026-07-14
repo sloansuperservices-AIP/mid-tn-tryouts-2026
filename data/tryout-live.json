@@ -8603,5 +8603,35 @@
     "metrics": {},
     "updatedAt": 1783991616083,
     "teamPriority": 6
+  },
+  {
+    "first": "Mia",
+    "last": "Doone",
+    "dob": "",
+    "division": "13 & Under",
+    "primaryPos": "Defensive Specialist",
+    "altPos": "",
+    "phone": "\t (270) 421-7088",
+    "email": "laverniewolphagen@hotmail.com",
+    "id": "wu-1783992021703",
+    "to": "211",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "13",
+    "posCategory": "defense",
+    "posCategories": [
+      "defense"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1783992021703
   }
 ]
