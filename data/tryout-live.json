@@ -8018,7 +8018,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "18-Blue",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -8037,7 +8037,9 @@
       "s2": [
         "2.48"
       ]
-    }
+    },
+    "teamPriority": 0,
+    "updatedAt": 1784002097497
   },
   {
     "to": "136",
@@ -8104,8 +8106,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 2,
-    "updatedAt": 1784002090918
+    "teamPriority": 3,
+    "updatedAt": 1784002097497
   },
   {
     "to": "144",
@@ -8313,8 +8315,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 0,
-    "updatedAt": 1784001879856
+    "teamPriority": 1,
+    "updatedAt": 1784002097497
   },
   {
     "to": "146",
@@ -9158,7 +9160,7 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784002086037,
-    "teamPriority": 1
+    "updatedAt": 1784002097497,
+    "teamPriority": 2
   }
 ]
