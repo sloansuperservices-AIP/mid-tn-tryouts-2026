@@ -8873,5 +8873,35 @@
     "metrics": {},
     "updatedAt": 1783994725167,
     "teamPriority": 10
+  },
+  {
+    "first": "Alaina",
+    "last": "De Giorgio",
+    "dob": "",
+    "division": "15 & Under",
+    "primaryPos": "Setter",
+    "altPos": "",
+    "phone": "(615) 423-2925",
+    "email": "margaretdegiorgio27@gmail.com",
+    "id": "wu-1784000198428",
+    "to": "216",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "15",
+    "posCategory": "setter",
+    "posCategories": [
+      "setter"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1784000198429
   }
 ]
