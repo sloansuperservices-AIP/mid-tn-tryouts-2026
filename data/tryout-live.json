@@ -1299,7 +1299,7 @@
       "middle"
     ],
     "status": "pending",
-    "teamAssignment": "13-Silver",
+    "teamAssignment": "13-Yellow",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -1313,8 +1313,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 8,
-    "updatedAt": 1783991145094
+    "teamPriority": 0,
+    "updatedAt": 1783991972281
   },
   {
     "to": "158",
