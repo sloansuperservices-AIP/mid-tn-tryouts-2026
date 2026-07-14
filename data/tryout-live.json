@@ -4171,7 +4171,7 @@
       "middle"
     ],
     "status": "pending",
-    "teamAssignment": "15-Silver",
+    "teamAssignment": "15-White",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -4185,8 +4185,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 2,
-    "updatedAt": 1783911689813
+    "teamPriority": 0,
+    "updatedAt": 1783998127619
   },
   {
     "to": "205",
