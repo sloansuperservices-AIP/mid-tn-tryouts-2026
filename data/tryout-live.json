@@ -7003,7 +7003,7 @@
       "setter"
     ],
     "status": "pending",
-    "teamAssignment": "17-Silver",
+    "teamAssignment": null,
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -7016,9 +7016,7 @@
     "metrics": {
       "s1": [],
       "s2": []
-    },
-    "teamPriority": 1,
-    "updatedAt": 1783989405377
+    }
   },
   {
     "to": "248",
@@ -7387,7 +7385,7 @@
       "setter"
     ],
     "status": "pending",
-    "teamAssignment": "17-Silver",
+    "teamAssignment": null,
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -7400,9 +7398,7 @@
     "metrics": {
       "s1": [],
       "s2": []
-    },
-    "teamPriority": 2,
-    "updatedAt": 1783989414361
+    }
   },
   {
     "to": "21",
@@ -7889,7 +7885,7 @@
     "phone": "6152945303",
     "email": "middaughar22@gmail.com",
     "id": "to-136",
-    "ageGroup": "18",
+    "ageGroup": "17",
     "posCategory": "outside",
     "posCategories": [
       "outside"
@@ -8481,43 +8477,12 @@
     "isWalkup": true,
     "arrived": true,
     "status": "arrived",
-    "ageGroup": "12",
-    "posCategory": "outside",
-    "posCategories": [
-      "outside"
-    ],
-    "teamAssignment": null,
-    "teamLocked": false,
-    "coachPos": "",
-    "hidden": true,
-    "hideReason": "Athlete Declined",
-    "notes": "",
-    "wontAccept": "",
-    "drillScore": "",
-    "metrics": {},
-    "updatedAt": 1783989363780,
-    "hideNote": ""
-  },
-  {
-    "first": "Lucy",
-    "last": "Cashion",
-    "dob": "",
-    "division": "17 & Under",
-    "primaryPos": "Outside Hitter",
-    "altPos": "",
-    "phone": "9313085068",
-    "email": "bethcash80@gmail.com",
-    "id": "wu-1783989353912",
-    "to": "209",
-    "isWalkup": true,
-    "arrived": true,
-    "status": "arrived",
     "ageGroup": "17",
     "posCategory": "outside",
     "posCategories": [
       "outside"
     ],
-    "teamAssignment": "17-Silver",
+    "teamAssignment": null,
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -8526,7 +8491,6 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1783989373078,
-    "teamPriority": 0
+    "updatedAt": 1783989235002
   }
 ]
