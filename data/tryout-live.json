@@ -5210,7 +5210,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "15-Yellow",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -5223,7 +5223,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 1,
+    "updatedAt": 1783998372911
   },
   {
     "to": "55",
