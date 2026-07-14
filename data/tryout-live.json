@@ -8196,7 +8196,7 @@
       "outside",
       "defense"
     ],
-    "status": "pending",
+    "status": "contacted",
     "teamAssignment": "18-Black",
     "teamLocked": false,
     "coachPos": "",
@@ -8494,7 +8494,7 @@
     "to": "203",
     "isWalkup": true,
     "arrived": true,
-    "status": "arrived",
+    "status": "contacted",
     "ageGroup": "18",
     "posCategory": "middle",
     "posCategories": [
