@@ -7521,8 +7521,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 8,
-    "updatedAt": 1784001737069
+    "teamPriority": 9,
+    "updatedAt": 1784001847896
   },
   {
     "to": "134",
@@ -7625,8 +7625,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 7,
-    "updatedAt": 1784001738609
+    "teamPriority": 8,
+    "updatedAt": 1784001847896
   },
   {
     "to": "23",
@@ -9028,8 +9028,8 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784001738609,
-    "teamPriority": 6
+    "updatedAt": 1784001847896,
+    "teamPriority": 7
   },
   {
     "first": "Kendall",
@@ -9050,7 +9050,7 @@
     "posCategories": [
       "middle"
     ],
-    "teamAssignment": null,
+    "teamAssignment": "17-Black",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -9059,6 +9059,7 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784001835852
+    "updatedAt": 1784001847896,
+    "teamPriority": 6
   }
 ]
