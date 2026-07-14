@@ -4152,7 +4152,7 @@
       "s2": []
     },
     "teamPriority": 4,
-    "updatedAt": 1783998089522
+    "updatedAt": 1783997842220
   },
   {
     "to": "204",
@@ -4386,7 +4386,7 @@
       "s2": []
     },
     "teamPriority": 6,
-    "updatedAt": 1783997842220
+    "updatedAt": 1783911387056
   },
   {
     "to": "211",
@@ -5474,7 +5474,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": "15-White",
+    "teamAssignment": null,
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -5487,9 +5487,7 @@
     "metrics": {
       "s1": [],
       "s2": []
-    },
-    "teamPriority": 1,
-    "updatedAt": 1783998187426
+    }
   },
   {
     "to": "256",
