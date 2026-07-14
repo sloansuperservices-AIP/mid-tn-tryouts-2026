@@ -1894,8 +1894,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 2,
-    "updatedAt": 1783994123436
+    "teamPriority": 3,
+    "updatedAt": 1783994251282
   },
   {
     "to": "172",
@@ -8724,7 +8724,7 @@
     "posCategories": [
       "outside"
     ],
-    "teamAssignment": "14-Blue",
+    "teamAssignment": "14-Yellow",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -8733,7 +8733,7 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1783994248531,
-    "teamPriority": 9
+    "updatedAt": 1783994251282,
+    "teamPriority": 2
   }
 ]
