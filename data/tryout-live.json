@@ -1817,7 +1817,7 @@
       "unsorted"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "14-White",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -1830,7 +1830,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 10,
+    "updatedAt": 1783996680110
   },
   {
     "to": "174",
