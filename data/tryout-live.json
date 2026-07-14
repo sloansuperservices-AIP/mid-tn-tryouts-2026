@@ -7387,7 +7387,7 @@
       "setter"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "17-Silver",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -7400,7 +7400,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 2,
+    "updatedAt": 1783989414361
   },
   {
     "to": "21",
