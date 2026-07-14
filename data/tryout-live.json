@@ -1797,8 +1797,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 4,
-    "updatedAt": 1783996478253
+    "teamPriority": 5,
+    "updatedAt": 1783996492452
   },
   {
     "to": "230",
@@ -1864,8 +1864,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 1,
-    "updatedAt": 1783996212347
+    "teamPriority": 2,
+    "updatedAt": 1783996492452
   },
   {
     "to": "173",
@@ -1898,8 +1898,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 8,
-    "updatedAt": 1783996478253
+    "teamPriority": 9,
+    "updatedAt": 1783996492452
   },
   {
     "to": "172",
@@ -2372,8 +2372,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 2,
-    "updatedAt": 1783996478253
+    "teamPriority": 3,
+    "updatedAt": 1783996492452
   },
   {
     "to": "89",
@@ -2665,7 +2665,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "14-Yellow",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -2678,7 +2678,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 0,
+    "updatedAt": 1783996492452
   },
   {
     "to": "91",
@@ -2747,8 +2749,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 0,
-    "updatedAt": 1783993597753
+    "teamPriority": 1,
+    "updatedAt": 1783996492452
   },
   {
     "to": "63",
@@ -2814,8 +2816,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 9,
-    "updatedAt": 1783996478253
+    "teamPriority": 10,
+    "updatedAt": 1783996492452
   },
   {
     "to": "61",
@@ -2918,8 +2920,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 6,
-    "updatedAt": 1783996478253
+    "teamPriority": 7,
+    "updatedAt": 1783996492452
   },
   {
     "to": "98",
@@ -3195,8 +3197,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 5,
-    "updatedAt": 1783996478253
+    "teamPriority": 6,
+    "updatedAt": 1783996492452
   },
   {
     "to": "64",
@@ -3398,8 +3400,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 3,
-    "updatedAt": 1783996478253
+    "teamPriority": 4,
+    "updatedAt": 1783996492452
   },
   {
     "to": "176",
@@ -8759,8 +8761,8 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1783996478253,
-    "teamPriority": 7
+    "updatedAt": 1783996492452,
+    "teamPriority": 8
   },
   {
     "first": "Ava",
