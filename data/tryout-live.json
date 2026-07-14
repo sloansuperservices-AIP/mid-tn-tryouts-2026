@@ -9178,17 +9178,18 @@
     "posCategories": [
       "defense"
     ],
-    "teamAssignment": "18-Black",
+    "teamAssignment": null,
     "teamLocked": false,
     "coachPos": "",
-    "hidden": false,
-    "hideReason": "",
+    "hidden": true,
+    "hideReason": "Athlete Declined",
     "notes": "",
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784002184000,
-    "teamPriority": 9
+    "updatedAt": 1784039565506,
+    "teamPriority": 9,
+    "hideNote": ""
   },
   {
     "first": "Jasmyn",
