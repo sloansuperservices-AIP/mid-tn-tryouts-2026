@@ -8038,8 +8038,8 @@
         "2.48"
       ]
     },
-    "teamPriority": 0,
-    "updatedAt": 1784002097497
+    "teamPriority": 1,
+    "updatedAt": 1784002103847
   },
   {
     "to": "136",
@@ -8106,8 +8106,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 3,
-    "updatedAt": 1784002097497
+    "teamPriority": 4,
+    "updatedAt": 1784002103847
   },
   {
     "to": "144",
@@ -8315,8 +8315,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 1,
-    "updatedAt": 1784002097497
+    "teamPriority": 2,
+    "updatedAt": 1784002103847
   },
   {
     "to": "146",
@@ -8350,8 +8350,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 4,
-    "updatedAt": 1784002100997
+    "teamPriority": 0,
+    "updatedAt": 1784002103847
   },
   {
     "to": "145",
@@ -9162,7 +9162,7 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784002097497,
-    "teamPriority": 2
+    "updatedAt": 1784002103847,
+    "teamPriority": 3
   }
 ]
