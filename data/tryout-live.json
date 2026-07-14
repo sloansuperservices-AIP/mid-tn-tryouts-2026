@@ -4309,7 +4309,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "15-Silver",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -4322,7 +4322,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 7,
+    "updatedAt": 1783999566754
   },
   {
     "to": "209",
@@ -5037,8 +5039,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 7,
-    "updatedAt": 1783999519439
+    "teamPriority": 8,
+    "updatedAt": 1783999566754
   },
   {
     "to": "116",
