@@ -4838,8 +4838,8 @@
       "s1": [],
       "s2": []
     },
-    "teamPriority": 7,
-    "updatedAt": 1784000372369
+    "teamPriority": 8,
+    "updatedAt": 1784000543991
   },
   {
     "to": "109",
@@ -8532,8 +8532,8 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784000372369,
-    "teamPriority": 8
+    "updatedAt": 1784000543991,
+    "teamPriority": 9
   },
   {
     "first": "Selah",
@@ -8935,8 +8935,8 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784000372369,
-    "teamPriority": 6
+    "updatedAt": 1784000543991,
+    "teamPriority": 7
   },
   {
     "first": "Layla",
@@ -8988,7 +8988,7 @@
     "posCategories": [
       "outside"
     ],
-    "teamAssignment": null,
+    "teamAssignment": "15-Blue",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -8997,6 +8997,7 @@
     "wontAccept": "",
     "drillScore": "",
     "metrics": {},
-    "updatedAt": 1784000530124
+    "updatedAt": 1784000543991,
+    "teamPriority": 6
   }
 ]
