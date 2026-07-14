@@ -8336,7 +8336,7 @@
       "defense"
     ],
     "status": "pending",
-    "teamAssignment": null,
+    "teamAssignment": "18-Blue",
     "teamLocked": false,
     "coachPos": "",
     "hidden": false,
@@ -8349,7 +8349,9 @@
     "metrics": {
       "s1": [],
       "s2": []
-    }
+    },
+    "teamPriority": 4,
+    "updatedAt": 1784002100997
   },
   {
     "to": "145",
