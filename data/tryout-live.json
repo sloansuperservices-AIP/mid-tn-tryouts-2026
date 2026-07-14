@@ -8542,5 +8542,35 @@
     "metrics": {},
     "updatedAt": 1783989373078,
     "teamPriority": 0
+  },
+  {
+    "first": "Raelyn",
+    "last": "Duke",
+    "dob": "",
+    "division": "13 & Under",
+    "primaryPos": "Middle Hitter",
+    "altPos": "",
+    "phone": "(615) 481-6156",
+    "email": "\t ronnisha.duke@icloud.com",
+    "id": "wu-1783990748746",
+    "to": "210",
+    "isWalkup": true,
+    "arrived": true,
+    "status": "arrived",
+    "ageGroup": "13",
+    "posCategory": "middle",
+    "posCategories": [
+      "middle"
+    ],
+    "teamAssignment": null,
+    "teamLocked": false,
+    "coachPos": "",
+    "hidden": false,
+    "hideReason": "",
+    "notes": "",
+    "wontAccept": "",
+    "drillScore": "",
+    "metrics": {},
+    "updatedAt": 1783990748747
   }
 ]
